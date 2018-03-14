@@ -1,0 +1,42 @@
+<div class="container">
+    <h1>Images Query Form</h1>
+    <form (ngSubmit)="query();" #loginForm="ngForm">
+      <div class="form-group">
+        <label for="keyword">Keyword</label>
+        <input type="text" class="form-control" [(ngModel)]="model.keyword" name="keyword" #keywordSpy #keyword="ngModel">
+        {{keywordSpy.className}}
+        <div [hidden]="keyword.valid || keyword.pristine" class="alert alert-danger">Required</div>
+      </div>
+      <div class="form-group">
+        <label for="rows">Number of Images</label>
+        <input type="number" class="form-control" [(ngModel)]="model.rows" name="rows" #rowsSpy #rows="ngModel">
+        {{rowsSpy.className}}
+        <div [hidden]="rows.valid || rows.pristine" class="alert alert-danger">Required</div>
+      </div>
+      <div class="form-group">
+        <label for="selectedProcedureName">Procedure Names</label>
+        <select class="form-control"  id="selectedProcedureName"
+            required
+            [(ngModel)]="model.selectedProcedureName" name="selectedProcedureName">
+            <option *ngFor="let procedureName of model.procedureNamesForDropdown" [value]="procedureName">{{proceureName}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="selectedParameterName">Parameter Names</label>
+        <select class="form-control"  id="selectedParameterName"
+            required
+            [(ngModel)]="model.selectedParameterName" name="selectedParameterName">
+            <option *ngFor="let parameterName of model.parameterNamesForDropdown" [value]="parameterName">{{parameterName}}</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-default" [disabled]="!loginForm.form.valid">
+        Query
+       
+      </button>
+      
+    </form>
+    <div *ngFor="let image of images" > in filter: {{image.marker_name}} <img src='{{image.thumbnail_url}}'/> </div>
+    <!-- <p>response should be here: {{response | json}}</p> -->
+    <!-- <h2>{{model | json}}</h2>
+    <ul><li *ngFor="let image of model.images" [value]="image">{{image.path}}</li></ul> -->
+  </div>

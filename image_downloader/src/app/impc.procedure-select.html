@@ -1,0 +1,7 @@
+<mat-form-field>
+    <mat-select placeholder="Procedure Name">
+      <mat-option *ngFor="let procedure of procedureNamesForDropdown" [value]="procedure">
+        {{ procedure }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>

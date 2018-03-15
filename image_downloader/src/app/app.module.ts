@@ -8,13 +8,13 @@ import { ImageBrowserComponent } from './impc.images.browser.component';
 import { FilterComponent } from './impc.images.filter.component';
 import { ImagesRestService } from './impc.images.rest.service';
 import { ShowThumbnailsComponent } from './impc.images.showthumbnails.component';
-import { SelectOverviewExample } from './select-overview-example';
+import { ProcedureSelectComponent } from './impc.procedure-select-component';
 import { MatSelectModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
-    AppComponent, ImageBrowserComponent, FilterComponent, ShowThumbnailsComponent, SelectOverviewExample
+    AppComponent, ImageBrowserComponent, FilterComponent, ShowThumbnailsComponent, ProcedureSelectComponent
   ],
   imports: [
     BrowserModule, FormsModule, HttpClientModule, MatSelectModule, BrowserAnimationsModule

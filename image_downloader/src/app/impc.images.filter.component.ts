@@ -43,18 +43,6 @@ export class FilterComponent implements OnInit {
       });
   }
 
-  getProceduresForDropdown() {
-    this.imagesRestService.getPossibleProceduresResponse().subscribe(resp => {
-      // access the body directly, which is typed as `Config`.
-      this.response = { ... resp.body };
-      const proceduresWithCounts = this.response['facet_counts']['facet_fields']['procedure_name'];
-      this.model.procedureNamesForDropdown = proceduresWithCounts.filter(function(item, index, array) {  return (index % 2 === 0 ); });
-      console.log('selected procedure name in getProceduresForDropdown=' + this.model.procedureNamesForDropdown);
-      this.model.selectedProcedureName = this.model.procedureNamesForDropdown[0];
-    });
-
-  }
-
   getParametersForDropdown() {
     this.imagesRestService.getPossibleParametersResponse().subscribe(resp => {
       // access the body directly, which is typed as `Config`.
@@ -70,8 +58,6 @@ export class FilterComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.model.images = this.images;
-    this.getProceduresForDropdown();
     this.getParametersForDropdown();
   }
 }

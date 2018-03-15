@@ -1,13 +1,15 @@
 <div class="container">
     <h1>Images Query Form</h1>
     <form (ngSubmit)="query();" #loginForm="ngForm">
-      <div class="form-group">
+        <app-procedure-select></app-procedure-select>
+        <app-parameter-select></app-parameter-select>
+      <!-- <div class="form-group">
         <label for="keyword">Keyword</label>
         <input type="text" class="form-control" [(ngModel)]="model.keyword" name="keyword" #keywordSpy #keyword="ngModel">
         {{keywordSpy.className}}
         <div [hidden]="keyword.valid || keyword.pristine" class="alert alert-danger">Required</div>
-      </div>
-      <div class="form-group">
+      </div> -->
+      <!-- <div class="form-group">
         <label for="rows">Number of Images</label>
         <input type="number" class="form-control" [(ngModel)]="model.rows" name="rows" #rowsSpy #rows="ngModel">
         {{rowsSpy.className}}
@@ -28,7 +30,7 @@
             [(ngModel)]="model.selectedParameterName" name="selectedParameterName">
             <option *ngFor="let parameterName of model.parameterNamesForDropdown" [value]="parameterName">{{parameterName}}</option>
         </select>
-      </div>
+      </div> -->
       <button type="submit" class="btn btn-default" [disabled]="!loginForm.form.valid">
         Query
        

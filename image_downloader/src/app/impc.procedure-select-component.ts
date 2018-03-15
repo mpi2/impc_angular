@@ -20,7 +20,7 @@ export class ProcedureSelectComponent implements OnInit {
       this.response = { ... resp.body };
       const proceduresWithCounts = this.response['facet_counts']['facet_fields']['procedure_name'];
       this.procedureNamesForDropdown = proceduresWithCounts.filter(function(item, index, array) {  return (index % 2 === 0 ); });
-      console.log('selected procedure name in getProceduresForDropdown=' + this.procedureNamesForDropdown);
+      console.log('getProceduresForDropdown=' + this.procedureNamesForDropdown);
       this.selectedProcedureName = this.procedureNamesForDropdown[0];
     });
   }

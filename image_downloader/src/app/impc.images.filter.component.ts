@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, ViewChild } from '@angular/core';
 import { ImagesRestService, ImagesResponse } from './impc.images.rest.service';
+import { ProcedureSelectComponent } from './impc.procedure-select-component';
+import { ParameterSelectComponent } from './impc.parameter-select-component';
 
 class ImagesFilter {
   constructor(public keyword: string, public rows: number, public parameterNamesForDropdown: string[],
@@ -13,18 +16,25 @@ class ImagesFilter {
   styleUrls: ['./impc.images.filter.css'],
   templateUrl: `./impc.images.filter.html`,
 })
-export class FilterComponent implements OnInit {
+export class FilterComponent implements OnInit, AfterViewInit {
+
+  @ViewChild(ProcedureSelectComponent)
+  private procedureSelector: ProcedureSelectComponent;
+  @ViewChild(ParameterSelectComponent)
+  private parameterSelector: ParameterSelectComponent;
+  private keyword: string;
   config: any;
   images: any[];
   headers: string[];
   imagesResponse: ImagesResponse;
   response: Response;
-  model = new ImagesFilter('*:*', 10, ['blood glucose', 'antibody levels', 'sugar'], 'sugar',
-  ['procedure1'], 'sugar');
 
   query() {
-    console.log('Logging with', this.model.keyword, this.model.rows, this.model.selectedParameterName);
-    this.showImagesResponse(this.model.keyword , this.model.rows, this.model.selectedParameterName, this.model.selectedProcedureName);
+    this.keyword = '*:*';
+    console.log('Logging with', 'keywordhere', 10, this.parameterSelector.selectedParameterName,
+    'procedurename here', this.procedureSelector.selectedProcedureName);
+    this.showImagesResponse(this.keyword , 10, this.parameterSelector.selectedParameterName,
+      this.procedureSelector.selectedProcedureName);
     // this.model = new ImagesFilter(this.model.keyword, this.model.rows, ['blood glucose', 'antibody levels', 'sugar'], this, this.images);
   }
 
@@ -43,21 +53,12 @@ export class FilterComponent implements OnInit {
       });
   }
 
-  getParametersForDropdown() {
-    this.imagesRestService.getPossibleParametersResponse().subscribe(resp => {
-      // access the body directly, which is typed as `Config`.
-      this.response = { ... resp.body };
-      const parametersWithCounts = this.response['facet_counts']['facet_fields']['parameter_name'];
-      this.model.parameterNamesForDropdown = parametersWithCounts.filter(function(item, index, array) {  return (index % 2 === 0 ); });
-      console.log('selected parameter name in getParametersForDropdown=' + this.model.parameterNamesForDropdown);
-      this.model.selectedParameterName = this.model.parameterNamesForDropdown[0];
-    });
-
-  }
   constructor(private imagesRestService: ImagesRestService) {
   }
 
   ngOnInit() {
-    this.getParametersForDropdown();
+  }
+
+  ngAfterViewInit() {
   }
 }

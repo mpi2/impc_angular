@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { ImagesRestService } from './impc.images.rest.service';
+import { MatCard } from '@angular/material';
 
 @Component({
     selector: 'app-showthumbnails',
@@ -12,11 +13,14 @@ images: any[];
     constructor(private imagesRestService: ImagesRestService) {
     }
 
+    public setImages(images) {
+        console.log('caling set images now');
+        this.images = images;
+    }
     // public getImages() {
     //     this.imagesRestService.getImages();
     // }
 
     ngOnInit() {
-        // this.images = this.imagesRestService.getImages();
     }
 }

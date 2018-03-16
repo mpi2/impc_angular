@@ -35,9 +35,11 @@
         Query
        
       </button>
-      
+      <app-showthumbnails></app-showthumbnails>
     </form>
-    <div *ngFor="let image of images" > in filter: {{image.marker_name}} <img src='{{image.thumbnail_url}}'/> </div>
+
+    <!-- <div *ngFor="let image of images" > in filter: {{image.marker_name}} <img src='{{image.thumbnail_url}}'/> </div> -->
+    <!-- <p>image here: {{images | json}}</p> -->
     <!-- <p>response should be here: {{response | json}}</p> -->
     <!-- <h2>{{model | json}}</h2>
     <ul><li *ngFor="let image of model.images" [value]="image">{{image.path}}</li></ul> -->

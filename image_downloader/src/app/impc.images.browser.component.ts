@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./impc.images.browser.css']
 })
 export class ImageBrowserComponent {
-  name = 'World';
+  name = 'IMPC';
 }

@@ -3,13 +3,7 @@ import { AfterViewInit, ViewChild } from '@angular/core';
 import { ImagesRestService, ImagesResponse } from './impc.images.rest.service';
 import { ProcedureSelectComponent } from './impc.procedure-select-component';
 import { ParameterSelectComponent } from './impc.parameter-select-component';
-
-class ImagesFilter {
-  constructor(public keyword: string, public rows: number, public parameterNamesForDropdown: string[],
-     public selectedParameterName: string , public procedureNamesForDropdown: string[],
-     public selectedProcedureName: string) {
-  }
-}
+import { ShowThumbnailsComponent } from './impc.images.showthumbnails.component';
 
 @Component({
   selector: 'app-filter',
@@ -22,6 +16,9 @@ export class FilterComponent implements OnInit, AfterViewInit {
   private procedureSelector: ProcedureSelectComponent;
   @ViewChild(ParameterSelectComponent)
   private parameterSelector: ParameterSelectComponent;
+  @ViewChild(ShowThumbnailsComponent)
+  private showThumbnailsComponent;
+
   private keyword: string;
   config: any;
   images: any[];
@@ -50,6 +47,7 @@ export class FilterComponent implements OnInit, AfterViewInit {
         // access the body directly, which is typed as `Config`.
         this.response = { ... resp.body };
         this.images = this.response['response']['docs'];
+        this.showThumbnailsComponent.setImages(this.images);
       });
   }
 

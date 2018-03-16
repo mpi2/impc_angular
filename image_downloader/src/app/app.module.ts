@@ -12,6 +12,7 @@ import { ProcedureSelectComponent } from './impc.procedure-select-component';
 import { ParameterSelectComponent } from './impc.parameter-select-component';
 import { MatSelectModule } from '@angular/material';
 import { MatCardModule } from '@angular/material';
+import { MatGridListModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -19,7 +20,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     AppComponent, ImageBrowserComponent, FilterComponent, ShowThumbnailsComponent, ProcedureSelectComponent, ParameterSelectComponent
   ],
   imports: [
-    BrowserModule, FormsModule, HttpClientModule, MatSelectModule, BrowserAnimationsModule, MatCardModule
+    BrowserModule, FormsModule, HttpClientModule, MatSelectModule, BrowserAnimationsModule, MatCardModule, MatGridListModule
   ],
   providers: [ImagesRestService],
   bootstrap: [AppComponent]

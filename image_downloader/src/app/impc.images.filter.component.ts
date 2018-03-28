@@ -4,6 +4,7 @@ import { ImagesRestService, ImagesResponse } from './impc.images.rest.service';
 import { ProcedureSelectComponent } from './impc.procedure-select-component';
 import { ParameterSelectComponent } from './impc.parameter-select-component';
 import { ShowThumbnailsComponent } from './impc.images.showthumbnails.component';
+import { RowsComponent } from './impc.rows.component';
 
 @Component({
   selector: 'app-filter',

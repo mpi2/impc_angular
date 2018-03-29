@@ -16,14 +16,15 @@ export class ImagesRestService {
 
 
 
-getImagesResponse(queryString= '*:*', rows= 10, selectedParameterName?: string, selectedProcedureName?: string): Observable<HttpResponse<Response>> {
+getImagesResponse(queryString= '*:*', rows= 10, selectedParameterName?: string, selectedProcedureName?: string):
+    Observable<HttpResponse<Response>> {
     console.log('selected parameter name in rest request=' + selectedParameterName);
     let query = 'q=' + queryString;
     query += '&rows=' + String(rows);
-    if(selectedParameterName){
+    if (selectedParameterName && selectedParameterName !== 'None') {
     query += '&fq=parameter_name:' + '"' + selectedParameterName + '"';
     }
-    if(selectedProcedureName){
+    if (selectedProcedureName && selectedProcedureName !== 'None') {
         query += '&fq=procedure_name:' + '"' + selectedProcedureName + '"';
     }
     return this.http.get<Response>(

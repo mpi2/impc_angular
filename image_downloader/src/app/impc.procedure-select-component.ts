@@ -21,6 +21,7 @@ export class ProcedureSelectComponent implements OnInit {
       const proceduresWithCounts = this.response['facet_counts']['facet_fields']['procedure_name'];
       this.procedureNamesForDropdown = proceduresWithCounts.filter(function(item, index, array) {  return (index % 2 === 0 ); });
       console.log('getProceduresForDropdown=' + this.procedureNamesForDropdown);
+      this.procedureNamesForDropdown.unshift('None');
       this.selectedProcedureName = this.procedureNamesForDropdown[0];
     });
   }

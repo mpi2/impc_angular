@@ -13,15 +13,12 @@ import { MatFormFieldModule } from '@angular/material';
 })
 export class RowsComponent {
   autoTicks = false;
-  disabled = false;
-  invert = false;
-  max = 100;
+  max = 1000;
   min = 0;
   showTicks = false;
   step = 1;
-  thumbLabel = false;
-  value = 0;
-  vertical = false;
+  thumbLabel = true;
+  value = 100;
 
   get tickInterval(): number | 'auto' {
     return this.showTicks ? (this.autoTicks ? 'auto' : this._tickInterval) : 0;

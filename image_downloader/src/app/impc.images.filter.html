@@ -32,11 +32,15 @@
             <option *ngFor="let parameterName of model.parameterNamesForDropdown" [value]="parameterName">{{parameterName}}</option>
         </select>
       </div> -->
+      <mat-card>
+          <mat-card-content>
       <button type="submit" class="btn btn-default" [disabled]="!loginForm.form.valid">
         Query
        
       </button>
       <app-showthumbnails></app-showthumbnails>
+      </mat-card-content>
+      </mat-card>
     </form>
 
     <!-- <div *ngFor="let image of images" > in filter: {{image.marker_name}} <img src='{{image.thumbnail_url}}'/> </div> -->

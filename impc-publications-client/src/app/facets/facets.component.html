@@ -1,0 +1,21 @@
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar><mat-icon>filter_list</mat-icon></div>
+    <mat-card-title>Filter</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div>Keyword hit</div>
+    <mat-selection-list #author>
+      <mat-list-option>IMPC</mat-list-option>
+      <mat-list-option>EUCOMM</mat-list-option>
+      <mat-list-option>KOMP</mat-list-option>
+    </mat-selection-list>
+    <div>Journal</div>
+    <mat-selection-list #journal>
+      <mat-list-option>PLoS Genetics</mat-list-option>
+      <mat-list-option>N Genetics</mat-list-option>
+      <mat-list-option>Evolution</mat-list-option>
+    </mat-selection-list>
+    <mat-checkbox>Fulltext available</mat-checkbox>
+  </mat-card-content>
+</mat-card>

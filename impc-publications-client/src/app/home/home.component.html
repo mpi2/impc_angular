@@ -1,0 +1,14 @@
+<div class="main-content">
+    <impc-head-bar></impc-head-bar>
+    <mat-drawer-container class="example-container" autosize>
+        <mat-drawer #drawer class="example-sidenav" mode="side">
+            <impc-facets></impc-facets>
+        </mat-drawer>
+        <button mat-icon-button (click)="drawer.toggle()" class="filter-toggle" type="button">
+                <mat-icon aria-label="Example icon-button with a heart icon">{{toggleFilterIcon}}</mat-icon>
+        </button>
+        <impc-status-filter (changeSelection)="changeStatus($event)"></impc-status-filter>
+        <impc-publication-list [status]="currentStatus"></impc-publication-list>
+    </mat-drawer-container>
+    <impc-footer></impc-footer>
+</div>

@@ -1,0 +1,6 @@
+<impc-publication *ngFor="let publication of publications|async" [publication]="publication"></impc-publication>
+<mat-paginator [length]="length"
+              [pageSize]="pageSize"
+              [pageSizeOptions]="pageSizeOptions"
+              (page)="pageEvent($event)">
+</mat-paginator>

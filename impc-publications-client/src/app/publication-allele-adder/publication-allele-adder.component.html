@@ -1,0 +1,24 @@
+<form class="form">
+  <mat-form-field class="allele-chip-list">
+    <mat-chip-list #chipList>
+      <mat-chip *ngFor="let allele of alleles" [selectable]="selectable"
+      [removable]="removable" (remove)="remove(allele, textInput)">
+      {{ allele }}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+    <input placeholder="Add Allele..."
+    [matChipInputFor]="chipList"
+    [matChipInputAddOnBlur]="addOnBlur"
+    [matAutocomplete]="auto"
+    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+    [formControl]="myControl" #textInput
+    (paste)="pasteEvent($event)"
+    />
+  </mat-chip-list>
+  <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption (optionSelected)="addFromAutcomplete($event, textInput)">
+    <mat-option *ngFor="let option of filteredOptions|async" [value]="option">
+      <span>{{ option }}</span>
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
+</form>

@@ -1,0 +1,15 @@
+<mat-card color="primary">
+  <mat-card-header>
+    <mat-card-title class="publicationTitle">{{ publication.title }} <br> <a [attr.href]="publication.url" class="fulltext-link" target="_blank">[Full text]</a><a *ngIf="publication.citesPmid" [attr.href]="publication.citesPmid" class="fulltext-link" target="_blank">[Cites IMPC Paper]</a></mat-card-title>
+    <mat-card-subtitle>{{ publication.journal }}</mat-card-subtitle>
+    <mat-card-subtitle style="font-style: italic;">{{ publication.authors }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <impc-fragment-explorer [keywordsPromise]="publication.keywords"></impc-fragment-explorer>
+  </mat-card-content>
+  <mat-card-actions style="text-align: center">
+    <impc-publication-allele-adder [alleles]="publication.alleles"></impc-publication-allele-adder>
+    <button mat-mini-fab color="primary"><mat-icon aria-label="Example icon-button with a heart icon">remove_circle_outline</mat-icon></button>
+    <button mat-mini-fab color="primary"><mat-icon aria-label="Example icon-button with a heart icon">done</mat-icon></button>
+  </mat-card-actions>
+</mat-card>

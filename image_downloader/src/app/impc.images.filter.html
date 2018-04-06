@@ -1,37 +1,61 @@
 <div class="container">
     <h1>Images Query Form</h1>
     <form (ngSubmit)="query();" #loginForm="ngForm">
-        <app-impc-rows></app-impc-rows>
-        <app-procedure-select></app-procedure-select>
-        <app-parameter-select></app-parameter-select>
-      <!-- <div class="form-group">
-        <label for="keyword">Keyword</label>
-        <input type="text" class="form-control" [(ngModel)]="model.keyword" name="keyword" #keywordSpy #keyword="ngModel">
-        {{keywordSpy.className}}
-        <div [hidden]="keyword.valid || keyword.pristine" class="alert alert-danger">Required</div>
-      </div> -->
-      <!-- <div class="form-group">
-        <label for="rows">Number of Images</label>
-        <input type="number" class="form-control" [(ngModel)]="model.rows" name="rows" #rowsSpy #rows="ngModel">
-        {{rowsSpy.className}}
-        <div [hidden]="rows.valid || rows.pristine" class="alert alert-danger">Required</div>
-      </div>
-      <div class="form-group">
-        <label for="selectedProcedureName">Procedure Names</label>
-        <select class="form-control"  id="selectedProcedureName"
-            required
-            [(ngModel)]="model.selectedProcedureName" name="selectedProcedureName">
-            <option *ngFor="let procedureName of model.procedureNamesForDropdown" [value]="procedureName">{{proceureName}}</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="selectedParameterName">Parameter Names</label>
-        <select class="form-control"  id="selectedParameterName"
-            required
-            [(ngModel)]="model.selectedParameterName" name="selectedParameterName">
-            <option *ngFor="let parameterName of model.parameterNamesForDropdown" [value]="parameterName">{{parameterName}}</option>
-        </select>
-      </div> -->
+      <mat-card>
+        <mat-card-content>
+          <h2 class="example-h2">Number of Images</h2>
+      
+          <section class="example-section">
+            <mat-form-field class="example-margin">
+              <input matInput type="number" name="rows" placeholder="Number of Images" [(ngModel)]="rows">
+            </mat-form-field>
+            <mat-form-field class="example-margin">
+              <input matInput type="number" name="minValue" placeholder="Min value" [(ngModel)]="min">
+            </mat-form-field>
+            <mat-form-field class="example-margin">
+              <input matInput type="number" name="maxValue" placeholder="Max value" [(ngModel)]="max">
+            </mat-form-field>
+          </section>
+        </mat-card-content>
+        <mat-card-content>
+            <h3 class="example-h2">Number Of Results</h3>
+        
+            <mat-slider name="rowsSlider" 
+                class="example-margin"
+                [max]="max"
+                [min]="min"
+                [step]="step"
+                [thumb-label]="thumbLabel"
+                [tick-interval]="tickInterval"
+                [(ngModel)]="rows">
+            </mat-slider>
+          </mat-card-content>
+      </mat-card>
+        <mat-card class="result">
+          <mat-card-content>
+      <mat-form-field>
+          <mat-select placeholder="Procedure Name" name="procedureName" [(ngModel)]="selectedProcedureName">
+            <!-- <mat-option>None</mat-option> -->
+            <mat-option *ngFor="let procedure of procedureNamesForDropdown" [value]="procedure">
+              {{ procedure }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <p>You selected {{selectedProcedureName}}</p>
+          <mat-form-field>
+              <mat-select [disabled]="disableSelect.value" name="parameterName" placeholder="Parameter Name" [(ngModel)]="selectedParameterName">
+                  <!-- <mat-option>None</mat-option> -->
+                <mat-option *ngFor="let parameter of parameterNamesForDropdown" [value]="parameter">
+                  {{ parameter }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <p>You selected {{selectedParameterName}}</p>
+          </mat-card-content>
+
+      </mat-card>
+      
+
       <mat-card>
           <mat-card-content>
       <button type="submit" class="btn btn-default" [disabled]="!loginForm.form.valid">

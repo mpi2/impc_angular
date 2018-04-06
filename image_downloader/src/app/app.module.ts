@@ -9,20 +9,16 @@ import { ImageBrowserComponent } from './impc.images.browser.component';
 import { FilterComponent } from './impc.images.filter.component';
 import { ImagesRestService } from './impc.images.rest.service';
 import { ShowThumbnailsComponent } from './impc.images.showthumbnails.component';
-import { ProcedureSelectComponent } from './impc.procedure-select-component';
-import { ParameterSelectComponent } from './impc.parameter-select-component';
 import { MatSelectModule, MatCheckbox } from '@angular/material';
 import { MatCardModule, MatSliderModule } from '@angular/material';
 import { MatGridListModule } from '@angular/material';
 import { MatCheckboxModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { RowsComponent } from './impc.rows.component';
 import {  MatInputModule } from '@angular/material';
 
 @NgModule({
   declarations: [
-    AppComponent, ImageBrowserComponent, FilterComponent, ShowThumbnailsComponent, ProcedureSelectComponent, ParameterSelectComponent,
-    RowsComponent
+    AppComponent, ImageBrowserComponent, FilterComponent, ShowThumbnailsComponent
   ],
   imports: [
     BrowserModule, FormsModule, HttpClientModule, MatSelectModule, BrowserAnimationsModule, MatCardModule, MatGridListModule,

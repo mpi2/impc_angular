@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { ImagesRestService, ImagesResponse } from './impc.images.rest.service';
 
 /**
@@ -10,6 +10,7 @@ import { ImagesRestService, ImagesResponse } from './impc.images.rest.service';
   styleUrls: ['impc.procedure-select.css'],
 })
 export class ProcedureSelectComponent implements OnInit {
+  @Output() procedureSelectedEvent = new EventEmitter<string>();
   response: Response;
   procedureNamesForDropdown: string[];
   selectedProcedureName: string;

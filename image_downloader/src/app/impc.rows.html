@@ -1,21 +1,18 @@
 <mat-card>
   <mat-card-content>
-    <h2 class="example-h2">Slider configuration</h2>
+    <h2 class="example-h2">Number of Images to Return</h2>
 
     <section class="example-section">
       <mat-form-field class="example-margin">
         <input matInput type="number" placeholder="Value" [(ngModel)]="value">
       </mat-form-field>
       <mat-form-field class="example-margin">
-        <input matInput type="number" placeholder="Min value" [(ngModel)]="min">
-      </mat-form-field>
-      <mat-form-field class="example-margin">
-        <input matInput type="number" placeholder="Max value" [(ngModel)]="max">
+        <input matInput type="number" placeholder="Max value" disabled="true" [(ngModel)]="max">
       </mat-form-field>
     </section>
   </mat-card-content>
   <mat-card-content>
-      <h3 class="example-h2">Number Of Results</h3>
+      <h3 class="example-h2">Number Of Results Slider</h3>
   
       <mat-slider
           class="example-margin"

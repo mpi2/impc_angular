@@ -18,7 +18,7 @@ export class RowsComponent {
   showTicks = false;
   step = 1;
   thumbLabel = true;
-  value = 100;
+  value = 10;
 
   get tickInterval(): number | 'auto' {
     return this.showTicks ? (this.autoTicks ? 'auto' : this._tickInterval) : 0;

@@ -13,6 +13,8 @@ import { RowsComponent } from './impc.rows.component';
 })
 export class FilterComponent implements OnInit, AfterViewInit {
 
+  @ViewChild(RowsComponent)
+  private rowsComponent: RowsComponent;
   @ViewChild(ProcedureSelectComponent)
   private procedureSelector: ProcedureSelectComponent;
   @ViewChild(ParameterSelectComponent)
@@ -29,9 +31,9 @@ export class FilterComponent implements OnInit, AfterViewInit {
 
   query() {
     this.keyword = '*:*';
-    console.log('Logging with', 'keywordhere', 10, this.parameterSelector.selectedParameterName,
+    console.log('Logging with', 'keywordhere', this.rowsComponent.value, this.parameterSelector.selectedParameterName,
     'procedurename here', this.procedureSelector.selectedProcedureName);
-    this.showImagesResponse(this.keyword , 10, this.parameterSelector.selectedParameterName,
+    this.showImagesResponse(this.keyword , this.rowsComponent.value, this.parameterSelector.selectedParameterName,
       this.procedureSelector.selectedProcedureName);
     // this.model = new ImagesFilter(this.model.keyword, this.model.rows, ['blood glucose', 'antibody levels', 'sugar'], this, this.images);
   }

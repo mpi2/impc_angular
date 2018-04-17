@@ -2,7 +2,7 @@
     <h1>Images Query Form</h1>
     <form (ngSubmit)="query();" #loginForm="ngForm">
         <app-impc-rows></app-impc-rows>
-        <app-procedure-select></app-procedure-select>
+        <app-procedure-select (procedureSelectedEvent)="procedureSelectedEvent($event)"></app-procedure-select>
         <app-parameter-select></app-parameter-select>
       <!-- <div class="form-group">
         <label for="keyword">Keyword</label>

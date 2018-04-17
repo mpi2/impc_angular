@@ -15,6 +15,11 @@ export class ProcedureSelectComponent implements OnInit {
   procedureNamesForDropdown: string[];
   selectedProcedureName: string;
 
+  procedureSelected(selectedProcedure: string) {
+    console.log('event called in procedureSelected with ' + selectedProcedure);
+    this.procedureSelectedEvent.emit(selectedProcedure);
+  }
+
   getProceduresForDropdown() {
     this.imagesRestService.getPossibleProceduresResponse().subscribe(resp => {
       // access the body directly, which is typed as `Config`.

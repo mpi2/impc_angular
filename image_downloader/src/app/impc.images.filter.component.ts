@@ -57,6 +57,10 @@ export class FilterComponent implements OnInit, AfterViewInit {
   constructor(private imagesRestService: ImagesRestService) {
   }
 
+  procedureSelectedEvent(procedureSelected: string) {
+    console.log('event caught in filter from procedureSelect?' + procedureSelected);
+  }
+
   ngOnInit() {
   }
 

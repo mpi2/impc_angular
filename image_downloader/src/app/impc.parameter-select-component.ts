@@ -16,12 +16,23 @@ export class ParameterSelectComponent implements OnInit {
   selectedParameterName: string;
   disableSelect = new FormControl(false);
 
-  getParametersForDropdown() {
-    this.imagesRestService.getPossibleParametersResponse().subscribe(resp => {
+  getParametersForDropdown(procedureFilter?: string) {
+    this.imagesRestService.getPossibleParametersResponse(procedureFilter).subscribe(resp => {
       // access the body directly, which is typed as `Config`.
+      console.log('calling getparametersforDropdown');
       this.response = { ... resp.body };
       const parametersWithCounts = this.response['facet_counts']['facet_fields']['parameter_name'];
-      this.parameterNamesForDropdown = parametersWithCounts.filter(function(item, index, array) {  return (index % 2 === 0 ); });
+      this.parameterNamesForDropdown = parametersWithCounts.filter(function(item, index, array) {
+        const filteredItems: Array <string> = [];
+        if (index % 2 === 0 ) {
+          if ( array[index + 1] > 0) {
+            filteredItems.push(item);
+            console.log('iterm=' + item);
+            return item;
+          }
+        }
+          // return filteredItems;
+        });
       this.parameterNamesForDropdown.unshift('None');
       console.log('getParametersForDropdown=' + this.parameterNamesForDropdown);
       this.selectedParameterName = this.parameterNamesForDropdown[0];
@@ -33,7 +44,7 @@ export class ParameterSelectComponent implements OnInit {
 
   ngOnInit() {
     // this.model.images = this.images;
-    this.getParametersForDropdown();
+    this.getParametersForDropdown(undefined);
   }
 }
 

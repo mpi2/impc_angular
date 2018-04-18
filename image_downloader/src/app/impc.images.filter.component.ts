@@ -60,6 +60,9 @@ export class FilterComponent implements OnInit, AfterViewInit {
   procedureSelectedEvent(procedureSelected: string) {
     console.log('event caught in filter from procedureSelect?' + procedureSelected);
     // filter the parameters in the dropdown we can select based on the procedure selected
+    if (procedureSelected === 'None') {
+      procedureSelected = undefined;
+    }
     this.parameterSelector.getParametersForDropdown(procedureSelected);
     // this.query();
   }

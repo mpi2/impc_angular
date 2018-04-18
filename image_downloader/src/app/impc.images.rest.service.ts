@@ -43,7 +43,7 @@ getPossibleProceduresResponse(): Observable<HttpResponse<Response>> {
     // tslint:disable-next-line:max-line-length
     // http://wwwdev.ebi.ac.uk/mi/impc/dev/solr/impc_images/select/?q=*:*&facet=true&facet.limit=-1&facet.field=parameter_stable_id&rows=0&wt=json
     let query = '';
-    if (procedureFilter == null) {
+    if (procedureFilter == null || procedureFilter === 'None') {
         query = 'q=*:*&facet=true&facet.limit=-1&facet.field=parameter_name&rows=0';
     } else {
         query = 'q=procedure_name:"' + procedureFilter + '"&facet=true&facet.limit=-1&facet.field=parameter_name&rows=0';

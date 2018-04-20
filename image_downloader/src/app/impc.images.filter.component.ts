@@ -50,6 +50,7 @@ export class FilterComponent implements OnInit, AfterViewInit {
         // access the body directly, which is typed as `Config`.
         this.response = { ... resp.body };
         this.images = this.response['response']['docs'];
+        this.rowsComponent.max = this.response['response'].numFound;
         this.showThumbnailsComponent.setImages(this.images);
       });
   }
@@ -71,5 +72,6 @@ export class FilterComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.query();
   }
 }

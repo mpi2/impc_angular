@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter} from '@angular/core';
-import { ImagesRestService, ImagesResponse } from './impc.images.rest.service';
+import { ImagesRestService, ImagesResponse } from '../services/impc.images.rest.service';
 
 /**
  * @title Basic select

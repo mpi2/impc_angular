@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AfterViewInit, ViewChild } from '@angular/core';
-import { ImagesRestService, ImagesResponse } from './impc.images.rest.service';
-import { ProcedureSelectComponent } from './impc.procedure-select-component';
-import { ParameterSelectComponent } from './impc.parameter-select-component';
-import { ShowThumbnailsComponent } from './impc.images.showthumbnails.component';
-import { RowsComponent } from './impc.rows.component';
+import { ImagesRestService, ImagesResponse } from '../services/impc.images.rest.service';
+import { ProcedureSelectComponent } from '../procedure-select/impc.procedure-select-component';
+import { ParameterSelectComponent } from '../parameter-select/impc.parameter-select-component';
+import { ShowThumbnailsComponent } from '../showthumbnails/impc.images.showthumbnails.component';
+import { RowsComponent } from '../rows/impc.rows.component';
 
 @Component({
   selector: 'app-filter',

@@ -6,23 +6,24 @@ import { ReactiveFormsModule} from '@angular/forms';
 
 import { AppComponent } from './impc.images.downloader.app';
 import { ImageBrowserComponent } from './impc.images.browser.component';
-import { FilterComponent } from './impc.images.filter.component';
-import { ImagesRestService } from './impc.images.rest.service';
-import { ShowThumbnailsComponent } from './impc.images.showthumbnails.component';
-import { ProcedureSelectComponent } from './impc.procedure-select-component';
-import { ParameterSelectComponent } from './impc.parameter-select-component';
+import { FilterComponent } from './filter/impc.images.filter.component';
+import { ImagesRestService } from './services/impc.images.rest.service';
+import { ShowThumbnailsComponent } from './showthumbnails/impc.images.showthumbnails.component';
+import { ProcedureSelectComponent } from './procedure-select/impc.procedure-select-component';
+import { ParameterSelectComponent } from './parameter-select/impc.parameter-select-component';
 import { MatSelectModule, MatCheckbox } from '@angular/material';
 import { MatCardModule, MatSliderModule } from '@angular/material';
 import { MatGridListModule } from '@angular/material';
 import { MatCheckboxModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { RowsComponent } from './impc.rows.component';
+import { RowsComponent } from './rows/impc.rows.component';
+import { LogoComponent } from './logo/logo.component';
 import {  MatInputModule } from '@angular/material';
 
 @NgModule({
   declarations: [
     AppComponent, ImageBrowserComponent, FilterComponent, ShowThumbnailsComponent, ProcedureSelectComponent, ParameterSelectComponent,
-    RowsComponent
+    RowsComponent, LogoComponent
   ],
   imports: [
     BrowserModule, FormsModule, HttpClientModule, MatSelectModule, BrowserAnimationsModule, MatCardModule, MatGridListModule,

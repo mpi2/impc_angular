@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { ImagesRestService } from './impc.images.rest.service';
+import { ImagesRestService } from '../services/impc.images.rest.service';
 import { MatCard } from '@angular/material';
 
 @Component({

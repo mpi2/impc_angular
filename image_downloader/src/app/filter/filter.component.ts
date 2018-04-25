@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { AfterViewInit, ViewChild } from '@angular/core';
-import { ImagesRestService, ImagesResponse } from '../services/impc.images.rest.service';
-import { ProcedureSelectComponent } from '../procedure-select/impc.procedure-select.component';
-import { ParameterSelectComponent } from '../parameter-select/impc.parameter-select.component';
-import { ShowThumbnailsComponent } from '../showthumbnails/impc.images.showthumbnails.component';
-import { RowsComponent } from '../rows/impc.rows.component';
+import { ImagesRestService, ImagesResponse } from '../services/rest.service';
+import { ProcedureSelectComponent } from '../procedure-select/procedure-select.component';
+import { ParameterSelectComponent } from '../parameter-select/parameter-select.component';
+import { ShowThumbnailsComponent } from '../showthumbnails/showthumbnails.component';
+import { RowsComponent } from '../rows/rows.component';
 import { AnatomyFilterComponent } from '../anatomy-filter/anatomy-filter.component';
 
 @Component({
   selector: 'app-filter',
-  styleUrls: ['./impc.images.filter.css'],
-  templateUrl: `./impc.images.filter.html`,
+  styleUrls: ['./filter.css'],
+  templateUrl: `./filter.html`,
 })
 export class FilterComponent implements OnInit, AfterViewInit {
 

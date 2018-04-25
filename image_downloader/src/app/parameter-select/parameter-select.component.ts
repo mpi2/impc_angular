@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ImagesRestService, ImagesResponse } from '../services/impc.images.rest.service';
+import { ImagesRestService, ImagesResponse } from '../services/rest.service';
 import {FormControl} from '@angular/forms';
 
 /**
@@ -7,8 +7,8 @@ import {FormControl} from '@angular/forms';
  */
 @Component({
   selector: 'app-parameter-select',
-  templateUrl: 'impc.parameter-select.html',
-  styleUrls: ['impc.parameter-select.css'],
+  templateUrl: 'parameter-select.html',
+  styleUrls: ['parameter-select.css'],
 })
 export class ParameterSelectComponent implements OnInit {
   response: Response;

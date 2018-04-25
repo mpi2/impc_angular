@@ -6,8 +6,8 @@ import { MatFormFieldModule } from '@angular/material';
  */
 @Component({
   selector: 'app-impc-rows',
-  templateUrl: 'impc.rows.html',
-  styleUrls: ['impc.rows.css'],
+  templateUrl: 'rows.html',
+  styleUrls: ['rows.css'],
   encapsulation: ViewEncapsulation.None,
   preserveWhitespaces: false,
 })

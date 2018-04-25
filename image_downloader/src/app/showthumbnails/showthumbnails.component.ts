@@ -1,11 +1,11 @@
 import { Component, OnInit} from '@angular/core';
-import { ImagesRestService } from '../services/impc.images.rest.service';
+import { ImagesRestService } from '../services/rest.service';
 import { MatCard } from '@angular/material';
 
 @Component({
     selector: 'app-showthumbnails',
-    styleUrls: ['./impc.images.showthumbnails.css'],
-    templateUrl: `./impc.images.showthumbnails.html`,
+    styleUrls: ['./showthumbnails.css'],
+    templateUrl: `./showthumbnails.html`,
     providers: [ImagesRestService]
   })
 export class ShowThumbnailsComponent implements OnInit {

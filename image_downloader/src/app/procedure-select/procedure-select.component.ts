@@ -1,13 +1,13 @@
 import { Component, OnInit, Output, EventEmitter} from '@angular/core';
-import { ImagesRestService, ImagesResponse } from '../services/impc.images.rest.service';
+import { ImagesRestService, ImagesResponse } from '../services/rest.service';
 
 /**
  * @title Basic select
  */
 @Component({
   selector: 'app-procedure-select',
-  templateUrl: 'impc.procedure-select.html',
-  styleUrls: ['impc.procedure-select.css'],
+  templateUrl: 'procedure-select.html',
+  styleUrls: ['procedure-select.css'],
 })
 export class ProcedureSelectComponent implements OnInit {
   @Output() procedureSelectedEvent = new EventEmitter<string>();

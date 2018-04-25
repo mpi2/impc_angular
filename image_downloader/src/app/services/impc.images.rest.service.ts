@@ -16,10 +16,14 @@ export class ImagesRestService {
 
 
 
-getImagesResponse(queryString= '*:*', rows= 10, selectedParameterName?: string, selectedProcedureName?: string):
+getImagesResponse(queryString= '*:*', rows= 10, selectedParameterName?: string, selectedProcedureName?: string,
+selectedAnatomyName?: string):
     Observable<HttpResponse<Response>> {
     console.log('selected parameter name in rest request=' + selectedParameterName);
     let query = 'q=' + queryString;
+    if (selectedAnatomyName && selectedAnatomyName !== 'None') {
+        query = 'q=anatomy_term:' + '"' + selectedAnatomyName + '"';
+    }
     query += '&rows=' + String(rows);
     if (selectedParameterName && selectedParameterName !== 'None') {
     query += '&fq=parameter_name:' + '"' + selectedParameterName + '"';
@@ -49,6 +53,14 @@ getPossibleProceduresResponse(): Observable<HttpResponse<Response>> {
         query = 'q=procedure_name:"' + procedureFilter + '"&facet=true&facet.limit=-1&facet.field=parameter_name&rows=0';
     }
     console.log('query is ' + query);
+    return this.http.get<Response>(
+      this.restBaseUrl + query, { observe: 'response' });
+  }
+
+  getPossibleAnatomyResponse(): Observable<HttpResponse<Response>> {
+    // tslint:disable-next-line:max-line-length
+    // http://wwwdev.ebi.ac.uk/mi/impc/dev/solr/impc_images/select/?q=*:*&facet=true&facet.limit=-1&facet.field=parameter_stable_id&rows=0&wt=json
+    const query = 'q=anatomy_term:*&facet=true&facet.limit=-1&facet.field=anatomy_term&rows=0';
     return this.http.get<Response>(
       this.restBaseUrl + query, { observe: 'response' });
   }

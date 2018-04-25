@@ -2,8 +2,21 @@
     <h1>Images Query Form</h1>
     <form (ngSubmit)="query();" #loginForm="ngForm">
         <app-impc-rows></app-impc-rows>
+        <mat-card class="result">
+          <mat-card-content>
+            <h2>Filter the images returned</h2>
         <app-procedure-select (procedureSelectedEvent)="procedureSelectedEvent($event)"></app-procedure-select>
         <app-parameter-select></app-parameter-select>
+        <app-anatomy-filter (anatomySelectedEvent)="anatomySelectedEvent($event)"></app-anatomy-filter>
+        </mat-card-content>
+        </mat-card>
+        <mat-card>
+          <mat-card-content>
+            <button mat-fab>
+              Query
+            </button>
+          </mat-card-content>
+        </mat-card>
       <!-- <div class="form-group">
         <label for="keyword">Keyword</label>
         <input type="text" class="form-control" [(ngModel)]="model.keyword" name="keyword" #keywordSpy #keyword="ngModel">
@@ -34,18 +47,9 @@
       </div> -->
       <mat-card>
           <mat-card-content>
-      <button type="submit" class="btn btn-default" [disabled]="!loginForm.form.valid">
-        Query
-       
-      </button>
       <app-showthumbnails></app-showthumbnails>
       </mat-card-content>
       </mat-card>
     </form>
-
-    <!-- <div *ngFor="let image of images" > in filter: {{image.marker_name}} <img src='{{image.thumbnail_url}}'/> </div> -->
-    <!-- <p>image here: {{images | json}}</p> -->
-    <!-- <p>response should be here: {{response | json}}</p> -->
-    <!-- <h2>{{model | json}}</h2>
-    <ul><li *ngFor="let image of model.images" [value]="image">{{image.path}}</li></ul> -->
+    <!-- <h2>{{model | json}}</h2> -->
   </div>

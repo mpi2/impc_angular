@@ -1,9 +1,12 @@
 import {} from 'jasmine';
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './impc.images.downloader.app';
+import { MatSelectModule, MatCheckbox, MatButtonModule } from '@angular/material';
+
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ MatSelectModule ],
       declarations: [
         AppComponent
       ],

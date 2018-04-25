@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AfterViewInit, ViewChild } from '@angular/core';
 import { ImagesRestService, ImagesResponse } from '../services/impc.images.rest.service';
-import { ProcedureSelectComponent } from '../procedure-select/impc.procedure-select-component';
-import { ParameterSelectComponent } from '../parameter-select/impc.parameter-select-component';
+import { ProcedureSelectComponent } from '../procedure-select/impc.procedure-select.component';
+import { ParameterSelectComponent } from '../parameter-select/impc.parameter-select.component';
 import { ShowThumbnailsComponent } from '../showthumbnails/impc.images.showthumbnails.component';
 import { RowsComponent } from '../rows/impc.rows.component';
+import { AnatomyFilterComponent } from '../anatomy-filter/anatomy-filter.component';
 
 @Component({
   selector: 'app-filter',
@@ -21,6 +22,8 @@ export class FilterComponent implements OnInit, AfterViewInit {
   private parameterSelector: ParameterSelectComponent;
   @ViewChild(ShowThumbnailsComponent)
   private showThumbnailsComponent;
+  @ViewChild((AnatomyFilterComponent))
+  private anatomyFilterComponent;
 
   private keyword: string;
   config: any;
@@ -34,12 +37,12 @@ export class FilterComponent implements OnInit, AfterViewInit {
     console.log('Logging with', 'keywordhere', this.rowsComponent.value, this.parameterSelector.selectedParameterName,
     'procedurename here', this.procedureSelector.selectedProcedureName);
     this.showImagesResponse(this.keyword , this.rowsComponent.value, this.parameterSelector.selectedParameterName,
-      this.procedureSelector.selectedProcedureName);
+      this.procedureSelector.selectedProcedureName, this.anatomyFilterComponent.selectedAnatomyName);
     // this.model = new ImagesFilter(this.model.keyword, this.model.rows, ['blood glucose', 'antibody levels', 'sugar'], this, this.images);
   }
 
-  showImagesResponse(query , rows, selectedParameterName, selectedProcedureName) {
-    this.imagesRestService.getImagesResponse(query, rows, selectedParameterName, selectedProcedureName)
+  showImagesResponse(query , rows, selectedParameterName, selectedProcedureName, selectedAnatomyName) {
+    this.imagesRestService.getImagesResponse(query, rows, selectedParameterName, selectedProcedureName, selectedAnatomyName)
       // resp is of type `HttpResponse<Config>`
       .subscribe(resp => {
         // display its headers
@@ -65,6 +68,16 @@ export class FilterComponent implements OnInit, AfterViewInit {
       procedureSelected = undefined;
     }
     this.parameterSelector.getParametersForDropdown(procedureSelected);
+    // this.query();
+  }
+
+  anatomySelectedEvent(anatomySelected: string) {
+    console.log('event caught in filter from anatomySelect?' + anatomySelected);
+    // filter the parameters in the dropdown we can select based on the procedure selected
+    if (anatomySelected === 'None') {
+      anatomySelected = undefined;
+    }
+    // this.anatomyFilterComponent.getAnatomysForDropdown(anatomySelected);
     // this.query();
   }
 

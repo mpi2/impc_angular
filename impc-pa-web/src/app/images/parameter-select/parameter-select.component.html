@@ -1,3 +1,9 @@
-<p>
-  parameter-select works!
-</p>
+<mat-form-field>
+    <mat-select [disabled]="disableSelect.value" placeholder="Parameter Name" [(value)]="selectedParameterName">
+        <!-- <mat-option>None</mat-option> -->
+      <mat-option *ngFor="let parameter of parameterNamesForDropdown" [value]="parameter">
+        {{ parameter }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <!-- You selected {{selectedParameterName}} -->

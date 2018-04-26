@@ -2,7 +2,7 @@
  import { ImagesRestService, ImagesResponse } from '../services/rest.service';
 
 @Component({
-  selector: 'app-anatomy-filter',
+  selector: 'app-anatomy-filter2',
   templateUrl: './anatomy-filter.component.html',
   styleUrls: ['./anatomy-filter.component.css']
 })

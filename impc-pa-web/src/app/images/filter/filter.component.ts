@@ -6,7 +6,7 @@ import { ParameterSelectComponent } from '../parameter-select/parameter-select.c
 import { ThumbnailsComponent } from '../thumbnails/thumbnails.component';
 import { NumberReturnedFilterComponent } from '../number-returned-filter/number-returned-filter.component';
 import { AnatomySelectComponent } from '../anatomy-select/anatomy-select.component';
-import { SaveImageComponent } from '../save-image/save-image.component';
+import { SaveImageComponent } from '../save-images/save-images.component';
 // import { ImagesModule } from '../images/images.module';
 
 @Component({

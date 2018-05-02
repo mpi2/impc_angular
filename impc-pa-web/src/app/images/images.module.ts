@@ -17,7 +17,7 @@ import { FilterComponent } from './filter/filter.component';
 import { NumberReturnedFilterComponent } from './number-returned-filter/number-returned-filter.component';
 import { LogoComponent } from './logo/logo.component';
 import { ImageService } from './image.service';
-import { SaveImageComponent } from './save-image/save-image.component';
+import { SaveImageComponent } from './save-images/save-images.component';
 
 @NgModule({
   imports: [

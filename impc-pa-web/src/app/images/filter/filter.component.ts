@@ -7,6 +7,7 @@ import { ThumbnailsComponent } from '../thumbnails/thumbnails.component';
 import { NumberReturnedFilterComponent } from '../number-returned-filter/number-returned-filter.component';
 import { AnatomySelectComponent } from '../anatomy-select/anatomy-select.component';
 import { SaveImageComponent } from '../save-images/save-images.component';
+import { ImageSaverService } from '../image-saver.service';
 // import { ImagesModule } from '../images/images.module';
 
 @Component({
@@ -83,7 +84,7 @@ export class FilterComponent implements OnInit, AfterViewInit {
     }
   }
 
-  constructor(private imagesRestService: ImageService) {
+  constructor(private imagesRestService: ImageService, private imageSaverService: ImageSaverService) {
   }
 
 
@@ -91,6 +92,8 @@ export class FilterComponent implements OnInit, AfterViewInit {
     console.log('saving images now with ' + images.length + ' images');
     for (let image of images ) {
         console.log(image.download_url);
+        this.imageSaverService.saveFile(image.omero_id);
+        this.imageSaverService.download();
     }
 
   }

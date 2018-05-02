@@ -18,7 +18,8 @@ import { NumberReturnedFilterComponent } from './number-returned-filter/number-r
 import { LogoComponent } from './logo/logo.component';
 import { ImageService } from './image.service';
 import { SaveImageComponent } from './save-images/save-images.component';
-
+import { ImageSaverService } from './image-saver.service';
+import { DownloaderService } from './downloader.service';
 @NgModule({
   imports: [
     CommonModule, MatSelectModule, FormsModule, MatSelectModule,
@@ -30,6 +31,6 @@ import { SaveImageComponent } from './save-images/save-images.component';
     exports: [
       AnatomySelectComponent, LogoComponent, FilterComponent
     ],
-    providers: [ImageService]
+    providers: [ImageService, ImageSaverService, DownloaderService]
 })
 export class ImagesModule { }

@@ -3,10 +3,13 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 
+import { DownloaderService } from './downloader.service';
+
 @Injectable()
 export class ImageSaverService {
+  contents: string;
  private rootImageUrl = 'http://wwwdev.ebi.ac.uk/mi/media/omero/webgateway/render_image/460595/';
- constructor(private http: HttpClient) { }
+ constructor(private http: HttpClient , private downloaderService: DownloaderService ) { }
 
  saveFile(imageId: string): Observable<HttpResponse<Response>> {
       // tslint:disable-next-line:max-line-length
@@ -25,4 +28,9 @@ export class ImageSaverService {
   //   const blob = new Blob([response._body], { type: 'text/plain' });
   //   saveAs(blob, filename);
   // }
+
+  public download() {
+    this.downloaderService.getTextFile('assets/textfile.txt')
+      .subscribe(results => this.contents = results);
+  }
 }

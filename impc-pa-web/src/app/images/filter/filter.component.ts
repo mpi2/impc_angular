@@ -6,6 +6,7 @@ import { ParameterSelectComponent } from '../parameter-select/parameter-select.c
 import { ThumbnailsComponent } from '../thumbnails/thumbnails.component';
 import { NumberReturnedFilterComponent } from '../number-returned-filter/number-returned-filter.component';
 import { AnatomySelectComponent } from '../anatomy-select/anatomy-select.component';
+import { SaveImageComponent } from '../save-image/save-image.component';
 // import { ImagesModule } from '../images/images.module';
 
 @Component({
@@ -23,8 +24,10 @@ export class FilterComponent implements OnInit, AfterViewInit {
   private parameterSelector: ParameterSelectComponent;
   @ViewChild(ThumbnailsComponent)
   private showThumbnailsComponent;
-  @ViewChild((AnatomySelectComponent))
+  @ViewChild(AnatomySelectComponent)
   private anatomySelectComponent;
+  @ViewChild(SaveImageComponent)
+  private saveImageComponent;
 
   private keyword: string;
   config: any;
@@ -36,7 +39,7 @@ export class FilterComponent implements OnInit, AfterViewInit {
   query() {
     this.keyword = '*:*';
     console.log('Logging with', 'keywordhere', this.rowsComponent.value, this.parameterSelector.selectedParameterName,
-    'procedurename here', this.procedureSelector.selectedProcedureName);
+    'procedurename here', this.procedureSelector.selectedProcedureName, ' save images =', this.saveImageComponent.saveImages);
     this.showImagesResponse(this.keyword , this.rowsComponent.value, this.parameterSelector.selectedParameterName,
       this.procedureSelector.selectedProcedureName, this.anatomySelectComponent.selectedAnatomyName);
     // this.model = new ImagesFilter(this.model.keyword, this.model.rows, ['blood glucose', 'antibody levels', 'sugar'], this, this.images);

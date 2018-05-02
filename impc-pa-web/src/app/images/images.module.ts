@@ -17,6 +17,7 @@ import { FilterComponent } from './filter/filter.component';
 import { NumberReturnedFilterComponent } from './number-returned-filter/number-returned-filter.component';
 import { LogoComponent } from './logo/logo.component';
 import { ImageService } from './image.service';
+import { SaveImageComponent } from './save-image/save-image.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,7 @@ import { ImageService } from './image.service';
     MatCheckboxModule, ReactiveFormsModule, MatSliderModule, MatInputModule, MatButtonModule
   ],
   declarations: [ThumbnailsComponent, ParameterSelectComponent, ProcedureSelectComponent, AnatomySelectComponent,
-    FilterComponent, NumberReturnedFilterComponent, AnatomySelectComponent, LogoComponent],
+    FilterComponent, NumberReturnedFilterComponent, AnatomySelectComponent, LogoComponent, SaveImageComponent],
     exports: [
       AnatomySelectComponent, LogoComponent, FilterComponent
     ],

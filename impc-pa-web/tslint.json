@@ -120,7 +120,7 @@
     "directive-selector": [
       true,
       "attribute",
-      "app",
+      "impc",
       "camelCase"
     ],
     "component-selector": [

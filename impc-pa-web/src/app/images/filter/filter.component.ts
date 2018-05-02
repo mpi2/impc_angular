@@ -40,12 +40,14 @@ export class FilterComponent implements OnInit, AfterViewInit {
     this.keyword = '*:*';
     console.log('Logging with', 'keywordhere', this.rowsComponent.value, this.parameterSelector.selectedParameterName,
     'procedurename here', this.procedureSelector.selectedProcedureName, ' save images =', this.saveImageComponent.saveImages);
-    this.showImagesResponse(this.keyword , this.rowsComponent.value, this.parameterSelector.selectedParameterName,
+    this.showImagesResponse(this.saveImageComponent.saveImages , this.keyword , this.rowsComponent.value, 
+      this.parameterSelector.selectedParameterName,
       this.procedureSelector.selectedProcedureName, this.anatomySelectComponent.selectedAnatomyName);
     // this.model = new ImagesFilter(this.model.keyword, this.model.rows, ['blood glucose', 'antibody levels', 'sugar'], this, this.images);
   }
 
-  showImagesResponse(query , rows, selectedParameterName, selectedProcedureName, selectedAnatomyName) {
+  showImagesResponse(saveImages , query , rows, selectedParameterName, selectedProcedureName, selectedAnatomyName) {
+    if ( !saveImages) {
     this.imagesRestService.getImagesResponse(query, rows, selectedParameterName, selectedProcedureName, selectedAnatomyName)
       // resp is of type `HttpResponse<Config>`
       .subscribe(resp => {
@@ -60,9 +62,37 @@ export class FilterComponent implements OnInit, AfterViewInit {
         this.rowsComponent.max = this.response['response'].numFound;
         this.showThumbnailsComponent.setImages(this.images);
       });
+    } else {
+      console.log('saving images in filterComponent');
+
+      this.imagesRestService.getImagesResponse(query, rows, selectedParameterName, selectedProcedureName, selectedAnatomyName)
+      // resp is of type `HttpResponse<Config>`
+      .subscribe(resp => {
+        // do things to save images here
+        const keys = resp.headers.keys();
+        this.headers = keys.map(key =>
+          `${key}: ${resp.headers.get(key)}`);
+          console.log('headers=' + this.headers);
+        // access the body directly, which is typed as `Config`.
+        this.response = { ... resp.body };
+        this.images = this.response['response']['docs'];
+        this.rowsComponent.max = this.response['response'].numFound;
+        this.showThumbnailsComponent.setImages(this.images);
+        this.saveImages(this.images);
+      });
+    }
   }
 
   constructor(private imagesRestService: ImageService) {
+  }
+
+
+  saveImages(images: any[]) {
+    console.log('saving images now with ' + images.length + ' images');
+    for (let image of images ) {
+        console.log(image.download_url);
+    }
+
   }
 
   procedureSelectedEvent(procedureSelected: string) {

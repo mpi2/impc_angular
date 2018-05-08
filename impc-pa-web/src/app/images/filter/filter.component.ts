@@ -88,6 +88,11 @@ export class FilterComponent implements OnInit, AfterViewInit {
   }
 
 
+  saveImagesEvent() {
+    console.log('images event caught in filter');
+    this.showThumbnailsComponent.saveImagesSelected();
+  }
+
   saveImages(images: any[]) {
     console.log('saving images now with ' + images.length + ' images');
     for (let image of images ) {

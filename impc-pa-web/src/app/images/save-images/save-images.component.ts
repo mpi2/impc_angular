@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'impc-save-images',
@@ -6,16 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./save-images.component.css']
 })
 export class SaveImageComponent implements OnInit {
+  @Output()
+  saveImagesEvent = new EventEmitter<string>();
   saveImages: boolean;
+
   constructor() { }
 
   ngOnInit() {
     this.saveImages = false;
   }
 
-  // saveImageSelected(saveUrl: string) {
-  //   console.log('save image event fired');
-
-  // }
+  saveImagesPressed() {
+    console.log('save image event fired');
+    this.saveImagesEvent.emit();
+  }
 
 }

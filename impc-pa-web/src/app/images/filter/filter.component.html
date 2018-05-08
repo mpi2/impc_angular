@@ -9,13 +9,13 @@
         <app-parameter-select></app-parameter-select>
         <app-anatomy-select (anatomySelectedEvent)="anatomySelectedEvent($event)"></app-anatomy-select>
         </mat-card-content>
-        <impc-save-images></impc-save-images>
         </mat-card>
         <mat-card>
           <mat-card-content>
             <button mat-fab>
               Query
             </button>
+            <impc-save-images (saveImagesEvent)="saveImagesEvent($event)"></impc-save-images>
           </mat-card-content>
         </mat-card>
       <!-- <div class="form-group">
@@ -48,7 +48,7 @@
       </div> -->
       <mat-card>
           <mat-card-content>
-      <app-showthumbnails></app-showthumbnails>
+      <impc-showthumbnails></impc-showthumbnails>
       </mat-card-content>
       </mat-card>
     </form>

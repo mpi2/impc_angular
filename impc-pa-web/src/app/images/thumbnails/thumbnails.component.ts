@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 
 @Component({
-    selector: 'app-showthumbnails',
+    selector: 'impc-showthumbnails',
     styleUrls: ['./thumbnails.component.css'],
     templateUrl: `./thumbnails.component.html`,
     providers: [ImageService]
@@ -13,6 +13,10 @@ import 'rxjs/add/operator/toPromise';
 export class ThumbnailsComponent implements OnInit {
 images: any[];
     constructor(private imagesRestService: ImageService) {
+    }
+
+    saveImagesSelected() {
+        console.log('saving images in Thumnails');
     }
 
     public setImages(images) {

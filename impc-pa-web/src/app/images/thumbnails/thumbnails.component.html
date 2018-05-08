@@ -1,24 +1,6 @@
 <mat-grid-list cols="5" rowHeight="400px">
     <mat-grid-tile *ngFor="let image of images">
-        <mat-card class="example-card">
-          <mat-card-header>
-            <div mat-card-avatar></div>
-            <mat-card-title>{{image.marker_symbol}}</mat-card-title>
-            <!-- <mat-card-subtitle>{{image.marker_name}}</mat-card-subtitle> -->
-          </mat-card-header>
-          <a href="{{image.jpeg_url}}" download>
-            <img mat-card-image src="{{image.thumbnail_url}}" alt="{{image.mgi_accession_id}}" class="image_thumbnail">
-          </a>
-            <!-- <mat-card-content>
-            <p>
-             {{image.mp_term}}
-            </p>
-          </mat-card-content> -->
-          <!-- <mat-card-actions>
-            <button mat-button>LIKE</button>
-            <button mat-button>SHARE</button>
-          </mat-card-actions> -->
-        </mat-card>
+        <impc-thumbnail [image]="image"></impc-thumbnail>
         
       </mat-grid-tile>
   </mat-grid-list>

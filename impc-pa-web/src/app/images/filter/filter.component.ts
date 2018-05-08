@@ -41,7 +41,7 @@ export class FilterComponent implements OnInit, AfterViewInit {
     this.keyword = '*:*';
     console.log('Logging with', 'keywordhere', this.rowsComponent.value, this.parameterSelector.selectedParameterName,
     'procedurename here', this.procedureSelector.selectedProcedureName, ' save images =', this.saveImageComponent.saveImages);
-    this.showImagesResponse(this.saveImageComponent.saveImages , this.keyword , this.rowsComponent.value, 
+    this.showImagesResponse(this.saveImageComponent.saveImages , this.keyword , this.rowsComponent.value,
       this.parameterSelector.selectedParameterName,
       this.procedureSelector.selectedProcedureName, this.anatomySelectComponent.selectedAnatomyName);
     // this.model = new ImagesFilter(this.model.keyword, this.model.rows, ['blood glucose', 'antibody levels', 'sugar'], this, this.images);
@@ -92,8 +92,8 @@ export class FilterComponent implements OnInit, AfterViewInit {
     console.log('saving images now with ' + images.length + ' images');
     for (let image of images ) {
         console.log(image.download_url);
-        this.imageSaverService.saveFile(image.omero_id);
-        this.imageSaverService.download();
+        // this.imageSaverService.saveFile(image.omero_id);
+        this.imageSaverService.download(image.omero_id);
     }
 
   }

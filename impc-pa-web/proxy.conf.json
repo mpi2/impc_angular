@@ -30,5 +30,18 @@
     "pathRewrite": {
       "^/api/ipify": ""
     }
+  },
+  "/api/*": {
+  "target": "http://localhost:8080/SimpleProxyServer/api/*",
+  "secure": false,
+  "logLevel": "debug",
+  "changeOrigin": true
+},
+    "/images/*": {
+    "target": "http://localhost:8080/SimpleProxyServer/images/*",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
   }
+
 }

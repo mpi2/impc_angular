@@ -7,7 +7,7 @@ import { DownloaderService } from './downloader.service';
 
 @Injectable()
 export class ImageSaverService {
-  contents: string;
+  contents: Blob;
  private rootImageUrl = 'http://wwwdev.ebi.ac.uk/mi/media/omero/webgateway/render_image/460595/';
  constructor(private http: HttpClient , private downloaderService: DownloaderService ) { }
 
@@ -29,8 +29,8 @@ export class ImageSaverService {
   //   saveAs(blob, filename);
   // }
 
-  public download() {
-    this.downloaderService.getTextFile('assets/textfile.txt')
+  public download(imageId: string) {
+    this.downloaderService.getFile(imageId)
       .subscribe(results => this.contents = results);
   }
 }

@@ -12,7 +12,7 @@ import { catchError, retry } from 'rxjs/operators';
     }
   @Injectable()
   export class ImageService {
-      restBaseUrl = 'http://localhost:8080/SimpleProxyServer/?';
+      restBaseUrl = 'http://localhost:8080/SimpleProxyServer/api/?';
 
   getImagesResponse(queryString= '*:*', rows= 10, selectedParameterName?: string, selectedProcedureName?: string,
   selectedAnatomyName?: string):

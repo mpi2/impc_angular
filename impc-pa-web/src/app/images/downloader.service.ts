@@ -5,7 +5,7 @@ import { tap } from 'rxjs/operators';
 @Injectable()
 export class DownloaderService {
 
-  imageDownloaderBaseUrl = 'http://localhost:8080/SimpleProxyServer/?';
+  imageDownloaderBaseUrl = '/images/?';
   constructor(
     private http: HttpClient) { }
 

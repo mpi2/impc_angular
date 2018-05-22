@@ -9,12 +9,11 @@ import 'rxjs/add/operator/toPromise';
 
 import { AppComponent } from './impc.images.downloader.app';
 import { ImagesModule } from './images/images.module';
-import { ThumbnailComponent } from './thumbnail/thumbnail.component';
+//import { ThumbnailComponent } from './images/thumbnail/thumbnail.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ThumbnailComponent
+    AppComponent
   ],
   imports: [
     BrowserModule, FormsModule, HttpClientModule,

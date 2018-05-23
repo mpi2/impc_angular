@@ -2203,28 +2203,6 @@ foot_content{
     width:70%;
 }
 
-button.accordion {
-    line-height:1.1em;
-    font-size:1.2em;
-    margin-bottom:0;
-    color:#0978a1;
-    font-weight:400;
-    cursor:pointer;
-    border:1px solid #eee;
-    padding:0.3em;
-    border-radius:4px;
-    margin-top:1em;
-    background:url(/static/images/impc.png) left center no-repeat;
-    padding:0.3em 0.3em 0.3em 0.5em;
-    width: 100%;
-    text-align: left;
-    font-family: "source sans pro" ,"Euphemia UCAS","Kannada Sangam MN";
-}
-
-button.accordion.active, button.accordion:hover {
-
-}
-
 div.panel {
     padding: 0 18px;
     display: none;

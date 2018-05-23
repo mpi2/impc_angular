@@ -1,0 +1,8 @@
+<button mat-button (click)="contactClick()">CONTACT</button>
+
+<button mat-button [matMenuTriggerFor]="menu2">LEARN MORE</button>
+<mat-menu #menu2="matMenu">
+  <button mat-menu-item (click)="faqClick()">FAQ</button>
+  <button mat-menu-item href="/glossary">Glossary</button>
+  <button mat-menu-item href="/publications">Publications</button>
+</mat-menu>

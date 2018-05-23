@@ -1,4 +1,5 @@
 <head>
+    <base href="/">
   <title> Home | 3i Consortium - Wellcome Trust Sanger Institute</title>
   <link rel="icon" type="image/png" href="images/index.ico">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -19,7 +20,7 @@
               <!-- <div id="logoslogan">3i</div>  -->
           </div>
           <nav id="mn">  <div class="region region-mainnavi">
-              <div id="block-system-main-menu" class="block block-system block-menu">
+              <!-- <div id="block-system-main-menu" class="block block-system block-menu">
 
                   <div class="content">
                       <ul class="menu" th:with="view=${#httpServletRequest.getServletPath()}">
@@ -35,7 +36,8 @@
                                   <li class="last leaf" th:classappend="${#strings.startsWith(view,'/publications') ? 'active' : ''}"><a th:href="@{/publications}">Publications</a></li>
                               </ul></li>
                   </ul><div class="clear"></div></div>
-              </div>
+              </div> -->
+              <threei-top-menu></threei-top-menu>
           </div>
           </nav>
           <div class="clear"></div>

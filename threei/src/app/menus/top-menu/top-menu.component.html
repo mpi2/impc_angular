@@ -1,8 +1,26 @@
+<header id="header">
+    <div class="region region-header">
+        <div id="tn"></div>
+        <div id="logo">
+            <a href="/"><img src="/assets/images/impc.png" alt="IMPC Logo"/></a>
+            <!-- <div id="logoslogan">3i</div>  -->
+        </div>
+        <nav id="mn">  <div class="region region-mainnavi">
+
+
+<!-- <nav><a routerLink="/home" >HOME</a></nav> -->
+<a routerLink="home" ><button mat-button>HOME</button></a>
 <button mat-button (click)="contactClick()">CONTACT</button>
 
 <button mat-button [matMenuTriggerFor]="menu2">LEARN MORE</button>
 <mat-menu #menu2="matMenu">
-  <button mat-menu-item (click)="faqClick()">FAQ</button>
+    <a routerLink="faq"><button mat-menu-item>FAQ</button></a>
   <button mat-menu-item href="/glossary">Glossary</button>
   <button mat-menu-item href="/publications">Publications</button>
 </mat-menu>
+
+</div>
+</nav>
+<div class="clear"></div>
+</div>
+</header>

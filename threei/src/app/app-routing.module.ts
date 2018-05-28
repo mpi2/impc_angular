@@ -1,9 +1,19 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { HomePageComponent }  from './home-page/home-page.component';
-import { FaqPageComponent }    from './faq-page/faq-page.component';
+
 import { AppComponent } from './app.component';
+import { HomePageComponent }  from './home-page/home-page.component';
+import { DataPageComponent} from './data-page/data-page.component';
+import { AnalysisPageComponent } from './analysis-page/analysis-page.component';
+import { MethodsPageComponent } from './methods-page/methods-page.component';
+import { ContactPageComponent } from './contact-page/contact-page.component';
+import { FaqPageComponent }    from './faq-page/faq-page.component';
+import { GlossaryPageComponent }    from './glossary-page/glossary-page.component';
+import { PublicationsPageComponent }    from './publications-page/publications-page.component';
+import { PrivacyPageComponent }    from './privacy-page/privacy-page.component';
+import { LearnMorePageComponent } from './learn-more-page/learn-more-page.component';
+
 
 const appRoutes: Routes = [
   {
@@ -11,8 +21,48 @@ const appRoutes: Routes = [
     component: HomePageComponent,
   },
   {
+    path: 'data',
+    component: DataPageComponent,
+    // outlet: 'popup'
+  },
+  {
+    path: 'analysis',
+    component: AnalysisPageComponent,
+    // outlet: 'popup'
+  },
+  {
+    path: 'methods',
+    component: MethodsPageComponent,
+    // outlet: 'popup'
+  },
+  {
+    path: 'contact',
+    component: ContactPageComponent,
+    // outlet: 'popup'
+  },
+  {
     path: 'faq',
     component: FaqPageComponent,
+    // outlet: 'popup'
+  },
+  {
+    path: 'glossary',
+    component: GlossaryPageComponent,
+    // outlet: 'popup'
+  },
+  {
+    path: 'publications',
+    component: PublicationsPageComponent,
+    // outlet: 'popup'
+  },
+  {
+    path: 'privacy',
+    component: PrivacyPageComponent,
+    // outlet: 'popup'
+  },
+  {
+    path: 'learn_more',
+    component: LearnMorePageComponent,
     // outlet: 'popup'
   },
   

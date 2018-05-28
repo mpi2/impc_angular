@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 
 import { TopMenuComponent } from './top-menu/top-menu.component';
 
-
 @NgModule({
   imports: [
     CommonModule, MatMenuModule, BrowserAnimationsModule, MatButtonModule, RouterModule

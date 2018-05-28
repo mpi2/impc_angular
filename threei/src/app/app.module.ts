@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {SlideshowModule} from 'ng-simple-slideshow';
+
 
 import { AppComponent } from './app.component';
 import { MenusModule } from './menus/menus.module';
@@ -7,6 +9,14 @@ import { Router } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { HomePageComponent } from './home-page/home-page.component';
 import { FaqPageComponent } from './faq-page/faq-page.component';
+import { DataPageComponent } from './data-page/data-page.component';
+import { AnalysisPageComponent } from './analysis-page/analysis-page.component';
+import { MethodsPageComponent } from './methods-page/methods-page.component';
+import { ContactPageComponent } from './contact-page/contact-page.component';
+import { GlossaryPageComponent } from './glossary-page/glossary-page.component';
+import { PublicationsPageComponent } from './publications-page/publications-page.component';
+import { PrivacyPageComponent } from './privacy-page/privacy-page.component';
+import { LearnMorePageComponent } from './learn-more-page/learn-more-page.component';
 
 
 
@@ -14,10 +24,10 @@ import { FaqPageComponent } from './faq-page/faq-page.component';
   declarations: [
     AppComponent,
     HomePageComponent,
-    FaqPageComponent
+    FaqPageComponent, DataPageComponent, AnalysisPageComponent, MethodsPageComponent, ContactPageComponent, GlossaryPageComponent, PublicationsPageComponent, PrivacyPageComponent, LearnMorePageComponent
   ],
   imports: [
-    BrowserModule, MenusModule, AppRoutingModule,
+    BrowserModule, MenusModule, AppRoutingModule, SlideshowModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -13,6 +13,9 @@
 
 <body id="top" class="html front not-logged-in one-sidebar sidebar-second page-home">
 <div id="wrapper">
+        <div id="welcome"  style="top:280px">
+                <h1>Welcome to <span >3i</span></h1>
+        </div>
   
               <!-- <div id="block-system-main-menu" class="block block-system block-menu">
 
@@ -32,7 +35,13 @@
                   </ul><div class="clear"></div></div>
               </div> -->
               <threei-top-menu></threei-top-menu>
-         
+              <slideshow [imageUrls]="imageUrlArray" [height]="height"
+              [minHeight]="'280px'"
+              [autoPlay]="true"
+              [showArrows]="false"
+              [imageUrls]="imageSources"
+              [lazyLoad]="imageSources?.length > 1"
+              [autoPlayWaitForLazyLoad]="true">></slideshow>
   <!--End of Header-->
   <!--Main Starts-->
   

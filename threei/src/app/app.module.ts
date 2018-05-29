@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {SlideshowModule} from 'ng-simple-slideshow';
-
+import { MatExpansionModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { MenusModule } from './menus/menus.module';
@@ -27,7 +27,7 @@ import { LearnMorePageComponent } from './learn-more-page/learn-more-page.compon
     FaqPageComponent, DataPageComponent, AnalysisPageComponent, MethodsPageComponent, ContactPageComponent, GlossaryPageComponent, PublicationsPageComponent, PrivacyPageComponent, LearnMorePageComponent
   ],
   imports: [
-    BrowserModule, MenusModule, AppRoutingModule, SlideshowModule
+    BrowserModule, MenusModule, AppRoutingModule, SlideshowModule, MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

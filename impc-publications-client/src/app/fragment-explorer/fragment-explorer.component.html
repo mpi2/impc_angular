@@ -1,9 +1,0 @@
-<impc-publication-keyword-list [keywords]="chips" (selectedKeyword)="filter($event)"></impc-publication-keyword-list>
-<ngx-carousel
-[inputs]="carouselOne"
-(carouselLoad)="myfunc($event)" *ngIf="selectedFragments.length > 1">
-<ngx-item NgxCarouselItem *ngFor="let fragment of selectedFragments" [innerHTML]="fragment" class="fragment"></ngx-item>
-<button mat-button NgxCarouselPrev class='leftRs'><mat-icon>keyboard_arrow_left</mat-icon></button>
-<button mat-button NgxCarouselNext class='rightRs'><mat-icon>keyboard_arrow_right</mat-icon></button>
-</ngx-carousel>
-<div *ngIf="selectedFragments.length === 1" class="fragment" [innerHTML]="selectedFragments[0]"></div>

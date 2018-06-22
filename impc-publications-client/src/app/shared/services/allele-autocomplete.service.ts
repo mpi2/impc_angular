@@ -9,19 +9,19 @@ import { map } from 'rxjs/operators/map';
 @Injectable()
 export class AlleleAutocompleteService {
 
-  public static allAlleles: Observable<any> = null;
+  allAlleles: Observable<any> = null;
 
   constructor(private http: HttpClient) { }
 
   getAlleles(text): Observable<any> {
     const requestUrl = environment.impcAlleleApiUrl + '/' + text ;
     if (text !== '') {
-      return this.http.get(requestUrl);
-    } else if (!!AlleleAutocompleteService.allAlleles) {
-      return AlleleAutocompleteService.allAlleles;
+      return this.http.get(requestUrl).pipe(map(response => response['content']));
+    } else if (this.allAlleles !== null) {
+      return this.allAlleles.pipe(map(response => response['content']));
     } else {
-      AlleleAutocompleteService.allAlleles = this.http.get(requestUrl);
-      return AlleleAutocompleteService.allAlleles;
+      this.allAlleles = this.http.get(requestUrl);
+      return this.allAlleles.pipe(map(response => response['content']));
     }
   }
 

@@ -5,7 +5,10 @@
 
 export const environment = {
   production: false,
-  impcPublicationsApiUrl: 'http://localhost:8080/publications',
+  impcPublicationsApiUrl: 'http://localhost:8080/graphql',
   impcFragmentsApiUrl: 'http://localhost:5000/fragments',
-  impcAlleleApiUrl: 'http://localhost:5000/alleles'
+  impcAlleleApiUrl: 'http://localhost:8080/alleles',
+  impcAuthUrl: 'http://localhost:8080/token/generate-token',
+  tokenKey: 'AuthToken',
+  baseUrl: 'http://localhost:4200'
 };

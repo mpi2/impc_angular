@@ -3,14 +3,14 @@ import { NgModule } from '@angular/core';
 import {SlideshowModule} from 'ng-simple-slideshow';
 import { MatExpansionModule } from '@angular/material';
 
-import { AppComponent } from './app.component';
+import { AppComponent  } from './app.component';
 import { MenusModule } from './menus/menus.module';
 import { Router } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { HomePageComponent } from './home-page/home-page.component';
 import { FaqPageComponent } from './faq-page/faq-page.component';
 import { DataPageComponent } from './data-page/data-page.component';
-import { AnalysisPageComponent } from './analysis-page/analysis-page.component';
+import { AnalysisPageComponent, SafePipe } from './analysis-page/analysis-page.component';
 import { MethodsPageComponent } from './methods-page/methods-page.component';
 import { ContactPageComponent } from './contact-page/contact-page.component';
 import { GlossaryPageComponent } from './glossary-page/glossary-page.component';
@@ -22,7 +22,7 @@ import { LearnMorePageComponent } from './learn-more-page/learn-more-page.compon
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent,SafePipe,
     HomePageComponent,
     FaqPageComponent, DataPageComponent, AnalysisPageComponent, MethodsPageComponent, ContactPageComponent, GlossaryPageComponent, PublicationsPageComponent, PrivacyPageComponent, LearnMorePageComponent
   ],

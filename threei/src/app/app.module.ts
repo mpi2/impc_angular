@@ -20,6 +20,7 @@ import { MethodsPageComponent } from './methods-page/methods-page.component';
 import { ContactPageComponent } from './contact-page/contact-page.component';
 import { GlossaryPageComponent } from './glossary-page/glossary-page.component';
 import { PublicationsPageComponent } from './publications-page/publications-page.component';
+import { HeatmapComponent } from './heatmap/heatmap.component';
 
 
 
@@ -30,6 +31,7 @@ import { PublicationsPageComponent } from './publications-page/publications-page
     FaqPageComponent, DataPageComponent, AnalysisPageComponent, MethodsPageComponent, ContactPageComponent, GlossaryPageComponent, 
     PublicationsPageComponent, PrivacyPageComponent, LearnMorePageComponent,
     HighchartsChartComponent,
+    HeatmapComponent,
   ],
   imports: [
     BrowserModule, MenusModule, AppRoutingModule, SlideshowModule, MatExpansionModule, FormsModule

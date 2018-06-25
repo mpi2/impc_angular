@@ -2,6 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {SlideshowModule} from 'ng-simple-slideshow';
 import { MatExpansionModule } from '@angular/material';
+import { PrivacyPageComponent } from './privacy-page/privacy-page.component';
+import { LearnMorePageComponent } from './learn-more-page/learn-more-page.component';
+import { HighchartsChartComponent } from './highcharts-chart.component';
+import { FormsModule } from '@angular/forms';
+
 
 import { AppComponent  } from './app.component';
 import { MenusModule } from './menus/menus.module';
@@ -15,8 +20,6 @@ import { MethodsPageComponent } from './methods-page/methods-page.component';
 import { ContactPageComponent } from './contact-page/contact-page.component';
 import { GlossaryPageComponent } from './glossary-page/glossary-page.component';
 import { PublicationsPageComponent } from './publications-page/publications-page.component';
-import { PrivacyPageComponent } from './privacy-page/privacy-page.component';
-import { LearnMorePageComponent } from './learn-more-page/learn-more-page.component';
 
 
 
@@ -24,10 +27,12 @@ import { LearnMorePageComponent } from './learn-more-page/learn-more-page.compon
   declarations: [
     AppComponent,SafePipe,
     HomePageComponent,
-    FaqPageComponent, DataPageComponent, AnalysisPageComponent, MethodsPageComponent, ContactPageComponent, GlossaryPageComponent, PublicationsPageComponent, PrivacyPageComponent, LearnMorePageComponent
+    FaqPageComponent, DataPageComponent, AnalysisPageComponent, MethodsPageComponent, ContactPageComponent, GlossaryPageComponent, 
+    PublicationsPageComponent, PrivacyPageComponent, LearnMorePageComponent,
+    HighchartsChartComponent,
   ],
   imports: [
-    BrowserModule, MenusModule, AppRoutingModule, SlideshowModule, MatExpansionModule
+    BrowserModule, MenusModule, AppRoutingModule, SlideshowModule, MatExpansionModule, FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

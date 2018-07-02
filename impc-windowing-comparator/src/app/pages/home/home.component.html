@@ -1,0 +1,7 @@
+<div class="main-content">
+    <impc-head-bar></impc-head-bar>
+    <impc-filter (updateChart)="updateChart($event)" (invalid)="clear()"></impc-filter>
+    <impc-comparison *ngIf="chart" [chartData]="chart" [oldData]="oldData" [newData]="newData" [oldPValue]="oldPValue" [newPValue]="newPValue"></impc-comparison>
+    <h1 *ngIf="!chart" class="alert">PLEASE FILL THE FIELDS TO VISUALIZE THE WINDOWING RESULT</h1>
+    <impc-footer></impc-footer>
+</div>

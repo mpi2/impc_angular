@@ -1,3 +1,4 @@
+import { SolrService } from './../../shared/solr.service';
 import { Chart } from 'angular-highcharts';
 import { Component, OnInit } from '@angular/core';
 import { RawDataService } from '../../shared/raw-data.service';
@@ -30,6 +31,11 @@ export class HomeComponent implements OnInit {
       text: 'Date'
     }
   },
+  yAxis: {
+    title: {
+      text: ''
+    }
+  }
 };
 
   chart: Chart;
@@ -37,6 +43,8 @@ export class HomeComponent implements OnInit {
   newData: any;
   oldPValue: any;
   newPValue: any;
+  rawLink: string;
+  portalLink: string;
 
 updateChart(value) {
   const procedureName = value.procedure.split(' | ')[0];
@@ -49,6 +57,8 @@ updateChart(value) {
       this.newData = data.newData;
       this.oldPValue = data.oldPValue;
       this.newPValue = data.newPvalue;
+      this.rawLink = data.rawLink;
+      this.portalLink = data.portalLink;
 
       this.chartData.series = [];
       data.series.forEach(serie => {
@@ -59,7 +69,13 @@ updateChart(value) {
         this.chartData.xAxis.plotLines.push(plotLine);
       });
       this.chartData.title.text = procedureName + ': ' + parameterName;
-      this.chart = new Chart(this.chartData);
+      this.solr.getParametrUnit(parameterID).subscribe(unit => {
+        this.chartData.yAxis.title.text = parameterName;
+        if (unit !== ' ') {
+          this.chartData.yAxis.title.text += ` (${unit})`;
+        }
+        this.chart = new Chart(this.chartData);
+      });
     }
   ).catch(error => {
     console.log(error);
@@ -68,7 +84,7 @@ updateChart(value) {
   });
 }
 
-  constructor(private rawService: RawDataService, private route: ActivatedRoute, public snackBar: MatSnackBar) {
+  constructor(private rawService: RawDataService, private route: ActivatedRoute, public snackBar: MatSnackBar, private solr: SolrService) {
 
   }
 

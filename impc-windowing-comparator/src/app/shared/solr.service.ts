@@ -31,11 +31,16 @@ export class SolrService {
         let emptyField = false;
         q.forEach(field => {
             field.name = this.fieldNamesMap[field.name];
-            field.value = field.value ? field.value.replace(/([\!\*\+\&\|\(\)\[\]\{\}\^\~\?\:\"])/g, '\\$1') : '';
+            field.value = field.value ? field.value.replace(/([\!\*\+\&\|\(\)\[\]\{\}\^\~\?\:\"\s])/g, '\\$1') : '';
             if (!field.value && !field.wildcard) { emptyField = true; }
             if (field.wildcard) {
                 const preWildcard = !field.value ? '' : '*';
-                query += `${field.name}:${preWildcard}${field.value}*`;
+                if (pivot) {
+                    query += `(${pivot.split(',')[0]}:${preWildcard}${field.value}*`;
+                    query += ` OR ${pivot.split(',')[1]}:${preWildcard}${field.value}*)`;
+                } else {
+                    query += `${field.name}:${preWildcard}${field.value}*`;
+                }
             } else {
                 query += `${field.name}:"${field.value}"`;
             }
@@ -71,7 +76,13 @@ export class SolrService {
         return parsedResults;
     }
 
-    getParametrUnit(paramterID) {
-
+    getParametrUnit(parameterID) {
+        const q = `parameter_stable_id:${parameterID}`;
+        const options = '&rows=1&wt=json';
+        return this.http.get(environment.solrUrl + 'pipeline/select?q=' + q + options).pipe(
+            map(result => {
+                return result['response']['docs'][0]['unit_x'];
+            })
+        );
     }
 }

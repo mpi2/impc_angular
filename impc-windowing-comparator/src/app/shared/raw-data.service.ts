@@ -88,17 +88,23 @@ export class RawDataService {
   }*/
 
   getWindowData(phenotypingCenter, colonyID, zygosity, procedure, parameter, metadataGroup) {
-    const name = 'file.tsv';
+    const fileName = 'output_Successful.tsv';
+    const rawFileName = 'output_rawData.csv';
+    procedure = procedure.substring(0, procedure.lastIndexOf('_'));
     this.seriesTemplate.forEach(serie => serie.data = []);
     this.plotLines = [];
-    let url = `${environment.baseUrl}/data/${phenotypingCenter.replace(new RegExp(' ', 'g'), '_')}/`;
-    url += `${colonyID.replace(new RegExp('-', 'g'), '_')}/${zygosity}/${procedure}/${parameter}/${metadataGroup}/${name}`;
+    let baseUrl = `${environment.baseUrl}/data/${phenotypingCenter.replace(new RegExp(' ', 'g'), '_')}/`;
+    baseUrl += `${colonyID.replace(new RegExp('-', 'g'), '_')}/${zygosity}/${procedure}/${parameter}/${metadataGroup}/`;
+    const fileUrl = baseUrl + fileName;
+    const rawLink = baseUrl + rawFileName;
     this.seriesTemplate[2].name = 'Female ' + this.zygosityMap[zygosity];
     this.seriesTemplate[3].name = 'Male ' + this.zygosityMap[zygosity];
-    return this.http.post(url, {}, {responseType: 'text'}).toPromise().then( response => {
+    return this.http.post(fileUrl, {}, {responseType: 'text'}).toPromise().then( response => {
       const responseArray = response.split('\t');
       const processed = responseArray[0] !== 'NotProcessed';
-      const result = eval('(' + responseArray[13] + ')')['result'];
+      const result = JSON.parse(responseArray[14])['result'];
+      console.log(result);
+      const portalLink = result['detail']['gene_page_url'];
       let oldPValue = 1;
       let newPValue = 1;
       let window = [];
@@ -153,7 +159,9 @@ export class RawDataService {
         oldData: oldData,
         newData: newData,
         oldPValue: oldPValue,
-        newPvalue: newPValue
+        newPvalue: newPValue,
+        rawLink: rawLink,
+        portalLink: portalLink
       };
     });
   }

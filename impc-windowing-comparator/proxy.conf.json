@@ -1,0 +1,14 @@
+{
+    "/solr/*": {
+        "target": "https://wwwdev.ebi.ac.uk/mi/impc/dev/",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    },
+    "/data/*": {
+        "target": "https://wwwdev.ebi.ac.uk/mi/impc/dev/phenotype-archive/media/images/windowing/",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    }
+}

@@ -195,9 +195,27 @@ this.chartOptions={ hcOptions: {
             '<b>' + this.series.yAxis.categories[this.point.y] + '</b>';
         }
     },
+    plotOptions: {
+      series: {
+          events: {
+              click: function (e) {
+                  // var text = '<b>Clicked</b><br>Series: ' + this.name +
+                  //         '<br>Point: ' + e.point.name + ' (' + e.point.value + '/km²)';
+                 
+                  //may have to use routerLink like for menus to link to our new not created yet parameter page
+                    var url = "http://starwars.com";
+                    window.open(url,'_blank');
+                      // this.chart.clickLabel.attr({
+                      //     text: text
+                      // });
+                  
+              }
+          }
+      }
+  },
 
     series: [{
-        name: 'Sales per employee',
+        name: 'Procedures with significant parameters',
         borderWidth: 1,
         data: this.data,
         //data: [[0, 0, 0], [0, 1, 1], [0, 2, 2], [0, 3, 3], [0, 4, 3], [1, 0, 0], [1, 1, 1], [1, 2, 2], [1, 3, 3], [1, 4, 3]],

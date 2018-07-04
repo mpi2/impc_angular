@@ -9,7 +9,7 @@ import { Observable, Subject, ReplaySubject, from, of, range } from 'rxjs';
 })
 export class HeatmapService {
 
-  restBaseUrl = '/api/data';
+  restBaseUrl = 'http://localhost:8080/data';
   constructor(private http: HttpClient) { }
 
   getHeatmapResponse():

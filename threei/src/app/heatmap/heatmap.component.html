@@ -9,16 +9,15 @@
     >
     <br/> -->
     <p>Data sets:</p>
-    <button *ngFor="let i of [0,1,2]"
+    <!-- <button *ngFor="let i of [0,1,2]"
       (click)="usedIndex = i">
       {{i+1}}
-    </button>
+    </button> -->
   </div>
-  <div style="width:65%; float: left;">
+  <div style="width:65%; height:200px; float: left;">
     <highcharts-chart
       [Highcharts]="Highcharts"
-      [options]="charts[usedIndex].hcOptions"
-      [callbackFunction]="charts[0].hcCallback"
+      [options]="chartOptions.hcOptions"
       [(update)]="updateDemo2"
 
       style="width: 100%; display: block;"

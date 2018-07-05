@@ -73,26 +73,26 @@ export class HeatmapComponent implements OnInit {
   }
 
 
-  getHeatmapResponse(){
-    this.heatmapService.getHeatmapResponse()
-      // resp is of type `HttpResponse<Config>`
-      .subscribe(resp => {
-        // display its headers
-        const keys = resp.headers.keys();
-        this.headers = keys.map(key =>
-          `${key}: ${resp.headers.get(key)}`);
-          //console.log('headers=' + this.headers);
-        // access the body directly, which is typed as `Config`.
-        this.response = { ... resp.body };
-        //this.data = this.response['response']['docs']
-        console.log('response here: '+JSON.stringify(this.response['_embedded'].Data[0]['data']));
-        this.data=this.response['_embedded'].Data[0]['data'];
-        this.columnHeaders=this.response['_embedded'].Data[0]['columnHeaders'];
-        this.rowHeaders=this.response['_embedded'].Data[0]['rowHeaders'];
-        this.updateDemo2=true;//can we force it to update like this?
-        this.displayProcedureChart();
-      });
-  }
+  // getHeatmapResponse(){
+  //   this.heatmapService.getHeatmapResponse()
+  //     // resp is of type `HttpResponse<Config>`
+  //     .subscribe(resp => {
+  //       // display its headers
+  //       const keys = resp.headers.keys();
+  //       this.headers = keys.map(key =>
+  //         `${key}: ${resp.headers.get(key)}`);
+  //         //console.log('headers=' + this.headers);
+  //       // access the body directly, which is typed as `Config`.
+  //       this.response = { ... resp.body };
+  //       //this.data = this.response['response']['docs']
+  //       console.log('response here: '+JSON.stringify(this.response['_embedded'].Data[0]['data']));
+  //       this.data=this.response['_embedded'].Data[0]['data'];
+  //       this.columnHeaders=this.response['_embedded'].Data[0]['columnHeaders'];
+  //       this.rowHeaders=this.response['_embedded'].Data[0]['rowHeaders'];
+  //       this.updateDemo2=true;//can we force it to update like this?
+  //       this.displayProcedureChart();
+  //     });
+  // }
 
   getProcedureHeatmapData(){
     this.heatmapService.getJSON().subscribe(resp => {

@@ -19,4 +19,10 @@ export class HeatmapService {
       return this.http.get<Response>(
         this.restBaseUrl , { observe: 'response' });
     }
+    //get data from a file?
+    public getJSON(): Observable<any> {
+      return this.http.get<any>('/assets/ProcedureHeatmapData.json');
+                        // .catch((error:any) => console.log(error));
+
+     }
 }

@@ -1,7 +1,12 @@
 
-  <!-- <div style="width: 100%; float: left;">
+  <div style="width: 100%; float: left;">
+  <mat-radio-group>
+    <mat-radio-button  (click)="displayProcedureChart()">Option 1</mat-radio-button>
+    <mat-radio-button (click)="displayCellChart()">Option 2</mat-radio-button>
+  </mat-radio-group>
+  </div>
+
   
-  </div> -->
   <div style="width:65%; height:200px; float: left;">
     <highcharts-chart
       [Highcharts]="Highcharts"

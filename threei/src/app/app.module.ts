@@ -1,12 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {SlideshowModule} from 'ng-simple-slideshow';
-import { MatExpansionModule } from '@angular/material';
+import { MatExpansionModule, MatRadioModule } from '@angular/material';
 import { PrivacyPageComponent } from './privacy-page/privacy-page.component';
 import { LearnMorePageComponent } from './learn-more-page/learn-more-page.component';
 import { HighchartsChartComponent } from './highcharts-chart.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule} from '@angular/forms';
+import { MatSelectModule, MatCheckbox, MatButtonModule } from '@angular/material';
+import { MatInputModule } from '@angular/material';
+import { MatCardModule, MatSliderModule } from '@angular/material';
+import { MatGridListModule } from '@angular/material';
+import { MatCheckboxModule} from '@angular/material';
 
 
 import { AppComponent  } from './app.component';
@@ -35,7 +41,7 @@ import { HeatmapComponent } from './heatmap/heatmap.component';
     HeatmapComponent,
   ],
   imports: [
-    BrowserModule, MenusModule, AppRoutingModule, SlideshowModule, MatExpansionModule, FormsModule, HttpClientModule
+    BrowserModule, MenusModule, AppRoutingModule, SlideshowModule, MatExpansionModule, FormsModule, HttpClientModule, MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

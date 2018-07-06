@@ -28,6 +28,8 @@ Highcharts.setOptions({
 })
 export class HeatmapComponent implements OnInit {
   
+    
+   
   // only order that procedures headers are displayed in
   // procedureDisplayHeaderOrder : Array<string>= [
   //   'Homozygous viability at P14',
@@ -46,10 +48,15 @@ export class HeatmapComponent implements OnInit {
   //       'Salmonella Challenge'];
 
         data: number[][]=[[]];
+        data2:number[][]=[[]];
         headers: string[];//http response headers
         columnHeaders: string[];
         rowHeaders: string[];
         response: Response;
+
+        columnHeaders2: string[];
+        rowHeaders2: string[];
+        response2: Response;
 
         updateDemo2 = false;
   usedIndex = 0;
@@ -62,9 +69,10 @@ export class HeatmapComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.displayCellChart();
+    //this.displayCellChart();
     //this.getHeatmapResponse();
     this.getProcedureHeatmapData();
+    //this.getCellHeatmapData();
     this.updateDemo2=true;
   }
 
@@ -104,8 +112,23 @@ export class HeatmapComponent implements OnInit {
       this.data=this.response['_embedded'].Data[0]['data'];
       this.columnHeaders=this.response['_embedded'].Data[0]['columnHeaders'];
       this.rowHeaders=this.response['_embedded'].Data[0]['rowHeaders'];
-      this.updateDemo2=true;//can we force it to update like this?
       this.displayProcedureChart();
+      this.updateDemo2=true;//can we force it to update like this?
+    });
+  }
+
+  getCellHeatmapData(){
+    this.heatmapService.getJSON().subscribe(resp => {
+      // display its headers
+      this.response2 = { ... resp};
+      console.log('cell heatmap response='+JSON.stringify(resp));
+      //this.data = this.response['response']['docs']
+      console.log('response from json file here: '+JSON.stringify(this.response['_embedded'].Data[1]['data']));
+      this.data2=this.response['_embedded'].Data[1]['data'];
+      this.columnHeaders2=this.response['_embedded'].Data[1]['columnHeaders'];
+      this.rowHeaders2=this.response['_embedded'].Data[1]['rowHeaders'];
+      this.displayCellChart();
+      this.updateDemo2=true;//can we force it to update like this?
     });
   }
   // For all demos:
@@ -259,7 +282,7 @@ this.chartOptions={ hcOptions: {
             marginTop: 200,
             marginBottom: 80,
             plotBorderWidth: 1,
-            height: 600
+            height: 20000
         },
     
     
@@ -269,7 +292,7 @@ this.chartOptions={ hcOptions: {
     
         xAxis: { 
           opposite: true,
-            categories: this.columnHeaders,
+            categories: this.columnHeaders2,
             labels: {
                 rotation: 90
             },
@@ -277,7 +300,7 @@ this.chartOptions={ hcOptions: {
           },
     
         yAxis: {
-            categories: this.rowHeaders,
+            categories: this.rowHeaders2,
             title: null
         },
     
@@ -355,10 +378,10 @@ this.chartOptions={ hcOptions: {
       },
     
         series: [{
-            name: 'Procedures with significant parameters',
+            name: 'Cell types with significant parameters',
             borderWidth: 1,
             //data: this.data,
-            data: [[0, 0, 0], [0, 1, 1], [0, 2, 2], [0, 3, 3], [0, 4, 3], [1, 0, 0], [1, 1, 1], [1, 2, 2], [1, 3, 3], [1, 4, 3]],
+            data: this.data2,
             //, [2, 0, 35], [2, 1, 15], [2, 2, 123], [2, 3, 64], [2, 4, 52], [3, 0, 72], [3, 1, 132], [3, 2, 114], [3, 3, 19], [3, 4, 16], [4, 0, 38], [4, 1, 5], [4, 2, 8], [4, 3, 117], [4, 4, 115], [5, 0, 88], [5, 1, 32], [5, 2, 12], [5, 3, 6], [5, 4, 120], [6, 0, 13], [6, 1, 44], [6, 2, 88], [6, 3, 98], [6, 4, 96], [7, 0, 31], [7, 1, 1], [7, 2, 82], [7, 3, 32], [7, 4, 30], [8, 0, 85], [8, 1, 97], [8, 2, 123], [8, 3, 64], [8, 4, 84], [9, 0, 47], [9, 1, 114], [9, 2, 31], [9, 3, 48], [9, 4, 91]],
             dataLabels: {
                 enabled: false,

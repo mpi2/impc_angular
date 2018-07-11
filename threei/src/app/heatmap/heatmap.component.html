@@ -1,8 +1,8 @@
 
   <div style="width: 100%; float: left;">
-  <mat-radio-group>
-    <mat-radio-button  (click)="displayProcedureChart()">Procedure Based Chart</mat-radio-button>
-    <mat-radio-button (click)="getCellHeatmapData()">Cell Based Chart</mat-radio-button>
+  <mat-radio-group name="chartTypeSelector" id="chartSelector">
+    <mat-radio-button [checked] (click)="displayProcedureChart()">Procedure Chart</mat-radio-button>
+    <mat-radio-button value="cell" (click)="displayCellChart()">Cell Chart</mat-radio-button>
   </mat-radio-group>
   </div>
 

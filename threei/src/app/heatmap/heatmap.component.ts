@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import * as Highcharts from 'highcharts/highcharts';
 import * as HC_map from 'highcharts/modules/map';
 import * as HC_exporting from 'highcharts/modules/exporting';
@@ -20,7 +20,7 @@ Highcharts.setOptions({
         marginTop: 200,
         marginBottom: 80,
         plotBorderWidth: 1,
-        height: 20000
+        height: 200
     },
 
     // click: function(e) {
@@ -170,6 +170,30 @@ Highcharts.setOptions({
   styleUrls: ['./heatmap.component.css']
 })
 export class HeatmapComponent implements OnInit {
+
+    readonly PROCEDURE_DATA_INDEX = 0;
+  readonly CELL_DATA_INDEX = 1;
+        data: number[][]=[[]];
+        data2:number[][]=[[]];
+        headers: string[];//http response headers
+        columnHeaders: string[];
+        rowHeaders: string[];
+        response: Response;
+
+        columnHeaders2: string[];
+        rowHeaders2: string[];
+        response2: Response;
+
+        updateDemo2 = false;
+  usedIndex = 0;
+  chartTitle = 'Procedure Heatmap'; // for init - change through titleChange
+
+  cellChart;
+  procedureChart;
+  chartType: string ="procedure";
+
+  @Input()
+  chartSelector="procedure";
   
     heatmapChart={
 
@@ -178,7 +202,7 @@ export class HeatmapComponent implements OnInit {
         marginTop: 200,
         marginBottom: 80,
         plotBorderWidth: 1,
-        height: 20000
+        height: 200
     },
 
     // click: function(e) {
@@ -195,20 +219,8 @@ export class HeatmapComponent implements OnInit {
     xAxis: { 
       opposite: true,
         categories: [
-              'Homozygous viability at P14',
-                   'Homozygous Fertility',
-                  'Haematology',
-                   'Peripheral Blood Leukocytes',
-                 'Spleen',
-                   "Mesenteric Lymph Node",
-                 'Bone Marrow',
-                  'Ear Epidermis',
-                  'Anti-nuclear Antibodies',
-                  'Cytotoxic T Cell Function',
-                  'DSS Challenge',
-                   'Influenza',
-                  'Trichuris Challenge',
-                  'Salmonella Challenge'],
+              'Data loading...',
+                   ],
         labels: {
             rotation: 90
         },
@@ -217,20 +229,7 @@ export class HeatmapComponent implements OnInit {
 
     yAxis: {
         categories: [
-            'Homozygous viability at P14',
-                 'Homozygous Fertility',
-                'Haematology',
-                 'Peripheral Blood Leukocytes',
-               'Spleen',
-                 "Mesenteric Lymph Node",
-               'Bone Marrow',
-                'Ear Epidermis',
-                'Anti-nuclear Antibodies',
-                'Cytotoxic T Cell Function',
-                'DSS Challenge',
-                 'Influenza',
-                'Trichuris Challenge',
-                'Salmonella Challenge'],
+            'Data loading.....'],
         title: null
     },
 
@@ -308,9 +307,9 @@ export class HeatmapComponent implements OnInit {
   },
 
     series: [{
-        name: 'Procedures with significant parameters',
+        name: 'Data Loading....',
         borderWidth: 1,
-        data: [[0, 0, 0], [0, 1, 1], [0, 2, 2], [0, 3, 3], [0, 4, 3], [1, 0, 0], [1, 1, 1], [1, 2, 2], [1, 3, 3], [1, 4, 3]],
+        data: [[0, 0, 0], [0, 1, 1]],
         //, [2, 0, 35], [2, 1, 15], [2, 2, 123], [2, 3, 64], [2, 4, 52], [3, 0, 72], [3, 1, 132], [3, 2, 114], [3, 3, 19], [3, 4, 16], [4, 0, 38], [4, 1, 5], [4, 2, 8], [4, 3, 117], [4, 4, 115], [5, 0, 88], [5, 1, 32], [5, 2, 12], [5, 3, 6], [5, 4, 120], [6, 0, 13], [6, 1, 44], [6, 2, 88], [6, 3, 98], [6, 4, 96], [7, 0, 31], [7, 1, 1], [7, 2, 82], [7, 3, 32], [7, 4, 30], [8, 0, 85], [8, 1, 97], [8, 2, 123], [8, 3, 64], [8, 4, 84], [9, 0, 47], [9, 1, 114], [9, 2, 31], [9, 3, 48], [9, 4, 91]],
         dataLabels: {
             enabled: false,
@@ -340,22 +339,7 @@ export class HeatmapComponent implements OnInit {
   //        'Influenza',
   //       'Trichuris Challenge',
   //       'Salmonella Challenge'];
-  readonly PROCEDURE_DATA_INDEX = 0;
-  readonly CELL_DATA_INDEX = 1;
-        data: number[][]=[[]];
-        data2:number[][]=[[]];
-        headers: string[];//http response headers
-        columnHeaders: string[];
-        rowHeaders: string[];
-        response: Response;
-
-        columnHeaders2: string[];
-        rowHeaders2: string[];
-        response2: Response;
-
-        updateDemo2 = false;
-  usedIndex = 0;
-  chartTitle = 'Procedure Heatmap'; // for init - change through titleChange
+  
   
 //   .hcOptions: {
 //     hcOptions: {
@@ -391,7 +375,7 @@ export class HeatmapComponent implements OnInit {
         
     // this.displayCellChart();
     //this.getHeatmapResponse();
-     this.getProcedureHeatmapData();
+     this.getAllHeatmapData();
     // //this.getCellHeatmapData();
     // this.updateDemo2=true;
   }
@@ -418,7 +402,7 @@ export class HeatmapComponent implements OnInit {
   //     });
   // }
 
-  getProcedureHeatmapData(){
+  getAllHeatmapData(){
     console.log('data length='+this.data)
     //if(this.data.length<=1){
     this.heatmapService.getHeatmapResponse().subscribe(resp => {
@@ -447,6 +431,7 @@ export class HeatmapComponent implements OnInit {
         ];
       this.rowHeaders=this.response['_embedded'].Data[0]['rowHeaders'];
 
+      //get the cell data also from this response. second in array.
       this.data2=this.response['_embedded'].Data[this.CELL_DATA_INDEX]['data'];
       this.columnHeaders2=this.response['_embedded'].Data[this.CELL_DATA_INDEX]['columnHeaders'];
       this.rowHeaders2=this.response['_embedded'].Data[this.CELL_DATA_INDEX]['rowHeaders'];
@@ -506,7 +491,7 @@ titleChange = function(event) {
   
 console.log('calling display chart method');
   
-this.heatmapChart= {
+this.procedureChart= {
 
     chart: {
         type: 'heatmap',
@@ -626,6 +611,7 @@ this.heatmapChart= {
         }
     }]
 }
+this.heatmapChart=this.procedureChart;
   }//end of display method
   
 

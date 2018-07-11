@@ -12,7 +12,7 @@ import { MatSelectModule, MatCheckbox, MatButtonModule } from '@angular/material
 import { MatInputModule } from '@angular/material';
 import { MatCardModule, MatSliderModule } from '@angular/material';
 import { MatGridListModule } from '@angular/material';
-import { MatCheckboxModule} from '@angular/material';
+import { MatCheckboxModule, MatProgressSpinnerModule} from '@angular/material';
 
 
 import { AppComponent  } from './app.component';
@@ -41,7 +41,7 @@ import { HeatmapComponent } from './heatmap/heatmap.component';
     HeatmapComponent,
   ],
   imports: [
-    BrowserModule, MenusModule, AppRoutingModule, SlideshowModule, MatExpansionModule, FormsModule, HttpClientModule, MatRadioModule
+    BrowserModule, MenusModule, AppRoutingModule, SlideshowModule, MatExpansionModule, FormsModule, HttpClientModule, MatRadioModule, MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

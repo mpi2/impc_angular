@@ -6,6 +6,7 @@
   </mat-radio-group>
   </div>
 
+  <mat-spinner *ngIf="!resourceLoaded"></mat-spinner>
   
   <div style="width:100%; height:200px; float: left;">
     <highcharts-chart

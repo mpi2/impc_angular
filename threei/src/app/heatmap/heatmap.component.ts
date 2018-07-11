@@ -190,10 +190,7 @@ export class HeatmapComponent implements OnInit {
 
   cellChart;
   procedureChart;
-  chartType: string ="procedure";
-
-  @Input()
-  chartSelector="procedure";
+  resourceLoaded: boolean =false;
   
     heatmapChart={
 
@@ -372,12 +369,7 @@ export class HeatmapComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-        
-    // this.displayCellChart();
-    //this.getHeatmapResponse();
      this.getAllHeatmapData();
-    // //this.getCellHeatmapData();
-    // this.updateDemo2=true;
   }
 
 
@@ -437,40 +429,11 @@ export class HeatmapComponent implements OnInit {
       this.rowHeaders2=this.response['_embedded'].Data[this.CELL_DATA_INDEX]['rowHeaders'];
       this.displayProcedureChart();
       this.updateDemo2=true;//can we force it to update like this?
-
+      this.resourceLoaded=true;
       
     });
-
-   
-    //}
   }
 
-//   getCellHeatmapData(){
-//     this.heatmapService.getCell.subscribe(resp => {
-//       // display its headers
-//       this.response2 = { ... resp};
-//       //console.log('cell heatmap response='+JSON.stringify(resp));
-//       //this.data = this.response['response']['docs']
-//       //console.log('response from json file here: '+JSON.stringify(this.response['_embedded'].Data[1]['data']));
-//       this.data2=this.response['_embedded'].Data[this.CELL_DATA_INDEX]['data'];
-//       this.columnHeaders2=this.response['_embedded'].Data[this.CELL_DATA_INDEX]['columnHeaders'];
-//       this.rowHeaders2=this.response['_embedded'].Data[this.CELL_DATA_INDEX]['rowHeaders'];
-//       this.displayCellChart();
-//       this.updateDemo2=true;//can we force it to update like this?
-//     });
-//   }
-
-  getCellHeatmapData(){
-    
-      //console.log('cell heatmap response='+JSON.stringify(resp));
-      //this.data = this.response['response']['docs']
-      //console.log('response from json file here: '+JSON.stringify(this.response['_embedded'].Data[1]['data']));
-      
-      this.displayCellChart();
-      this.updateDemo2=true;//can we force it to update like this?
-    
-  }
-  // For all demos:
   Highcharts = Highcharts;
 
 // change in all places
@@ -488,7 +451,7 @@ titleChange = function(event) {
 
 
   displayProcedureChart(){
-  
+  this.resourceLoaded=false;
 console.log('calling display chart method');
   
 this.procedureChart= {
@@ -612,6 +575,7 @@ this.procedureChart= {
     }]
 }
 this.heatmapChart=this.procedureChart;
+this.resourceLoaded=true;
   }//end of display method
   
 

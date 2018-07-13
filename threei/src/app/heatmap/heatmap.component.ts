@@ -3,7 +3,7 @@ import * as Highcharts from 'highcharts/highcharts';
 import * as HC_map from 'highcharts/modules/map';
 import * as HC_exporting from 'highcharts/modules/exporting';
 import * as HC_ce from 'highcharts-custom-events';
-import { MatRadioModule } from '@angular/material';
+import { MatRadioModule, MatSelectModule } from '@angular/material';
 
 import { HeatmapService } from '../heatmap.service';
 
@@ -172,7 +172,7 @@ Highcharts.setOptions({
 export class HeatmapComponent implements OnInit {
 
     readonly PROCEDURE_TYPE = 'procedure';
-  readonly CELL_DATA_TYPE = 'cell';
+  readonly CELL_TYPE = 'cell';
         data: number[][]=[[]];
         data2:number[][]=[[]];
         headers: string[];//http response headers
@@ -369,7 +369,8 @@ export class HeatmapComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-     this.getHeatmapData('procedure');
+     //this.getHeatmapData(this.PROCEDURE_TYPE);
+     this.getHeatmapData(this.CELL_TYPE)
   }
 
 
@@ -425,7 +426,7 @@ export class HeatmapComponent implements OnInit {
         ];
       this.rowHeaders=this.response['rowHeaders'];
       this.displayProcedureChart();
-    }else if(heatmapType==this.CELL_DATA_TYPE){
+    }else if(heatmapType==this.CELL_TYPE){
       //get the cell data also from this response. second in array.
       console.log('getting cell type in getHeatmapData method');
       this.data2=this.response['data'];

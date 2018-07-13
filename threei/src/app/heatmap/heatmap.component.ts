@@ -171,8 +171,8 @@ Highcharts.setOptions({
 })
 export class HeatmapComponent implements OnInit {
 
-    readonly PROCEDURE_DATA_INDEX = 0;
-  readonly CELL_DATA_INDEX = 1;
+    readonly PROCEDURE_TYPE = 'procedure';
+  readonly CELL_DATA_TYPE = 'cell';
         data: number[][]=[[]];
         data2:number[][]=[[]];
         headers: string[];//http response headers
@@ -199,7 +199,7 @@ export class HeatmapComponent implements OnInit {
         marginTop: 200,
         marginBottom: 80,
         plotBorderWidth: 1,
-        height: 200
+        height: 2000
     },
 
     // click: function(e) {
@@ -306,7 +306,7 @@ export class HeatmapComponent implements OnInit {
     series: [{
         name: 'Data Loading....',
         borderWidth: 1,
-        data: [[0, 0, 0], [0, 1, 1]],
+        data: [[0, 0, 'blah'], [0, 1, 1]],
         //, [2, 0, 35], [2, 1, 15], [2, 2, 123], [2, 3, 64], [2, 4, 52], [3, 0, 72], [3, 1, 132], [3, 2, 114], [3, 3, 19], [3, 4, 16], [4, 0, 38], [4, 1, 5], [4, 2, 8], [4, 3, 117], [4, 4, 115], [5, 0, 88], [5, 1, 32], [5, 2, 12], [5, 3, 6], [5, 4, 120], [6, 0, 13], [6, 1, 44], [6, 2, 88], [6, 3, 98], [6, 4, 96], [7, 0, 31], [7, 1, 1], [7, 2, 82], [7, 3, 32], [7, 4, 30], [8, 0, 85], [8, 1, 97], [8, 2, 123], [8, 3, 64], [8, 4, 84], [9, 0, 47], [9, 1, 114], [9, 2, 31], [9, 3, 48], [9, 4, 91]],
         dataLabels: {
             enabled: false,
@@ -369,7 +369,7 @@ export class HeatmapComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-     this.getAllHeatmapData();
+     this.getHeatmapData('procedure');
   }
 
 
@@ -394,16 +394,18 @@ export class HeatmapComponent implements OnInit {
   //     });
   // }
 
-  getAllHeatmapData(){
-    console.log('data length='+this.data)
+  getHeatmapData(heatmapType){
+    console.log('heamapType='+heatmapType);
+    this.resourceLoaded=false;
     //if(this.data.length<=1){
-    this.heatmapService.getHeatmapResponse().subscribe(resp => {
+    this.heatmapService.getHeatmapResponse(heatmapType).subscribe(resp => {
       // display its headers
       this.response = { ... resp.body};
       //console.log('response='+JSON.stringify(resp));
       //this.data = this.response['response']['docs']
       //console.log('response from json file here: '+JSON.stringify(this.response['_embedded'].Data[0]['data']));
-      this.data=this.response['_embedded'].Data[this.PROCEDURE_DATA_INDEX]['data'];
+      if(heatmapType == this.PROCEDURE_TYPE){
+      this.data=this.response['data'];
       //let headerData=this.response['_embedded'].Data[0]['columnHeaders'];
       this.columnHeaders=[
         '<[routerLink]="" (click)="onGoToPage2()">Homozygous viability at P14</a>',
@@ -421,15 +423,19 @@ export class HeatmapComponent implements OnInit {
         "Trichuris Challenge",
         "Salmonella Challenge"
         ];
-      this.rowHeaders=this.response['_embedded'].Data[0]['rowHeaders'];
-
-      //get the cell data also from this response. second in array.
-      this.data2=this.response['_embedded'].Data[this.CELL_DATA_INDEX]['data'];
-      this.columnHeaders2=this.response['_embedded'].Data[this.CELL_DATA_INDEX]['columnHeaders'];
-      this.rowHeaders2=this.response['_embedded'].Data[this.CELL_DATA_INDEX]['rowHeaders'];
+      this.rowHeaders=this.response['rowHeaders'];
       this.displayProcedureChart();
+    }else if(heatmapType==this.CELL_DATA_TYPE){
+      //get the cell data also from this response. second in array.
+      console.log('getting cell type in getHeatmapData method');
+      this.data2=this.response['data'];
+      this.columnHeaders2=this.response['columnHeaders'];
+      this.rowHeaders2=this.response['rowHeaders'];
+      
       this.updateDemo2=true;//can we force it to update like this?
       this.resourceLoaded=true;
+      this.displayCellChart();
+    }
       
     });
   }
@@ -451,9 +457,7 @@ titleChange = function(event) {
 
 
   displayProcedureChart(){
-  this.resourceLoaded=false;
-console.log('calling display chart method');
-  
+console.log('calling display procedure chart method');
 this.procedureChart= {
 
     chart: {
@@ -583,8 +587,7 @@ this.resourceLoaded=true;
   displayCellChart(){
   
     console.log('calling display cell chart method');
-      
-    this.heatmapChart= {
+    this.cellChart= {
     
         chart: {
             type: 'heatmap',
@@ -699,6 +702,9 @@ this.resourceLoaded=true;
         }],
         
       }
+      this.heatmapChart=this.cellChart;
+      this.resourceLoaded=true;
+      this.updateDemo2=true;
     };//end of display method
 
 

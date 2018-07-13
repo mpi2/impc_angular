@@ -12,12 +12,12 @@ export class HeatmapService {
   restBaseUrl = 'http://localhost:8080/data';
   constructor(private http: HttpClient) { }
 
-  getHeatmapResponse():
+  getHeatmapResponse(heatmapType):
       Observable<HttpResponse<Response>> {
       console.log('calling heatmap service method');
       
       return this.http.get<Response>(
-        this.restBaseUrl , { observe: 'response' });
+        this.restBaseUrl +'?heatmapType='+heatmapType, { observe: 'response' });
     }
     //get data from a file?
     // public getJSON(): Observable<any> {

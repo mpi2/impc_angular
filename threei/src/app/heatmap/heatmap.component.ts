@@ -171,8 +171,14 @@ Highcharts.setOptions({
 })
 export class HeatmapComponent implements OnInit {
 
+    
+    cellSubTypeDropdowns: string[];
+    cellSubType: any;
     readonly PROCEDURE_TYPE = 'procedure';
   readonly CELL_TYPE = 'cell';
+  cellTypesForDropdown: string[];
+
+
         data: number[][]=[[]];
         data2:number[][]=[[]];
         headers: string[];//http response headers
@@ -369,8 +375,9 @@ export class HeatmapComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-     //this.getHeatmapData(this.PROCEDURE_TYPE);
-     this.getHeatmapData(this.CELL_TYPE)
+     this.getHeatmapData(this.PROCEDURE_TYPE);
+     this.getCellSubTypesDropdown();
+     //this.getHeatmapData(this.CELL_TYPE)
   }
 
 
@@ -440,6 +447,22 @@ export class HeatmapComponent implements OnInit {
       
     });
   }
+
+  getCellSubTypesDropdown(){
+    console.log('calling cellType dropdown');
+    this.resourceLoaded=false;
+    //if(this.data.length<=1){
+    this.heatmapService.getCellSubTypeResponse().subscribe(resp => {
+      // display its headers
+      this.response = { ... resp.body};
+      //console.log('response='+JSON.stringify(resp));
+      //this.data = this.response['response']['docs']
+      //console.log('response from json file here: '+JSON.stringify(this.response['_embedded'].Data[0]['data']));
+      
+      this.cellSubTypeDropdowns=this.response['types'];
+      //let headerData=this.response['_embedded'].Data[0]['columnHeaders'];      
+  });
+}
 
   Highcharts = Highcharts;
 

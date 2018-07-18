@@ -9,7 +9,8 @@ import { Observable, Subject, ReplaySubject, from, of, range } from 'rxjs';
 })
 export class HeatmapService {
 
-  restBaseUrl = 'http://localhost:8080/data';
+  restDataBaseUrl = 'http://localhost:8080/data';
+  restBaseUrl= 'http://localhost:8080/';
   constructor(private http: HttpClient) { }
 
   getHeatmapResponse(heatmapType):
@@ -17,7 +18,23 @@ export class HeatmapService {
       console.log('calling heatmap service method');
       
       return this.http.get<Response>(
-        this.restBaseUrl +'?heatmapType='+heatmapType, { observe: 'response' });
+        this.restDataBaseUrl +'?heatmapType='+heatmapType, { observe: 'response' });
+    }
+
+    getCellSubTypeResponse():
+    Observable<HttpResponse<Response>> {
+    console.log('calling heatmap service method');
+    
+    return this.http.get<Response>(
+      this.restBaseUrl +'/cellSubTypes', { observe: 'response' });
+  }
+
+    getCellTypeResponse():
+      Observable<HttpResponse<Response>> {
+      console.log('calling heatmap service method');
+      
+      return this.http.get<Response>(
+        this.restBaseUrl +'/cellTypes', { observe: 'response' });
     }
     //get data from a file?
     // public getJSON(): Observable<any> {

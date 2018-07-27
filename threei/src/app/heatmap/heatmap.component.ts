@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import * as Highcharts from 'highcharts/highcharts';
 import * as HC_map from 'highcharts/modules/map';
 import * as HC_exporting from 'highcharts/modules/exporting';
@@ -23,13 +24,6 @@ Highcharts.setOptions({
         height: 200
     },
 
-    // click: function(e) {
-    //     console.log(
-    //         Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', e.xAxis[0].value),
-    //         e.yAxis[0].value
-    //     )
-    // },
-
     title: {
         text: 'Procedure Heatmap'
     },
@@ -42,7 +36,7 @@ Highcharts.setOptions({
                   'Haematology',
                    'Peripheral Blood Leukocytes',
                  'Spleen',
-                   "Mesenteric Lymph Node",
+                   'Mesenteric Lymph Node',
                  'Bone Marrow',
                   'Ear Epidermis',
                   'Anti-nuclear Antibodies',
@@ -80,16 +74,6 @@ Highcharts.setOptions({
         color: '#c4463a',
         name: 'Significantly Different'
     }
-      // stops: [
-      //   [0, '#ffffff', 'no data'],
-      //   [0.25, '#2f4259'],
-      //   [0.5, '#0000ff'],
-      //   [0.75, '#c4463a']
-
-        // [0, '#3060cf'],
-        // [0.25, '#fffbbc'],
-        // [0.5, '#2f4259'],
-        // [0.75, '#c4463a']
     ],
     min: 0,
     max: 4,
@@ -115,15 +99,6 @@ Highcharts.setOptions({
       series: {
           events: {
               click: function (e) {
-                  // var text = '<b>Clicked</b><br>Series: ' + this.name +
-                  //         '<br>Point: ' + e.point.name + ' (' + e.point.value + '/km²)';
-                 
-                  //may have to use routerLink like for menus to link to our new not created yet parameter page
-                    //var url = "http://starwars.com";
-                    //window.open(url,'_blank');
-                      // this.chart.clickLabel.attr({
-                      //     text: text
-                      // });
                   
               }
           }
@@ -191,13 +166,6 @@ export class HeatmapComponent implements OnInit {
         height: 2000
     },
 
-    // click: function(e) {
-    //     console.log(
-    //         Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', e.xAxis[0].value),
-    //         e.yAxis[0].value
-    //     )
-    // },
-
     title: {
         text: 'Procedure Heatmap'
     },
@@ -242,16 +210,6 @@ export class HeatmapComponent implements OnInit {
         color: '#c4463a',
         name: 'Significantly Different'
     }
-      // stops: [
-      //   [0, '#ffffff', 'no data'],
-      //   [0.25, '#2f4259'],
-      //   [0.5, '#0000ff'],
-      //   [0.75, '#c4463a']
-
-        // [0, '#3060cf'],
-        // [0.25, '#fffbbc'],
-        // [0.5, '#2f4259'],
-        // [0.75, '#c4463a']
     ],
     min: 0,
     max: 4,
@@ -277,15 +235,6 @@ export class HeatmapComponent implements OnInit {
       series: {
           events: {
               click: function (e) {
-                  // var text = '<b>Clicked</b><br>Series: ' + this.name +
-                  //         '<br>Point: ' + e.point.name + ' (' + e.point.value + '/km²)';
-                 
-                  //may have to use routerLink like for menus to link to our new not created yet parameter page
-                    //var url = "http://starwars.com";
-                    //window.open(url,'_blank');
-                      // this.chart.clickLabel.attr({
-                      //     text: text
-                      // });
                   
               }
           }
@@ -303,51 +252,7 @@ export class HeatmapComponent implements OnInit {
         }
     }]
 };
-    //heatmapChart: { chart: { type: string; marginTop: number; marginBottom: number; plotBorderWidth: number; height: number; }; title: { text: string; }; xAxis: { opposite: boolean; categories: string[]; labels: { rotation: number; }; reserveSpace: boolean; }; yAxis: { categories: string[]; title: any; }; colorAxis: { dataClasses: { from: number; to: number; color: string; name: string; }[]; min: number; max: number; }; legend: { align: string; layout: string; verticalAlign: string; }; tooltip: { formatter: () => string; }; plotOptions: { series: { events: { click: (e: any) => void; }; }; }; series: { name: string; borderWidth: number; data: number[][]; dataLabels: { enabled: boolean; color: string; }; }[]; };
-
-  
-
-
- 
-  // only order that procedures headers are displayed in
-  // procedureDisplayHeaderOrder : Array<string>= [
-  //   'Homozygous viability at P14',
-  //        'Homozygous Fertility',
-  //       'Haematology',
-  //        'Peripheral Blood Leukocytes',
-  //      'Spleen',
-  //        "Mesenteric Lymph Node",
-  //      'Bone Marrow',
-  //       'Ear Epidermis',
-  //       'Anti-nuclear Antibodies',
-  //       'Cytotoxic T Cell Function',
-  //       'DSS Challenge',
-  //        'Influenza',
-  //       'Trichuris Challenge',
-  //       'Salmonella Challenge'];
-  
-  
-//   .hcOptions: {
-//     hcOptions: {
-//     title: { text: this.chartTitle },
-//     subtitle: { text: '2nd data set' },
-//     series: [{
-//       type: 'column',
-//       data: [4, 3, -12],
-//       threshold: -10
-//     }, {
-//       type: 'ohlc',
-//       data: [
-//         [0, 15, -6, 7],
-//         [7, 12, -1, 3],
-//         [3, 10, -3, 3]
-//       ]
-//     }]
-//   },
-//   hcCallback: () => {}
-// }
-  
-
+   
   constructor(private heatmapService: HeatmapService) { 
     
   }
@@ -362,28 +267,6 @@ export class HeatmapComponent implements OnInit {
      this.getCellSubTypesDropdown();
      //this.getHeatmapData(this.CELL_TYPE)
   }
-
-
-  // getHeatmapResponse(){
-  //  this.heatmapService.getHeatmapResponse()
-  //     // resp is of type `HttpResponse<Config>`
-  //     .subscribe(resp => {
-  //       // display its headers
-  //       const keys = resp.headers.keys();
-  //       this.headers = keys.map(key =>
-  //         `${key}: ${resp.headers.get(key)}`);
-  //         //console.log('headers=' + this.headers);
-  //       // access the body directly, which is typed as `Config`.
-  //       this.response = { ... resp.body };
-  //       //this.data = this.response['response']['docs']
-  //       console.log('response here: '+JSON.stringify(this.response['_embedded'].Data[0]['data']));
-  //       this.data=this.response['_embedded'].Data[0]['data'];
-  //       this.columnHeaders=this.response['_embedded'].Data[0]['columnHeaders'];
-  //       this.rowHeaders=this.response['_embedded'].Data[0]['rowHeaders'];
-  //       this.updateDemo2=true;//can we force it to update like this?
-  //       this.displayProcedureChart();
-  //     });
-  // }
 
   getHeatmapData(heatmapType){
     console.log('heamapType='+heatmapType);
@@ -486,13 +369,6 @@ this.procedureChart= {
         height: 20000
     },
 
-    // click: function(e) {
-    //     console.log(
-    //         Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', e.xAxis[0].value),
-    //         e.yAxis[0].value
-    //     )
-    // },
-
     title: {
         text: 'Procedure Heatmap'
     },
@@ -509,13 +385,10 @@ this.procedureChart= {
     yAxis:[
          {
         categories: this.rowHeaders,
-        title: null
+        title: 'gene'
      },{
         linkedTo: 0,
-        tickLength:100,
-        tickWidth: 2,
-        // opposite: false,
-        title: null,
+        title: 'construct',
         lineWidth: 2,
         categories: this.constructs,
     }],
@@ -543,16 +416,6 @@ this.procedureChart= {
         color: '#c4463a',
         name: 'Significantly Different'
     }
-      // stops: [
-      //   [0, '#ffffff', 'no data'],
-      //   [0.25, '#2f4259'],
-      //   [0.5, '#0000ff'],
-      //   [0.75, '#c4463a']
-
-        // [0, '#3060cf'],
-        // [0.25, '#fffbbc'],
-        // [0.5, '#2f4259'],
-        // [0.75, '#c4463a']
     ],
     min: 0,
     max: 4,
@@ -578,15 +441,21 @@ this.procedureChart= {
       series: {
           events: {
               click: function (e) {
-                  // var text = '<b>Clicked</b><br>Series: ' + this.name +
-                  //         '<br>Point: ' + e.point.name + ' (' + e.point.value + '/km²)';
+                  var gene= e.point.series.yAxis.categories[e.point.y];
+                  //var construct=e.point.series.yAxis.categories[e.point.y];
+                  var procedure=e.point.series.xAxis.categories[e.point.x];
+                  
+                  var text = 'gene: ' +gene +
+                           ' Procedure: ' + procedure + ' significance=' + e.point.value ;
                  
                   //may have to use routerLink like for menus to link to our new not created yet parameter page
-                    //var url = "http://starwars.com";
-                    //window.open(url,'_blank');
-                      // this.chart.clickLabel.attr({
-                      //     text: text
-                      // });
+                    var url = 'http://starwars.com';
+                    var routerLink='procedureDetails?'+'procedure="'+procedure+'"&gene="'+gene+'"';
+                    window.open(routerLink,'_blank');
+                    //   this.chart.clickLabel.attr({
+                    //       text: text
+                    //   });
+                      console.log('text on click='+text);
                   
               }
           }
@@ -667,16 +536,6 @@ this.resourceLoaded=true;
             color: '#c4463a',
             name: 'Significantly Different'
         }
-          // stops: [
-          //   [0, '#ffffff', 'no data'],
-          //   [0.25, '#2f4259'],
-          //   [0.5, '#0000ff'],
-          //   [0.75, '#c4463a']
-    
-            // [0, '#3060cf'],
-            // [0.25, '#fffbbc'],
-            // [0.5, '#2f4259'],
-            // [0.75, '#c4463a']
         ],
         min: 0,
         max: 4,
@@ -706,7 +565,7 @@ this.resourceLoaded=true;
                       //         '<br>Point: ' + e.point.name + ' (' + e.point.value + '/km²)';
                      
                       //may have to use routerLink like for menus to link to our new not created yet parameter page
-                        var url = "http://starwars.com";
+                        var url = 'http://starwars.com';
                         window.open(url,'_blank');
                           // this.chart.clickLabel.attr({
                           //     text: text
@@ -737,46 +596,6 @@ this.resourceLoaded=true;
 
 
 
-    //   onChartLoad(chart) {
-    //       console.log('loading onchartload method');
-    //     this.chartOptions = chart;
-    //     var t = chart.legend.title.element.children[0].children[1]
-    //     t.onclick = () => this.onLegendTitleClick()
-    //   }
-      
-    //   onLegendTitleClick() {
-    //     console.log('title clicked', this)
-    //   }
-      
-
-//       this.chart.xAxis[0].labelGroup.element.childNodes.forEach(function(label)
-// {
-// 	label.style.cursor = "pointer";
-//   label.onclick = function(){
-//   	alert('You clicked on '+this.textContent);
-//   }
-// });
-
-    //   if (sortByCol!=-1) {
-    //     if (sortByCol==null)   sortByCol=0;
-    //     else   // populated
-    //     if (_heatmap_sortBy == sortByCol)
-    //         _heatmap_sortByReversed=(_heatmap_sortByReversed?false:true);
-
-    //     _heatmap_sortBy = sortByCol;
-    //     //console.log('sortByCol:::', sortByCol);
-    //     //console.log('rows:::', JSON.stringify(heatmap_rows));
-    //     heatmap_rows.sort(function(a,b) {
-    //         if(a[sortByCol] > 3 || b[sortByCol] > 3) {
-    //             a[sortByCol] = b[sortByCol] = 0;
-    //         }
-    //         //console.log('sortByCol A:::', a[sortByCol]);
-    //         if(a[sortByCol]<b[sortByCol]) return (_heatmap_sortByReversed?1:-1)
-    //         if(a[sortByCol]>b[sortByCol]) return (_heatmap_sortByReversed?-1:1)
-    //         return 0;
-
-    //     })
-    // }
-
+   
       
 }

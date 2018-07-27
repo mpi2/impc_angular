@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import * as Highcharts from 'highcharts/highcharts';
 import * as HC_map from 'highcharts/modules/map';
 import * as HC_exporting from 'highcharts/modules/exporting';
-import * as HC_ce from 'highcharts-custom-events';
+//import * as HC_CustomEvents from 'highcharts-custom-events';
 import { MatRadioModule, MatSelectModule } from '@angular/material';
 
 import { HeatmapService } from '../heatmap.service';
@@ -11,7 +11,7 @@ HC_map(Highcharts);
 //require('../../js/worldmap')(Highcharts);
 
 HC_exporting(Highcharts);
-HC_ce(Highcharts);
+//HC_ce(Highcharts);
 
 Highcharts.setOptions({
 
@@ -56,25 +56,6 @@ Highcharts.setOptions({
         },
         reserveSpace: true,
       },
-
-    yAxis: {
-        categories: [
-            'Homozygous viability at P14',
-                 'Homozygous Fertility',
-                'Haematology',
-                 'Peripheral Blood Leukocytes',
-               'Spleen',
-                 "Mesenteric Lymph Node",
-               'Bone Marrow',
-                'Ear Epidermis',
-                'Anti-nuclear Antibodies',
-                'Cytotoxic T Cell Function',
-                'DSS Challenge',
-                 'Influenza',
-                'Trichuris Challenge',
-                'Salmonella Challenge'],
-        title: null
-    },
 
     colorAxis: {
 
@@ -172,6 +153,7 @@ Highcharts.setOptions({
 export class HeatmapComponent implements OnInit {
 
     
+    constructs: string[];
     cellSubTypeDropdowns: string[];
     cellSubType: any;
     readonly PROCEDURE_TYPE = 'procedure';
@@ -179,12 +161,13 @@ export class HeatmapComponent implements OnInit {
   cellTypesForDropdown: string[];
 
 
-        data: number[][]=[[]];
+        data: any[][]=[[]];
         data2:number[][]=[[]];
         headers: string[];//http response headers
         columnHeaders: string[];
         rowHeaders: string[];
         response: Response;
+        constructColumnData: any[];//need any as string for construct and ints for col and row indexes
 
         columnHeaders2: string[];
         rowHeaders2: string[];
@@ -414,26 +397,37 @@ export class HeatmapComponent implements OnInit {
       //console.log('response from json file here: '+JSON.stringify(this.response['_embedded'].Data[0]['data']));
       if(heatmapType == this.PROCEDURE_TYPE){
       this.data=this.response['data'];
-      //let headerData=this.response['_embedded'].Data[0]['columnHeaders'];
-      this.columnHeaders=[
-        '<[routerLink]="" (click)="onGoToPage2()">Homozygous viability at P14</a>',
-        "Homozygous Fertility",
-        "Haematology",
-        "Peripheral Blood Leukocytes",
-        "Spleen",
-        "Mesenteric Lymph Node",
-        "Bone Marrow",
-        "Ear Epidermis",
-        "Anti-nuclear Antibodies",
-        "Cytotoxic T Cell Function",
-        "DSS Challenge",
-        "Influenza",
-        "Trichuris Challenge",
-        "Salmonella Challenge"
-        ];
+      this.columnHeaders=this.response['columnHeaders'];
+    //   this.columnHeaders=[
+    //     '<[routerLink]="" (click)="onGoToPage2()">Homozygous viability at P14</a>',
+    //     "Homozygous Fertility",
+    //     "Haematology",
+    //     "Peripheral Blood Leukocytes",
+    //     "Spleen",
+    //     "Mesenteric Lymph Node",
+    //     "Bone Marrow",
+    //     "Ear Epidermis",
+    //     "Anti-nuclear Antibodies",
+    //     "Cytotoxic T Cell Function",
+    //     "DSS Challenge",
+    //     "Influenza",
+    //     "Trichuris Challenge",
+    //     "Salmonella Challenge"
+    //     ];
       this.rowHeaders=this.response['rowHeaders'];
+      //here we need to add a whole column populated with the construct as java has no way of mixing strings and ints in an array
+      this.constructs=this.response['constructs'];
+      console.log('construct='+this.constructs+'||');
+      console.log('rowheaders='+this.rowHeaders+'||');
+      
+    //   for (let index = 0; index < this.constructs.length; index++) {
+    //     let cell:[string, number, number];//a new cell for each construct
+    //       const construct = this.constructs[index];
+    //       cell=[construct, 0, index];
+    //       this.data.push(cell);
+    //   }
       this.displayProcedureChart();
-    }else if(heatmapType==this.CELL_TYPE){
+    }else if(heatmapType==this.CELL_TYPE|| heatmapType=='oldCell'){
       //get the cell data also from this response. second in array.
       console.log('getting cell type in getHeatmapData method');
       this.data2=this.response['data'];
@@ -511,11 +505,20 @@ this.procedureChart= {
         },
         reserveSpace: true,
       },
-
-    yAxis: {
+//example of multiple columns working http://jsfiddle.net/0qmt0mkq/
+    yAxis:[
+         {
         categories: this.rowHeaders,
         title: null
-    },
+     },{
+        linkedTo: 0,
+        tickLength:100,
+        tickWidth: 2,
+        // opposite: false,
+        title: null,
+        lineWidth: 2,
+        categories: this.constructs,
+    }],
 
     colorAxis: {
 
@@ -603,6 +606,7 @@ this.procedureChart= {
     }]
 }
 this.heatmapChart=this.procedureChart;
+console.log('heatmap chart=',this.heatmapChart);
 this.resourceLoaded=true;
   }//end of display method
   

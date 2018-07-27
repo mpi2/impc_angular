@@ -16,9 +16,18 @@ export class HeatmapService {
   getHeatmapResponse(heatmapType):
       Observable<HttpResponse<Response>> {
       console.log('calling heatmap service method');
-      
+      if(heatmapType=='procedure'){
       return this.http.get<Response>(
-        this.restDataBaseUrl +'?heatmapType='+heatmapType, { observe: 'response' });
+        this.restBaseUrl +'procedure_heatmap', { observe: 'response' });
+      }
+      if(heatmapType=='cell'){
+        return this.http.get<Response>(
+          this.restBaseUrl +'cell_heatmap', { observe: 'response' });
+      }
+      // if(heatmapType=='cell'){
+      //   return this.http.get<Response>(
+      //     this.restDataBaseUrl +'?heatmapType='+heatmapType, { observe: 'response' });
+      // }
     }
 
     getCellSubTypeResponse():

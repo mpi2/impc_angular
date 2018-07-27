@@ -5,6 +5,7 @@
   <mat-radio-group name="chartTypeSelector" id="chartSelector">
     <mat-radio-button [checked] (click)="getHeatmapData('procedure')">Procedure Chart</mat-radio-button>
     <mat-radio-button value="cell" (click)="getHeatmapData('cell')">Cell Chart</mat-radio-button>
+    <!-- <mat-radio-button value="cell" (click)="getHeatmapData('oldcell')">Old Cell Chart</mat-radio-button> -->
   </mat-radio-group>
   </p>
   <p>
@@ -22,7 +23,7 @@
     </mat-select>
   </mat-form-field> -->
 
-  <mat-form-field>
+  <!-- <mat-form-field>
     <mat-select   placeholder="Cell subtype" [(value)]="selected">
       <mat-option>None</mat-option>
       <mat-option *ngFor="let cellSubTypeDrop of cellSubTypeDropdowns" ([value)]="cellSubTypeDrop">{{cellSubTypeDrop}}</mat-option>
@@ -36,20 +37,20 @@
       <mat-option value="Blood">Blood</mat-option>
       <mat-option value="Mesenteric lymph node">Mesenteric lymph node</mat-option>
     </mat-select>
-  </mat-form-field>
-</p>
-  <p>You selected: {{selected}}</p>
+  </mat-form-field> -->
+<!-- </p>
+  <p>You selected: {{selected}}</p> -->
   </div>
 
-  <mat-spinner *ngIf="!resourceLoaded"></mat-spinner>
+  <!-- <mat-spinner *ngIf="!resourceLoaded"></mat-spinner> -->
   
-  <div style="width:100%; height:200px; float: left;">
+  <div style="height: 400px; min-width: 310px; max-width: 1800px; margin: 0 auto">
     <highcharts-chart
       [Highcharts]="Highcharts"
       [options]="heatmapChart"
       [(update)]="updateDemo2"
    
-      style="width: 100%; display: block;"
+      
     ></highcharts-chart>
   </div>
 

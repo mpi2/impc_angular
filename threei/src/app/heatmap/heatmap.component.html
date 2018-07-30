@@ -11,7 +11,7 @@
   <p>
   <mat-form-field appearance="standard">
       <mat-label>Search Gene or MP Term</mat-label>
-    <input matInput placeholder="Input">
+    <input matInput type="search" #searchBox placeholder="Search for gene symbol or name" (click)="getHeatmapData('searchBox')">
   </mat-form-field>
 </p>
 

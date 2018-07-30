@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import * as Highcharts from 'highcharts/highcharts';
 import * as HC_map from 'highcharts/modules/map';
@@ -127,7 +127,7 @@ Highcharts.setOptions({
 })
 export class HeatmapComponent implements OnInit {
 
-    
+    @ViewChild('searchBox') searchBox;
     constructs: string[];
     cellSubTypeDropdowns: string[];
     cellSubType: any;
@@ -263,13 +263,14 @@ export class HeatmapComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-     this.getHeatmapData(this.PROCEDURE_TYPE);
+     this.getHeatmapData(this.PROCEDURE_TYPE, this.searchBox);
      this.getCellSubTypesDropdown();
      //this.getHeatmapData(this.CELL_TYPE)
   }
 
-  getHeatmapData(heatmapType){
+  getHeatmapData(heatmapType, searchBox){
     console.log('heamapType='+heatmapType);
+    console.log('searchbox='+this.searchBox);
     this.resourceLoaded=false;
     //if(this.data.length<=1){
     this.heatmapService.getHeatmapResponse(heatmapType).subscribe(resp => {

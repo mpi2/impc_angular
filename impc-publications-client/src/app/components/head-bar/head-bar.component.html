@@ -1,7 +1,0 @@
-<mat-toolbar color="primary">
-  <impc-logo></impc-logo>
-  <span class="logo-text">IMPC</span>
-  <span class="spacer"></span>
-  <a mat-raised-button color="accent" *ngIf="!_authService.isLoggedIn()" routerLink="/login">LOGIN</a>
-  <button mat-raised-button color="accent" *ngIf="_authService.isLoggedIn()" (click)="logout()">LOGOUT</button>
-</mat-toolbar>

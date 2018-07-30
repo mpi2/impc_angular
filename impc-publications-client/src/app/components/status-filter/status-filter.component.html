@@ -1,8 +1,0 @@
-<mat-button-toggle-group #group="matButtonToggleGroup" color="primary" (valueChange)="change($event)">
-    <mat-button-toggle [value]="false" checked="true">
-      <mat-icon>assignment_late</mat-icon>Pending<impc-count [number]="pending"></impc-count>
-    </mat-button-toggle>
-    <mat-button-toggle [value]="true">
-      <mat-icon>assignment_turned_in</mat-icon>Reviewed<impc-count [number]="reviewed"></impc-count>
-    </mat-button-toggle>
-  </mat-button-toggle-group>

@@ -1,3 +1,0 @@
-<mat-chip-list #keywordList>
-  <mat-chip *ngFor="let keyword of keywords" [selected]="keyword.selected" [color]="keyword.color" [selectable]="true" (click)="changeSelection(keyword)" class="keyword">{{ keyword.label }}</mat-chip>
-</mat-chip-list>

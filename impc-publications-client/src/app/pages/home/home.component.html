@@ -1,7 +1,0 @@
-<div class="main-content">
-    <impc-head-bar></impc-head-bar>
-    <impc-facets [facets]="facets" (changeSelection)="changeFilter($event)"></impc-facets>
-    <impc-status-filter (changeSelection)="changeStatus($event)" [pending]="pendingNumber" [reviewed]="reviewedNumber"></impc-status-filter>
-    <impc-publication-list [status]="currentStatus" [filters]="currentFilters"></impc-publication-list>
-    <impc-footer></impc-footer>
-</div>

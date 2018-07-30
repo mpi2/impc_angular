@@ -1,8 +1,0 @@
-<mat-form-field>
-    <mat-select placeholder="Anatomy Name" [(value)]="selectedAnatomyName">
-      <!-- <mat-option>None</mat-option> -->
-      <mat-option *ngFor="let anatomy of anatomyNamesForDropdown" [value]="anatomy" (click)="anatomySelected(anatomy)">
-        {{ anatomy }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>

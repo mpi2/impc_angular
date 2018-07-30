@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+/* ::ng-deep .mat-button-focus-overlay {
+    background-color:orange;
+} */
+
+/* #mn > div > a:nth-child(1) > button > span {
+    background-color:orange;
+} */
+
+#mn > div > a > button.active .mat-button-focus-overlay{
+    background-color:orange;
+}
+
+/* #mn > div > a:nth-child(2) > button > span{
+    color: orange
+} */

@@ -1,0 +1,67 @@
+
+
+<head>
+  <title> Home | 3i Consortium - Wellcome Trust Sanger Institute</title>
+  <link rel="icon" type="image/png" href="images/index.ico">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link href="/assets/css/imageslider.css"  rel="stylesheet" type="text/css"  />
+  <link href="/assets/css/threei.css" rel="stylesheet" type="text/css"  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+  <link rel="icon" type="image/png" href="images/index.ico">
+</head>
+
+<body id="top" class="html front not-logged-in one-sidebar sidebar-second page-home">
+<div id="wrapper">
+
+
+        
+
+              <br/>
+<hr/>
+
+
+        
+       
+  
+              <!-- <div id="block-system-main-menu" class="block block-system block-menu">
+
+                  <div class="content">
+                      <ul class="menu" th:with="view=${#httpServletRequest.getServletPath()}">
+                          <li class="first leaf" th:classappend="${#strings.equals(view,'/') ? 'active' : ''}"><a th:href="@{/}">HOME</a></li>
+                          <li class="leaf" th:classappend="${#strings.startsWith(view,'/data') ? 'active' : ''}"><a th:href="@{/data}">DATA</a></li>
+                          <li class="leaf" th:classappend="${#strings.startsWith(view,'/analysis') ? 'active' : ''}"><a th:href="@{/analysis}">ANALYSIS</a></li>
+                          <li class="leaf" th:classappend="${#strings.startsWith(view,'/methods') ? 'active' : ''}"><a th:href="@{/methods}">METHODS</a></li>
+                          <li class="leaf" th:classappend="${#strings.startsWith(view,'/contact') ? 'active' : ''}"><a th:href="@{/contact}">CONTACT</a></li>
+                          <li class="last expanded" th:classappend="${#strings.startsWith(view,'/learnmore') ? 'active' : ''}"><a th:href="@{/learnmore}">LEARN MORE</a>
+                              <ul class="menu">
+                                  <li class="first leaf" th:classappend="${#strings.startsWith(view,'/faq') ? 'active' : ''}"><a th:href="@{/faq}">FAQ</a></li>
+                                  <li class="leaf" th:classappend="${#strings.startsWith(view,'/glossary') ? 'active' : ''}"><a th:href="@{/glossary}">Glossary</a></li>
+                                  <li class="last leaf" th:classappend="${#strings.startsWith(view,'/publications') ? 'active' : ''}"><a th:href="@{/publications}">Publications</a></li>
+                              </ul></li>
+                  </ul><div class="clear"></div></div>
+              </div> -->
+              <threei-top-menu></threei-top-menu>
+              <slideshow [imageUrls]="imageUrlArray" [height]="height"
+              [minHeight]="'280px'"
+              [autoPlay]="true"
+              [showArrows]="false"
+              [imageUrls]="imageSources"
+              [lazyLoad]="imageSources?.length > 1"
+              [autoPlayWaitForLazyLoad]="true">></slideshow>
+  <!--End of Header-->
+  <!--Main Starts-->
+  
+  <!--Main Ends-->
+
+  <!-- <router-outlet></router-outlet> -->
+  <router-outlet></router-outlet>
+  <!-- <th:block th:include="fragments/footer::footer1"> </th:block> -->
+  <!-- todo need angular footer to replace the above here -->
+
+</div>
+<!-- todo get js below to work in angular?? -->
+
+</body>
+
+

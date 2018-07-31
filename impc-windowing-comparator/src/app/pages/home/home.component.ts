@@ -73,8 +73,8 @@ export class HomeComponent implements OnInit {
           const result = new Result();
           result.oldData = data.oldData;
           result.newData = data.newData;
-          result.oldPValue = data.oldPValue.toExponential(1);
-          result.newPValue = data.newPvalue.toExponential(1);
+          result.oldPValue = data.oldPValue.toExponential(2);
+          result.newPValue = data.newPvalue.toExponential(2);
           result.rawLink = data.rawLink;
           result.portalLink = data.portalLink;
           result.resultsLink = data.resultsLink;

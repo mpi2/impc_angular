@@ -1,4 +1,17 @@
 mat-form-field {
-    margin: 10px 5px;
-    width: 30%;
+    margin-right: 30px ;
+    width: 28%;
 }
+
+mat-form-field.second {
+    width: 25%;
+}
+
+.toggle {
+    position: relative;
+    float: right;
+}
+.toggle-wrapper {
+    display: inline-block;
+    width: 100%;
+} 

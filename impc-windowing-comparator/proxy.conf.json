@@ -10,5 +10,11 @@
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true
+    },
+    "/Results/*": {
+        "target": "https://wwwdev.ebi.ac.uk/~jmason/DR8_windowed/jobs/",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
     }
 }

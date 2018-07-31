@@ -2,7 +2,8 @@ import { SolrService } from './shared/solr.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FilterComponent } from './components/filter/filter.component';
 import { MatToolbarModule, MatSelectModule, MatAutocompleteModule,
-  MatInputModule, MatFormFieldModule, MatTableModule, MatSnackBarModule, MatBadgeModule, MatChipsModule } from '@angular/material';
+  MatInputModule, MatFormFieldModule, MatTableModule, MatSnackBarModule,
+  MatBadgeModule, MatChipsModule, MatTabsModule, MatSlideToggle, MatSlideToggleModule, MatProgressBar, MatProgressBarModule, MatSpinner, MatProgressSpinnerModule } from '@angular/material';
 import { HomeComponent, ErrorMessageComponent } from './pages/home/home.component';
 import { HeadBarComponent } from './components/head-bar/head-bar.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -10,6 +11,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { ChartModule } from 'angular-highcharts';
+import {DndModule} from 'ng2-dnd';
 
 import { AppComponent } from './app.component';
 import { LogoComponent } from './components/logo/logo.component';
@@ -50,6 +52,10 @@ import { TableComponent } from './components/table/table.component';
     MatSnackBarModule,
     MatBadgeModule,
     MatChipsModule,
+    MatTabsModule,
+    MatSlideToggleModule,
+    MatProgressSpinnerModule,
+    DndModule.forRoot(),
     RouterModule.forRoot([
       { path: '**', component: HomeComponent }
   ]),

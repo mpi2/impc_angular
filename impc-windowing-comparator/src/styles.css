@@ -6,3 +6,12 @@
 .mat-toolbar-row, .mat-toolbar-single-row {
     height: 50px !important;
 }
+
+.mat-option-text {
+    color: black !important;
+}
+
+.mat-badge-medium.mat-badge-overlap.mat-badge-before .mat-badge-content {
+    left: -25px !important;
+    top: 0px;
+}

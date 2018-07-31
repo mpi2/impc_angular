@@ -1,8 +1,7 @@
 import { environment } from './../../environments/environment';
-import { Component, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { catchError, retry, map} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 
@@ -18,11 +17,12 @@ export class SolrService {
         center: 'phenotyping_center',
         colonyID: 'colony_id',
         zygosity: 'zygosity',
-        procedureID: 'procedure_stable_id',
+        procedureID: 'procedure_group',
         procedureName: 'procedure_name',
         parameterID: 'parameter_stable_id',
         parameterName: 'parameter_name',
-        metadata: 'metadata_group'
+        metadata: 'metadata_group',
+        alleleSymbol: 'allele_symbol'
     };
     constructor(private http: HttpClient) { }
 
@@ -48,9 +48,10 @@ export class SolrService {
         });
         query = query.substring(0, query.length - 5);
         query = encodeURI(query);
+        const fqs = '&fq=datasource_name:IMPC&fq=observation_type:unidimensional&fq=biological_sample_group:experimental';
         const options = '&rows=0&wt=json&facet=on&facet.mincount=1';
         const facet = pivot ? `&facet.pivot=${pivot}` : `&facet.field=${target}`;
-        query += options + facet;
+        query += fqs + options + facet;
         if (!emptyField) { return query; }
         return false;
     }

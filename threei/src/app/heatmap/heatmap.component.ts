@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatCard  } from '@angular/material';
 import * as Highcharts from 'highcharts/highcharts';
 import * as HC_map from 'highcharts/modules/map';
 import * as HC_exporting from 'highcharts/modules/exporting';

@@ -8,11 +8,8 @@ import { HighchartsChartComponent } from './highcharts-chart.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule} from '@angular/forms';
-import { MatSelectModule, MatCheckbox, MatButtonModule } from '@angular/material';
-import { MatInputModule } from '@angular/material';
-import { MatCardModule, MatSliderModule } from '@angular/material';
-import { MatGridListModule } from '@angular/material';
-import { MatCheckboxModule, MatProgressSpinnerModule} from '@angular/material';
+import { MatCheckboxModule, MatProgressSpinnerModule, MatCardModule, MatSliderModule, MatGridListModule, MatInputModule, MatSelectModule, MatCheckbox, MatButtonModule} from '@angular/material';
+
 
 
 import { AppComponent  } from './app.component';
@@ -28,6 +25,9 @@ import { ContactPageComponent } from './contact-page/contact-page.component';
 import { GlossaryPageComponent } from './glossary-page/glossary-page.component';
 import { PublicationsPageComponent } from './publications-page/publications-page.component';
 import { HeatmapComponent } from './heatmap/heatmap.component';
+import { ConsortiumPageComponent } from './consortium-page/consortium-page.component';
+import { PhenotypeofthemonthPageComponent } from './phenotypeofthemonth-page/phenotypeofthemonth-page.component';
+import { ImageacknowledgementsPageComponent } from './imageacknowledgements-page/imageacknowledgements-page.component';
 
 
 
@@ -38,10 +38,13 @@ import { HeatmapComponent } from './heatmap/heatmap.component';
     FaqPageComponent, DataPageComponent, AnalysisPageComponent, MethodsPageComponent, ContactPageComponent, GlossaryPageComponent, 
     PublicationsPageComponent, PrivacyPageComponent, LearnMorePageComponent,
     HighchartsChartComponent,
-    HeatmapComponent
+    HeatmapComponent,
+    ConsortiumPageComponent,
+    PhenotypeofthemonthPageComponent,
+    ImageacknowledgementsPageComponent
   ],
   imports: [
-    BrowserModule, MenusModule, AppRoutingModule, SlideshowModule, MatExpansionModule, FormsModule, HttpClientModule, MatRadioModule, MatProgressSpinnerModule, MatSelectModule, MatInputModule
+    BrowserModule, MenusModule, AppRoutingModule, SlideshowModule, MatExpansionModule, FormsModule, HttpClientModule, MatRadioModule, MatProgressSpinnerModule, MatSelectModule, MatInputModule, MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

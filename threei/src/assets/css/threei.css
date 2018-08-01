@@ -129,11 +129,13 @@ li {
 /*Aside CSS*/
 #main {
     padding-bottom: 6em;
-    padding-top: 5em;
+    padding-top: 3em;
+  right:40px;
 }
 .region-sidebar-second {
-    width: 28%;
+    width: 20%;
     float: right;
+  right:220px;
     position: relative;
 }
 div#block-block-1, #block-views-phenotype-of-the-month-block-1 {
@@ -1087,9 +1089,9 @@ td.unCollapse:before,.facetCat.facetCatUp:before{
 #welcome{
     background: #fff;
     position: absolute;
-    top: 140px;
-
-    z-index: 9999;
+    top:380px;
+    left:10%;
+  z-index: 9999;
     font-size: 30px;
     padding: 10px;
     font-family: "source sans pro" ,"Euphemia UCAS","Kannada Sangam MN";
@@ -1176,6 +1178,7 @@ div#block-block-2 .content{
     font-family: "source sans pro" ,"Euphemia UCAS","Kannada Sangam MN";
 }
 div#block-block-3{
+  border:none;
 
 
 }div#block-block-4{
@@ -2078,7 +2081,7 @@ div#block-views-news-page-block {
 }
 
 .one-sidebar .region-content {
-    width: 68%;
+    width: 60%;
     float: left;
 }
 .sidebar-second .region-content {
@@ -2194,7 +2197,7 @@ foot_content{
     padding-bottom: 10px;
     line-height: 1.1em;
     font-size: 1em;
-    margin-top: 220px;
+    margin-top: 2px;
     margin-bottom: 1em;
     font-family: "source sans pro" ,"Euphemia UCAS","Kannada Sangam MN";
 
@@ -2217,10 +2220,10 @@ div.panel {
 }
 span{
 
-    font-weight: inherit;
-    font-size: 100%;
+    font-weight:bold;
+    font-size: 110%;
     vertical-align: baseline;
-    text-decoration: underline;
+    text-decoration: none;
     color: #0978a1; text-decoration-style: solid; cursor: pointer;
     font-family: "source sans pro" ,"Euphemia UCAS","Kannada Sangam MN";
 }
@@ -2242,6 +2245,7 @@ span{
 article span a:visited {
     color: #0978a1;
     font-family:"source sans pro" ,"Euphemia UCAS","Kannada Sangam MN";
+
 }
 .ul-pdf li span a:visited {
     color: #0978a1;
@@ -2278,7 +2282,7 @@ footer1 {
     border-style: solid;
     border-color: #eee;
     position: absolute;
-    top:350px;
+
     height: 50px;
     color: white;
     font-size: 25px;

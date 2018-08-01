@@ -1,53 +1,53 @@
-<div style="text-align: center;">
-  <form [formGroup]="formGroup">
-    <mat-form-field>
-      <mat-select placeholder="Center" #center formControlName="center"  (selectionChange)="selected('colonyID')">
-        <mat-option *ngFor="let center of centerOptions" [value]="center" >
-          {{ center }}
-        </mat-option>
-      </mat-select>
+<div style="text-align: center; margin-top: 20px;">
+<form [formGroup]="formGroup" dnd-sortable-container [sortableData]="filters">
+  <ng-container *ngFor="let filter of filters; let i = index">
+    <mat-form-field dnd-sortable [sortableIndex]="i" [dragEnabled]="editing" *ngIf="filter.type !== 'none'">
+      <div *ngIf="filter.type === 'select'" [matBadge]="editing ? '&#x21b9;' : i + 1" matBadgePosition="before" matBadgeColor="primary">
+        <mat-select [placeholder]="filter.title" #select [formControlName]="filter.name"  (selectionChange)="selected(i)">
+          <mat-option *ngFor="let option of dynamicOptions[filter.name] | async" [value]="option" >
+            {{ option }}
+          </mat-option>
+        </mat-select>
+      </div>
+      <div *ngIf="filter.type === 'autocomplete'" [matBadge]="editing ? '&#x21b9;' : i + 1" matBadgePosition="before" matBadgeColor="primary">
+        <div *ngIf="filter.name !== 'procedure' && filter.name !== 'parameter' ">
+          <input matInput [placeholder]="filter.title" [matAutocomplete]="auto" [formControlName]="filter.name" (click)="$event.target.select()">
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected(i)" [autoActiveFirstOption]="true">
+            <mat-option  *ngFor="let option of dynamicOptions[filter.name] | async" [value]="option">
+              {{ option }}
+            </mat-option>
+          </mat-autocomplete>
+        </div>
+        <div *ngIf="filter.name === 'procedure' || filter.name === 'parameter' ">
+          <input matInput [placeholder]="filter.title" [matAutocomplete]="auto" [formControlName]="filter.name" (click)="$event.target.select()">
+          <mat-autocomplete  #auto="matAutocomplete" (optionSelected)="selected(i)" [autoActiveFirstOption]="true">
+            <mat-option *ngFor="let option of dynamicOptions[filter.name] | async" [value]="option.name + ' | ' + option.id">
+              <small>{{option.name}}</small> |
+              <small>{{option.id}}</small>
+            </mat-option>
+          </mat-autocomplete>
+        </div>
+        
+      </div>
     </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Colony ID" [matAutocomplete]="auto" formControlName="colonyID">
-      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected('zygosity')" [autoActiveFirstOption]="true">
-        <mat-option *ngFor="let colonyID of dynamicOptions.colonyID | async" [value]="colonyID">
-          {{ colonyID }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-select placeholder="Zygosity" formControlName="zygosity" (selectionChange)="selected('procedure')">
-        <mat-option *ngFor="let zygosityOption of dynamicOptions.zygosity | async" [value]="zygosityOption">
-          {{ zygosityOption }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <input matInput placeholder="Procedure" [matAutocomplete]="autoProcedure" formControlName="procedure">
-      <mat-autocomplete #autoProcedure="matAutocomplete"  (optionSelected)="selected('parameter')" [autoActiveFirstOption]="true">
-        <mat-option *ngFor="let procedure of dynamicOptions.procedure | async" [value]="procedure.name + ' | ' + procedure.id">
-          <small>{{procedure.name}}</small> |
-          <small>{{procedure.id}}</small>
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Parameter" [matAutocomplete]="autoParameter" formControlName="parameter">
-      <mat-autocomplete #autoParameter="matAutocomplete" (optionSelected)="selected('metadata')" [autoActiveFirstOption]="true">
-        <mat-option *ngFor="let parameter of dynamicOptions.parameter | async" [value]="parameter.name + ' | ' + parameter.id">
-          <span>{{parameter.name}}</span> |
-          <small>{{parameter.id}}</small>
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Metadata group" [matAutocomplete]="autoMetadata" formControlName="metadata">
-      <mat-autocomplete #autoMetadata="matAutocomplete" (optionSelected)="update()" [autoActiveFirstOption]="true">
-        <mat-option *ngFor="let metadata of dynamicOptions.metadata | async" [value]="metadata">
-          {{ metadata }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-  </form>
+  </ng-container>
+  
+</form>
+<div class="toggle-wrapper">
+    <mat-slide-toggle
+    class="toggle"
+    color="accent"
+    [(ngModel)]="editing"
+    [disabled]="false"
+    (change)="toggle()"
+    >
+    <span *ngIf="editing">
+        Save filtering order
+    </span>
+    <span *ngIf="!editing">
+        Edit filtering order
+    </span>
+    </mat-slide-toggle>
+</div>
+
 </div>

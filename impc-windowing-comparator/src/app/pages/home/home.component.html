@@ -1,10 +1,23 @@
 <div class="main-content">
     <impc-head-bar></impc-head-bar>
     <impc-filter (updateChart)="updateChart($event)" (invalid)="clear()"></impc-filter>
-    <impc-comparison *ngIf="chart" [chartData]="chart" [oldData]="oldData" [newData]="newData" [oldPValue]="oldPValue" [newPValue]="newPValue"></impc-comparison>
-    <h1 *ngIf="!chart" class="alert">PLEASE FILL THE FIELDS TO VISUALIZE THE WINDOWING RESULT</h1>
-    <div *ngIf="!!chart" class="links">
-        <a target="_blank" [attr.href]="rawLink">Download raw data</a> | <a target="_blank" [attr.href]="portalLink">View on IMPC portal</a>
+    <div class="example-loading-shade" *ngIf="isLoadingResults">
+        <mat-spinner *ngIf="isLoadingResults" color="accent"></mat-spinner>
     </div>
+    <mat-tab-group color="accent" backgroundColor="primary" *ngIf="metadataGroups.length > 1 && results.length > 1">
+        <mat-tab *ngFor="let result of results, let i = index" label="Metadata group {{i + 1}}">
+            <impc-comparison *ngIf="result.chart" [chartData]="result.chart" [oldData]="result.oldData" [newData]="result.newData" [oldPValue]="result.oldPValue" [newPValue]="result.newPValue" [method]="result.method"></impc-comparison>
+            <div *ngIf="!!result.chart" class="links">
+                <a target="_blank" [attr.href]="result.rawLink">Download raw data</a> | <a target="_blank" [attr.href]="result.portalLink">View on IMPC portal</a> | <a target="_blank" [attr.href]="result.resultsLink">Download results</a>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+    <div *ngIf="metadataGroups.length === 1 && results.length === 1">
+        <impc-comparison *ngIf="results[0].chart" [chartData]="results[0].chart" [oldData]="results[0].oldData" [newData]="results[0].newData" [oldPValue]="results[0].oldPValue" [newPValue]="results[0].newPValue" [method]="results[0].method"></impc-comparison>
+        <div *ngIf="!!results[0].chart" class="links">
+            <a target="_blank" [attr.href]="results[0].rawLink">Download raw data</a> | <a target="_blank" [attr.href]="results[0].portalLink">View on IMPC portal</a> | <a target="_blank" [attr.href]="results[0].resultsLink">Download results</a>
+        </div>
+    </div>
+    <h1 *ngIf="metadataGroups.length === 0 && results.length === 1" class="alert">PLEASE FILL THE FIELDS TO VISUALIZE THE WINDOWING RESULT</h1>
     <impc-footer></impc-footer>
 </div>

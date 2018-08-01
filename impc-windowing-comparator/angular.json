@@ -24,7 +24,8 @@
             ],
             "styles": [
               "src/styles.css",
-              "src/impc-theme.scss"
+              "src/impc-theme.scss",
+              "node_modules/ng2-dnd/bundles/style.css"
             ],
             "scripts": []
           },

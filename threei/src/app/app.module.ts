@@ -15,6 +15,7 @@ import { MatGridListModule } from '@angular/material';
 import { MatCheckboxModule, MatProgressSpinnerModule} from '@angular/material';
 
 
+
 import { AppComponent  } from './app.component';
 import { MenusModule } from './menus/menus.module';
 import { Router } from '@angular/router';
@@ -41,7 +42,7 @@ import { HeatmapComponent } from './heatmap/heatmap.component';
     HeatmapComponent
   ],
   imports: [
-    BrowserModule, MenusModule, AppRoutingModule, SlideshowModule, MatExpansionModule, FormsModule, HttpClientModule, MatRadioModule, MatProgressSpinnerModule, MatSelectModule, MatInputModule
+    BrowserModule, MenusModule, AppRoutingModule, SlideshowModule, MatExpansionModule, FormsModule, HttpClientModule, MatRadioModule, MatProgressSpinnerModule, MatSelectModule, MatInputModule, MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

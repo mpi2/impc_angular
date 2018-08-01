@@ -25,6 +25,9 @@ import { ContactPageComponent } from './contact-page/contact-page.component';
 import { GlossaryPageComponent } from './glossary-page/glossary-page.component';
 import { PublicationsPageComponent } from './publications-page/publications-page.component';
 import { HeatmapComponent } from './heatmap/heatmap.component';
+import { ConsortiumPageComponent } from './consortium-page/consortium-page.component';
+import { PhenotypeofthemonthPageComponent } from './phenotypeofthemonth-page/phenotypeofthemonth-page.component';
+import { ImageacknowledgementsPageComponent } from './imageacknowledgements-page/imageacknowledgements-page.component';
 
 
 
@@ -35,7 +38,10 @@ import { HeatmapComponent } from './heatmap/heatmap.component';
     FaqPageComponent, DataPageComponent, AnalysisPageComponent, MethodsPageComponent, ContactPageComponent, GlossaryPageComponent, 
     PublicationsPageComponent, PrivacyPageComponent, LearnMorePageComponent,
     HighchartsChartComponent,
-    HeatmapComponent
+    HeatmapComponent,
+    ConsortiumPageComponent,
+    PhenotypeofthemonthPageComponent,
+    ImageacknowledgementsPageComponent
   ],
   imports: [
     BrowserModule, MenusModule, AppRoutingModule, SlideshowModule, MatExpansionModule, FormsModule, HttpClientModule, MatRadioModule, MatProgressSpinnerModule, MatSelectModule, MatInputModule, MatCardModule

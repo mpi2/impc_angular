@@ -8,11 +8,8 @@ import { HighchartsChartComponent } from './highcharts-chart.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule} from '@angular/forms';
-import { MatSelectModule, MatCheckbox, MatButtonModule } from '@angular/material';
-import { MatInputModule } from '@angular/material';
-import { MatCardModule, MatSliderModule } from '@angular/material';
-import { MatGridListModule } from '@angular/material';
-import { MatCheckboxModule, MatProgressSpinnerModule} from '@angular/material';
+import { MatCheckboxModule, MatProgressSpinnerModule, MatCardModule, MatSliderModule, MatGridListModule, MatInputModule, MatSelectModule, MatCheckbox, MatButtonModule} from '@angular/material';
+
 
 
 import { AppComponent  } from './app.component';
@@ -47,7 +44,7 @@ import { ImageacknowledgementsPageComponent } from './imageacknowledgements-page
     ImageacknowledgementsPageComponent
   ],
   imports: [
-    BrowserModule, MenusModule, AppRoutingModule, SlideshowModule, MatExpansionModule, FormsModule, HttpClientModule, MatRadioModule, MatProgressSpinnerModule, MatSelectModule, MatInputModule
+    BrowserModule, MenusModule, AppRoutingModule, SlideshowModule, MatExpansionModule, FormsModule, HttpClientModule, MatRadioModule, MatProgressSpinnerModule, MatSelectModule, MatInputModule, MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

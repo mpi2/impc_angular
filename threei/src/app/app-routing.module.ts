@@ -13,7 +13,8 @@ import { GlossaryPageComponent }    from './glossary-page/glossary-page.componen
 import { PublicationsPageComponent }    from './publications-page/publications-page.component';
 import { PrivacyPageComponent }    from './privacy-page/privacy-page.component';
 import { LearnMorePageComponent } from './learn-more-page/learn-more-page.component';
-
+import { ConsortiumPageComponent } from './consortium-page/consortium-page.component';
+import { PhenotypeofthemonthPageComponent }  from './phenotypeofthemonth-page/phenotypeofthemonth-page.component';
 
 const appRoutes: Routes = [
   {
@@ -60,6 +61,17 @@ const appRoutes: Routes = [
     component: PrivacyPageComponent,
     // outlet: 'popup'
   },
+  {
+    path: 'consortium',
+    component: ConsortiumPageComponent,
+    //outlet: 'popup'
+  },
+  {
+    path: 'phenotypeofthemonth',
+    component: PhenotypeofthemonthPageComponent,
+    //outlet: 'popup'
+  },
+  
   {
     path: 'learn_more',
     component: LearnMorePageComponent,

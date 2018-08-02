@@ -22,7 +22,7 @@ Highcharts.setOptions({
         marginTop: 200,
         marginBottom: 80,
         plotBorderWidth: 1,
-        height: 200
+        height: 80000
     },
 
     title: {
@@ -51,6 +51,16 @@ Highcharts.setOptions({
         },
         reserveSpace: true,
       },
+      yAxis:[
+        {
+       categories: ['gene blah1, gene blah2'],
+       title: 'gene'
+    },{
+       linkedTo: 0,
+       title: 'construct',
+       lineWidth: 2,
+       categories: ['constr blah1, contr blah2'],
+   }],
 
     colorAxis: {
 
@@ -122,11 +132,11 @@ Highcharts.setOptions({
 
 
 @Component({
-  selector: 'threei-heatmap',
-  templateUrl: './heatmap.component.html',
-  styleUrls: ['./heatmap.component.css']
+  selector: 'threei-cell-heatmap',
+  templateUrl: './cell-heatmap.component.html',
+  styleUrls: ['./cell-heatmap.component.css']
 })
-export class HeatmapComponent implements OnInit {
+export class CellHeatmapComponent implements OnInit {
 
     @ViewChild('searchBox') searchBox;
     constructs: string[];
@@ -182,11 +192,16 @@ export class HeatmapComponent implements OnInit {
         reserveSpace: true,
       },
 
-    yAxis: {
-        categories: [
-            'Data loading.....'],
-        title: null
-    },
+      yAxis:[
+        {
+       categories: ['gene blah1, gene blah2'],
+       title: 'gene'
+    },{
+       linkedTo: 0,
+       title: 'construct',
+       lineWidth: 2,
+       categories: ['constr blah1, contr blah2'],
+   }],
 
     colorAxis: {
 
@@ -274,13 +289,12 @@ export class HeatmapComponent implements OnInit {
     console.log('searchbox='+this.searchBox);
     this.resourceLoaded=false;
     //if(this.data.length<=1){
-    this.heatmapService.getHeatmapResponse(heatmapType).subscribe(resp => {
+    this.heatmapService.getHeatmapResponse(this.CELL_TYPE).subscribe(resp => {
       // display its headers
       this.response = { ... resp.body};
       //console.log('response='+JSON.stringify(resp));
       //this.data = this.response['response']['docs']
       //console.log('response from json file here: '+JSON.stringify(this.response['_embedded'].Data[0]['data']));
-      if(heatmapType == this.PROCEDURE_TYPE){
       this.data=this.response['data'];
       this.columnHeaders=this.response['columnHeaders'];
     //   this.columnHeaders=[
@@ -312,17 +326,7 @@ export class HeatmapComponent implements OnInit {
     //       this.data.push(cell);
     //   }
       this.displayProcedureChart();
-    }else if(heatmapType==this.CELL_TYPE|| heatmapType=='oldCell'){
-      //get the cell data also from this response. second in array.
-      console.log('getting cell type in getHeatmapData method');
-      this.data2=this.response['data'];
-      this.columnHeaders2=this.response['columnHeaders'];
-      this.rowHeaders2=this.response['rowHeaders'];
-      
-      this.updateDemo2=true;//can we force it to update like this?
-      this.resourceLoaded=true;
-      this.displayCellChart();
-    }
+    
       
     });
   }
@@ -510,10 +514,13 @@ this.resourceLoaded=true;
             reserveSpace: true,
           },
     
-        yAxis: {
+        yAxis: [{
             categories: this.rowHeaders2,
             title: null
-        },
+        }, {
+          categories: this.constructs,
+          title: null
+      }],
     
         colorAxis: {
     

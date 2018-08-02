@@ -34,6 +34,14 @@ export class FilterComponent implements OnInit {
     ];
     formGroup: FormGroup;
     editing = false;
+    loading = {
+        alleleSymbol: false,
+        colonyID: false,
+        procedure: false,
+        parameter: false,
+        center: false,
+        zygosity: false,
+    };
 
     @Output()
     updateChart: EventEmitter<any> = new EventEmitter();
@@ -47,43 +55,26 @@ export class FilterComponent implements OnInit {
         private _route: ActivatedRoute
     ) {
         this.formGroup = this.fb.group({
-            alleleSymbol: [{ value: null, disabled: true }, Validators.required],
-            colonyID: [{ value: null, disabled: true }, Validators.required],
-            procedure: [{ value: null, disabled: true }, Validators.required],
-            parameter: [{ value: null, disabled: true }, Validators.required],
-            center: [{ value: null, disabled: true }, Validators.required],
-            zygosity: [{ value: null, disabled: true }, Validators.required],
-            metadata: [{ value: null, disabled: true }, Validators.required]
+            alleleSymbol: ['', Validators.required],
+            colonyID: ['', Validators.required],
+            procedure: ['', Validators.required],
+            parameter: ['', Validators.required],
+            center: ['', Validators.required],
+            zygosity: ['', Validators.required],
+            metadata: ['', Validators.required]
         });
         this.filters = localStorage.getItem('filters') ? JSON.parse(localStorage.getItem('filters')) : this.filters;
     }
 
     ngOnInit() {
-        this._route.queryParams.pipe(first()).subscribe(value => {
-            this.filters.forEach(filter => {
-                const key = filter.name;
-                if (value[key] === null) {
-                    return;
-                }
-                if (key === 'zygosity' || key === 'center') {
-                    this.dynamicOptions[key] = this.solr.query(
-                        this.makeQuery(key, ''),
-                        key
-                    );
-                }
-                this.formGroup.controls[key].setValue(value[key]);
-                this.formGroup.controls[key].enable();
-            });
-            if (this.formGroup.valid) {
-                this.updateChart.emit(this.formGroup.value);
-            }
-        });
         this.filters.filter(item => item.type !== 'none').forEach(filter => {
             this.formGroup.controls[filter.name].valueChanges.subscribe(text => {
                 const nextFieldName = this.getNextField(filter.name);
                 if (this.formGroup.controls[nextFieldName].valid) {
                     this.formGroup.controls[nextFieldName].setValue('');
+                    this.formGroup.controls[nextFieldName].disable();
                 }
+                this.loading[nextFieldName] = false;
                 let pivot = null;
                 if (filter.name === 'parameter') {
                     pivot = `${filter.name}_stable_id,${filter.name}_name`;
@@ -91,20 +82,57 @@ export class FilterComponent implements OnInit {
                     pivot = `${filter.name}_group,${filter.name}_name`;
                 }
                 if (filter.type === 'autocomplete') {
+                    if (this.formGroup.controls[filter.name].enabled) {
+                        this.loading[filter.name] = true;
+                    }
                     this.dynamicOptions[filter.name] = this.solr.query(
                         this.makeQuery(filter.name, text),
                         filter.name,
                         pivot
                     );
+                    this.dynamicOptions[filter.name].subscribe(_ => this.loading[filter.name] = false);
                 } else if (text === '') {
+                    if (this.formGroup.controls[filter.name].enabled) {
+                        this.loading[filter.name] = true;
+                    }
                     this.dynamicOptions[filter.name] = this.solr.query(
                         this.makeQuery(filter.name, ''),
                         filter.name
                     );
+                    this.dynamicOptions[filter.name].subscribe(_ => this.loading[filter.name] = false);
                 }
+                this.updateParams();
             });
         });
-        if (!this.formGroup.valid) {
+        this._route.queryParams.pipe(first()).subscribe(value => {
+            this.filters.forEach(filter => {
+                const key = filter.name;
+                if (key === 'zygosity' || key === 'center') {
+                    this.dynamicOptions[key] = this.solr.query(
+                        this.makeQuery(key, ''),
+                        key
+                    );
+                }
+                if (value[key] === undefined) {
+                    return;
+                }
+                this.formGroup.controls[key].setValue(value[key]);
+                this.formGroup.controls[this.getNextField(key)].enable();
+            });
+            if (this.formGroup.valid) {
+                this.updateChart.emit(this.formGroup.value);
+            } else {
+                this.filters.slice().reverse().forEach(filter => {
+                    if (!this.formGroup.controls[filter.name].valid) {
+                        this.formGroup.controls[filter.name].disable();
+                    } else {
+                        console.log(this.getNextField(filter.name));
+                        this.formGroup.controls[this.getNextField(filter.name)].enable();
+                    }
+                });
+            }
+        });
+        if (!this.formGroup.controls[this.filters[0].name].valid) {
             this.formGroup.controls[this.filters[0].name].enable();
             this.formGroup.controls[this.filters[0].name].setValue('');
         }
@@ -116,6 +144,7 @@ export class FilterComponent implements OnInit {
     }
 
     selected(i) {
+        this.loading[this.filters[i].name] = false;
         const nextControlName = this.getNextField(this.filters[i].name);
         this.formGroup.controls[nextControlName].setValue('');
         this.formGroup.controls[nextControlName].enable();

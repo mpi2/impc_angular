@@ -36,7 +36,8 @@ export class RawDataService {
     return this.http.post(fileUrl, {}, {responseType: 'text'})
     .toPromise()
     .then(response => this.parseResponse(response, zygosity, fileUrl, rawLink))
-    .catch(error => this.http.post(fileUrl.replace('Successful', 'NotProcessed'), {}, {responseType: 'text'}).toPromise()
+    .catch(error => this.http.post(fileUrl.replace('Successful', 'NotProcessed'), {},
+                                  {responseType: 'text'}).toPromise()
     .then(response => this.parseResponse(response, zygosity, fileUrl.replace('Successful', 'NotProcessed'), rawLink)));
   }
 
@@ -119,9 +120,11 @@ export class RawDataService {
     series.push(this.getSeries('Window'));
     const responseArray = response.split('\t');
     const processed = responseArray[0] !== 'NotProcessed';
-    const result = JSON.parse(responseArray[14].replace(':NA', ':"NA"')
+    const jsonStr = responseArray[14].replace(':NA', ':"NA"')
     .replace(new RegExp('Male: "NA""', 'g'), 'Male: NA"')
-    .replace(new RegExp('Female: "NA",', 'g'), 'Female: NA,'))['result'];
+    .replace(new RegExp('Female: "NA",', 'g'), 'Female: NA,')
+    .replace('"(>1): FALSE: "NA""', '"(>1): FALSE: NA"');
+    const result = JSON.parse(jsonStr)['result'];
     console.log(result);
     const portalLink = result['detail']['gene_page_url'];
     const resultsLink = fileUrl;

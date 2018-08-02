@@ -108,8 +108,14 @@ export class HomeComponent implements OnInit {
         });
       }
     ).catch(error => {
+      if (error instanceof SyntaxError) {
+        this.snackBar.open('THERE WAS AN ISSUE PARSING THE DATA FILE', null, {
+          duration: 2000,
+        });
+      } else {
+        this.openSnackBar();
+      }
       console.log(error);
-      this.openSnackBar();
       this.clear();
       if (i === this.metadataGroups.length - 1) {
         this.isLoadingResults = false;

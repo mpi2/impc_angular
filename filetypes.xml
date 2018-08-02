@@ -1,0 +1,7 @@
+<application>
+  <component name="FileTypeManager" version="17">
+    <extensionMap>
+      <mapping pattern="make-a-div-stick-to-top-when-scrolled-to" type="ThymeleafExpressions" />
+    </extensionMap>
+  </component>
+</application>

@@ -1,7 +1,7 @@
 <div [chart]="chartData"></div>
 <div class="comparison" *ngIf="method.indexOf('Mixed Model framework') >= 0">
-  <impc-table style="width: 50%;" [dataSource]="oldData" title="Original Results Statistics Summary" [pValue]="oldPValue"></impc-table>
-  <impc-table style="width: 50%;" [dataSource]="newData" title="Windowed Results Statistics Summary" [pValue]="newPValue" ></impc-table>
+  <impc-table style="width: 50%;" [dataSource]="oldData" title="Original Results Statistics Summary" [pValue]="oldPValue" *ngIf="oldData.length > 0"></impc-table>
+  <impc-table style="width: 50%;" [dataSource]="newData" title="Windowed Results Statistics Summary" [pValue]="newPValue" *ngIf="newData.length > 0"></impc-table>
 </div>
 <h3 class="method">{{ method }}</h3>
 <div *ngIf="method.indexOf('Mixed Model framework') < 0" class="notice">(We don't apply window calculation to this method)</div>

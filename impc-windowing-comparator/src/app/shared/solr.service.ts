@@ -49,7 +49,7 @@ export class SolrService {
         query = query.substring(0, query.length - 5);
         query = encodeURI(query);
         const fqs = '&fq=datasource_name:IMPC&fq=observation_type:unidimensional&fq=biological_sample_group:experimental';
-        const options = '&rows=0&wt=json&facet=on&facet.mincount=1';
+        const options = '&rows=0&wt=json&facet=on&facet.mincount=1&facet.sort=index';
         const facet = pivot ? `&facet.pivot=${pivot}` : `&facet.field=${target}`;
         query += fqs + options + facet;
         if (!emptyField) { return query; }
@@ -65,7 +65,8 @@ export class SolrService {
         );
     }
 
-    parseSimpleFacetResult = (x, solrFieldName) => x['facet_counts']['facet_fields'][solrFieldName].filter(doc => typeof doc === 'string');
+    parseSimpleFacetResult = (x, solrFieldName) => x['facet_counts']['facet_fields'][solrFieldName]
+                             .filter(doc => typeof doc === 'string' && doc !== '')
     parsePivotFacetResults = (x, pivot) => {
         const parsedResults = [];
         x['facet_counts']['facet_pivot'][pivot].forEach(facetPivot => {
@@ -74,7 +75,7 @@ export class SolrService {
             parsedResult['name'] = facetPivot['pivot'][0]['value'];
             parsedResults.push(parsedResult);
         });
-        return parsedResults;
+        return parsedResults.sort((a, b) => a.name.localeCompare(b.name));
     }
 
     getParametrUnit(parameterID) {

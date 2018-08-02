@@ -3,7 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FilterComponent } from './components/filter/filter.component';
 import { MatToolbarModule, MatSelectModule, MatAutocompleteModule,
   MatInputModule, MatFormFieldModule, MatTableModule, MatSnackBarModule,
-  MatBadgeModule, MatChipsModule, MatTabsModule, MatSlideToggle, MatSlideToggleModule, MatProgressBar, MatProgressBarModule, MatSpinner, MatProgressSpinnerModule } from '@angular/material';
+  MatBadgeModule, MatChipsModule, MatTabsModule, MatSlideToggle, MatSlideToggleModule, MatProgressBar, MatProgressBarModule, MatSpinner, MatProgressSpinnerModule, MatTooltipModule } from '@angular/material';
 import { HomeComponent, ErrorMessageComponent } from './pages/home/home.component';
 import { HeadBarComponent } from './components/head-bar/head-bar.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -55,6 +55,7 @@ import { TableComponent } from './components/table/table.component';
     MatTabsModule,
     MatSlideToggleModule,
     MatProgressSpinnerModule,
+    MatTooltipModule,
     DndModule.forRoot(),
     RouterModule.forRoot([
       { path: '**', component: HomeComponent }

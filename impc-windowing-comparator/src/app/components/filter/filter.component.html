@@ -1,4 +1,5 @@
 <div style="text-align: center; margin-top: 20px;">
+<span *ngIf="editing" class="notice">Drag and drop the fields to reorder</span>
 <form [formGroup]="formGroup" dnd-sortable-container [sortableData]="filters">
   <ng-container *ngFor="let filter of filters; let i = index">
     <mat-form-field dnd-sortable [sortableIndex]="i" [dragEnabled]="editing" *ngIf="filter.type !== 'none'">
@@ -29,6 +30,9 @@
         </div>
         
       </div>
+      <div matSuffix *ngIf="loading[filter.name] && formGroup.controls[filter.name].enabled">
+          <mat-progress-spinner color="accent" mode="indeterminate" diameter="20" strokeWidth="2" matSuffix></mat-progress-spinner>
+      </div>
     </mat-form-field>
   </ng-container>
   
@@ -41,11 +45,11 @@
     [disabled]="false"
     (change)="toggle()"
     >
-    <span *ngIf="editing">
-        Save filtering order
+    <span *ngIf="editing" style="color: #ff9800">
+        Deactivate filter reordering
     </span>
     <span *ngIf="!editing">
-        Edit filtering order
+        Activate filter reordering
     </span>
     </mat-slide-toggle>
 </div>

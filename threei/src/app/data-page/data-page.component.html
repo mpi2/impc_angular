@@ -7,12 +7,12 @@
       
        <!-- <div style="width: 100%;"> -->
 
-      <form (ngSubmit)="query();" #loginForm="ngForm">
+      <!-- <form (ngSubmit)="query();" #loginForm="ngForm">
             <p>
             <mat-radio-group name="chartTypeSelector" id="chartSelector">
               <mat-radio-button [checked] (click)="getHeatmapData('procedure')">Procedure Chart</mat-radio-button>
               <mat-radio-button value="cell" (click)="getHeatmapData('cell')">Cell Chart</mat-radio-button>
-              <!-- <mat-radio-button value="cell" (click)="getHeatmapData('oldcell')">Old Cell Chart</mat-radio-button> -->
+              <mat-radio-button value="cell" (click)="getHeatmapData('oldcell')">Old Cell Chart</mat-radio-button> 
             </mat-radio-group>
             </p>
             <p>
@@ -20,9 +20,9 @@
                 <mat-label>Search Gene or MP Term</mat-label>
               <input matInput type="search" #searchBox placeholder="Search for gene symbol or name" (click)="getHeatmapData('searchBox')">
             </mat-form-field>
-          </p>
+          </p> 
           
-          <!-- <mat-card>
+          <mat-card>
               <mat-card-content>
                 <button mat-fab>
                   Query
@@ -31,7 +31,7 @@
               <!-- </mat-card-content>
             </mat-card> -->
           
-          </form>
+          <!-- </form> -->
           
         
             <!-- <mat-form-field>
@@ -60,19 +60,20 @@
             <p>You selected: {{selected}}</p> -->
             <!-- </div> -->
           
-            <mat-spinner *ngIf="!resourceLoaded"></mat-spinner>
-            <mat-tab-group height="2000px">
+            
+            <mat-tab-group height="2000px" width="1000px">
+              
                     <mat-tab label="Cell View">
                         <ng-template matTabContent>
                                 <!-- <threei-procedure-heatmap></threei-procedure-heatmap> -->
                                  <threei-cell-heatmap></threei-cell-heatmap>
                         </ng-template>
                       </mat-tab>
-                      <mat-tab label="Procedure View">
-                            <ng-template matTabContent>
-                                    <!-- <threei-procedure-heatmap></threei-procedure-heatmap> -->
-                           </ng-template>
-                          </mat-tab> 
+                    <mat-tab label="Procedure View">
+                          <ng-template matTabContent>
+                                  <threei-procedure-heatmap></threei-procedure-heatmap>
+                         </ng-template>
+                    </mat-tab> 
                 <!-- <threei-procedure-heatmap></threei-procedure-heatmap> -->
                 
               </mat-tab-group>

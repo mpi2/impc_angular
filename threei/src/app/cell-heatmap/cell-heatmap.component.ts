@@ -42,17 +42,11 @@ export class CellHeatmapComponent implements OnInit {
 
 
         data: any[][]=[[]];
-        data2:number[][]=[[]];
         headers: string[];//http response headers
         columnHeaders: string[];
         rowHeaders: string[];
         response: Response;
         constructColumnData: any[];//need any as string for construct and ints for col and row indexes
-
-        columnHeaders2: string[];
-        rowHeaders2: string[];
-        response2: Response;
-
         updateDemo2 = false;
   usedIndex = 0;
   chartTitle = 'Procedure Heatmap'; // for init - change through titleChange
@@ -72,8 +66,8 @@ cellChartOptions={
     marginTop: 200,
     marginBottom: 80,
     plotBorderWidth: 1,
-    height: 17000,
-    width:1000
+     height: 17000,
+     width:1000
 },
 
 

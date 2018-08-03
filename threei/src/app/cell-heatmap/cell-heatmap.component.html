@@ -1,5 +1,6 @@
+<mat-spinner *ngIf="!resourceLoaded"></mat-spinner>
 <div>
-    <highcharts-chart style="height: 1700px;  max-width: 1000px; margin: 0 auto"
+    <highcharts-chart style="height: 1700px;  max-width: 1000px; min-width: 800px; margin: 0 auto"
       [Highcharts]="Highcharts"
       [options]="cellChartOptions"
       [(update)]="updateDemo2"

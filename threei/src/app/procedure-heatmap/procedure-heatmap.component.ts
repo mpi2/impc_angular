@@ -155,7 +155,7 @@ export class ProcedureHeatmapComponent implements OnInit {
   procedureChart;
   resourceLoaded: boolean =false;
   
-    heatmapChart={
+  Highcharts={
 
     chart: {
         type: 'heatmap',
@@ -263,8 +263,6 @@ export class ProcedureHeatmapComponent implements OnInit {
 
   ngAfterViewInit() {
      this.getHeatmapData( this.searchBox);
-     this.getCellSubTypesDropdown();
-     //this.getHeatmapData(this.CELL_TYPE)
   }
 
   getHeatmapData( searchBox){
@@ -315,23 +313,8 @@ export class ProcedureHeatmapComponent implements OnInit {
     });
   }
 
-  getCellSubTypesDropdown(){
-    console.log('calling cellType dropdown');
-    this.resourceLoaded=false;
-    //if(this.data.length<=1){
-    this.heatmapService.getCellSubTypeResponse().subscribe(resp => {
-      // display its headers
-      this.response = { ... resp.body};
-      //console.log('response='+JSON.stringify(resp));
-      //this.data = this.response['response']['docs']
-      //console.log('response from json file here: '+JSON.stringify(this.response['_embedded'].Data[0]['data']));
-      
-      this.cellSubTypeDropdowns=this.response['types'];
-      //let headerData=this.response['_embedded'].Data[0]['columnHeaders'];      
-  });
-}
-
-  Highcharts = Highcharts;
+  
+  //Highcharts = Highcharts;
 
 // change in all places
 titleChange = function(event) {
@@ -464,128 +447,14 @@ this.procedureChart= {
         }
     }]
 }
-this.heatmapChart=this.procedureChart;
-console.log('heatmap chart=',this.heatmapChart);
+this.Highcharts=this.procedureChart;
+//console.log('heatmap chart=',this.heatmapChart);
 this.resourceLoaded=true;
   }//end of display method
   
 
 
-  displayCellChart(){
   
-    console.log('calling display cell chart method');
-    this.cellChart= {
-    
-        chart: {
-            type: 'heatmap',
-            marginTop: 200,
-            marginBottom: 80,
-            marginLeft:300,
-            plotBorderWidth: 1,
-            height: 17000
-        },
-    
-    
-        title: {
-            text: 'Cell Type Heatmap'
-        },
-    
-        xAxis: { 
-          opposite: true,
-            categories: this.columnHeaders2,
-            labels: {
-                rotation: 90
-            },
-            reserveSpace: true,
-          },
-    
-        yAxis: {
-            categories: this.rowHeaders2,
-            title: null
-        },
-    
-        colorAxis: {
-    
-          dataClasses: [{
-            from: 0,
-            to: 1,
-            color: '#ffffff',
-            name: 'No Data'
-        }, {
-            from: 1,
-            to: 2,
-            color: '#808080',
-            name: 'Not enough data'
-        }, {
-            from: 2,
-            to: 3,
-            color: '#0000ff',
-            name: 'Not Significantly Different'
-        }, {
-            from: 3,
-            to: 4,
-            color: '#c4463a',
-            name: 'Significantly Different'
-        }
-        ],
-        min: 0,
-        max: 4,
-        },
-    
-        legend: {
-            align: 'right',
-            layout: 'vertical',
-            // margin: 0,
-            verticalAlign: 'top',
-            // y: 25,
-            // symbolHeight: 280
-        },
-    
-        tooltip: {
-            formatter: function () {
-                return '<b>' + this.series.xAxis.categories[this.point.x] + '</b><br/>' +
-                this.series.colorAxis.dataClasses[this.point.dataClass].name + '</b><br>'+
-                '<b>' + this.series.yAxis.categories[this.point.y] + '</b>';
-            }
-        },
-        plotOptions: {
-          series: {
-              events: {
-                  click: function (e) {
-                      // var text = '<b>Clicked</b><br>Series: ' + this.name +
-                      //         '<br>Point: ' + e.point.name + ' (' + e.point.value + '/km²)';
-                     
-                      //may have to use routerLink like for menus to link to our new not created yet parameter page
-                        var url = 'http://starwars.com';
-                        window.open(url,'_blank');
-                          // this.chart.clickLabel.attr({
-                          //     text: text
-                          // });
-                      
-                  }
-              }
-          }
-      },
-    
-        series: [{
-            name: 'Cell types with significant parameters',
-            borderWidth: 1,
-            //data: this.data,
-            data: this.data2,
-            //, [2, 0, 35], [2, 1, 15], [2, 2, 123], [2, 3, 64], [2, 4, 52], [3, 0, 72], [3, 1, 132], [3, 2, 114], [3, 3, 19], [3, 4, 16], [4, 0, 38], [4, 1, 5], [4, 2, 8], [4, 3, 117], [4, 4, 115], [5, 0, 88], [5, 1, 32], [5, 2, 12], [5, 3, 6], [5, 4, 120], [6, 0, 13], [6, 1, 44], [6, 2, 88], [6, 3, 98], [6, 4, 96], [7, 0, 31], [7, 1, 1], [7, 2, 82], [7, 3, 32], [7, 4, 30], [8, 0, 85], [8, 1, 97], [8, 2, 123], [8, 3, 64], [8, 4, 84], [9, 0, 47], [9, 1, 114], [9, 2, 31], [9, 3, 48], [9, 4, 91]],
-            dataLabels: {
-                enabled: false,
-                color: '#000000'
-            }
-        }],
-        
-      }
-      this.heatmapChart=this.cellChart;
-      this.resourceLoaded=true;
-      this.updateDemo2=true;
-    };//end of display method
-
-
 
    
       

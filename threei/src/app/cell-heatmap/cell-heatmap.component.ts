@@ -15,6 +15,7 @@ HC_map(Highcharts);
 HC_exporting(Highcharts);
 //HC_ce(Highcharts);
 
+//stops undefined being thrown straight off
 Highcharts.setOptions({
   series: [{
     data: [1, 2, 3]
@@ -71,7 +72,8 @@ cellChartOptions={
     marginTop: 200,
     marginBottom: 80,
     plotBorderWidth: 1,
-    height: 17000
+    height: 17000,
+    width:1000
 },
 
 
@@ -269,19 +271,7 @@ titleChange = function(event) {
     console.log('calling display cell chart method');
     this.cellChart= {
     
-        chart: {
-            type: 'heatmap',
-            marginTop: 200,
-            marginBottom: 80,
-            plotBorderWidth: 1,
-            height: 17000,
-            width:1000
-        },
-    
-    
-        title: {
-            text: 'Cell Type Heatmap'
-        },
+        
     
         xAxis: { 
           opposite: true,
@@ -299,43 +289,6 @@ titleChange = function(event) {
           categories: this.constructs,
           title: null
       }],
-    
-        colorAxis: {
-    
-          dataClasses: [{
-            from: 0,
-            to: 1,
-            color: '#ffffff',
-            name: 'No Data'
-        }, {
-            from: 1,
-            to: 2,
-            color: '#808080',
-            name: 'Not enough data'
-        }, {
-            from: 2,
-            to: 3,
-            color: '#0000ff',
-            name: 'Not Significantly Different'
-        }, {
-            from: 3,
-            to: 4,
-            color: '#c4463a',
-            name: 'Significantly Different'
-        }
-        ],
-        min: 0,
-        max: 4,
-        },
-    
-        legend: {
-            align: 'right',
-            layout: 'vertical',
-            // margin: 0,
-            verticalAlign: 'top',
-            // y: 25,
-            // symbolHeight: 280
-        },
     
         tooltip: {
             formatter: function () {
@@ -380,6 +333,7 @@ titleChange = function(event) {
       //this.Highcharts.setOptions(this.cellChartOptions);
       this.cellChartOptions=this.cellChart;
       this.updateDemo2=true;
+      this.resourceLoaded=true;
       
     };//end of display method
 

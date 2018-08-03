@@ -277,12 +277,12 @@ titleChange = function(event) {
           },
     
         yAxis: [{
-            categories: this.rowHeaders,
-            title: null
-        }, {
           categories: this.constructs,
           title: null
-      }],
+        },{
+        categories: this.rowHeaders,
+        title: null
+        } ],
     
         tooltip: {
             formatter: function () {
@@ -295,15 +295,21 @@ titleChange = function(event) {
           series: {
               events: {
                   click: function (e) {
-                      // var text = '<b>Clicked</b><br>Series: ' + this.name +
-                      //         '<br>Point: ' + e.point.name + ' (' + e.point.value + '/km²)';
+                      var gene= e.point.series.yAxis.categories[e.point.y];
+                      //var construct=e.point.series.yAxis.categories[e.point.y];
+                      var procedure=e.point.series.xAxis.categories[e.point.x];
+                      
+                      var text = 'gene: ' +gene +
+                               ' Procedure: ' + procedure + ' significance=' + e.point.value ;
                      
                       //may have to use routerLink like for menus to link to our new not created yet parameter page
                         var url = 'http://starwars.com';
-                        window.open(url,'_blank');
-                          // this.chart.clickLabel.attr({
-                          //     text: text
-                          // });
+                        var routerLink='procedureDetails?'+'procedure="'+procedure+'"&gene="'+gene+'"';
+                        window.open(routerLink,'_blank');
+                        //   this.chart.clickLabel.attr({
+                        //       text: text
+                        //   });
+                          console.log('text on click='+text);
                       
                   }
               }

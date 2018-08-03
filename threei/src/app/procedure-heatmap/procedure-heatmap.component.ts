@@ -257,16 +257,13 @@ this.procedureChart= {
         reserveSpace: true,
       },
 //example of multiple columns working http://jsfiddle.net/0qmt0mkq/
-    yAxis:[
-         {
-        categories: this.rowHeaders,
-        title: 'gene'
-     },{
-        linkedTo: 0,
-        title: 'construct',
-        lineWidth: 2,
-        categories: this.constructs,
-    }],
+    yAxis: [{
+    categories: this.constructs,
+    title: null
+    },{
+    categories: this.rowHeaders,
+    title: null
+    } ],
 
     colorAxis: {
 

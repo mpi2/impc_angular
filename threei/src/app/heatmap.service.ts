@@ -30,14 +30,6 @@ export class HeatmapService {
       // }
     }
 
-    getCellSubTypeResponse():
-    Observable<HttpResponse<Response>> {
-    console.log('calling heatmap service method');
-    
-    return this.http.get<Response>(
-      this.restBaseUrl +'/cellSubTypes', { observe: 'response' });
-  }
-
     getCellTypeResponse():
       Observable<HttpResponse<Response>> {
       console.log('calling heatmap service method');
@@ -45,6 +37,22 @@ export class HeatmapService {
       return this.http.get<Response>(
         this.restBaseUrl +'/cellTypes', { observe: 'response' });
     }
+
+    getCellSubTypeResponse():
+    Observable<HttpResponse<Response>> {
+    console.log('calling cellsubtype method');
+    
+    return this.http.get<Response>(
+      this.restBaseUrl +'/cellSubTypes', { observe: 'response' });
+  }
+
+  getAssaysResponse():
+    Observable<HttpResponse<Response>> {
+    console.log('calling cellsubtype method');
+    
+    return this.http.get<Response>(
+      this.restBaseUrl +'/assays', { observe: 'response' });
+  }
     //get data from a file?
     // public getJSON(): Observable<any> {
     //   return this.http.get<any>('/assets/ProcedureHeatmapData.json');

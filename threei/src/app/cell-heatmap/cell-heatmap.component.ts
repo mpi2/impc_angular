@@ -35,26 +35,33 @@ export class CellHeatmapComponent implements OnInit {
   Highcharts = Highcharts;
     @ViewChild('searchBox') searchBox;
     constructs: string[];
-    cellSubTypeDropdowns: string[];
-    cellSubType: any;
-  readonly CELL_TYPE = 'cell';
-  cellTypesForDropdown: string[];
-
-
-        data: any[][]=[[]];
-        headers: string[];//http response headers
-        columnHeaders: string[];
-        rowHeaders: string[];
-        response: Response;
-        constructColumnData: any[];//need any as string for construct and ints for col and row indexes
-        updateDemo2 = false;
-  usedIndex = 0;
-  chartTitle = 'Procedure Heatmap'; // for init - change through titleChange
+    constructSelected: string;
+    cells: string[];
+    cellSelected: string;
+    cellSubTypes: string[];
+    cellSubtypeSelected: string;
+    assays: string[];
+    assaySelected;
+    readonly CELL_TYPE = 'cell';
+    
+    data: any[][]=[[]];
+    headers: string[];//http response headers
+    columnHeaders: string[];
+    rowHeaders: string[];
+    response: Response;
+    chartTitle = 'Procedure Heatmap'; // for init - change through titleChange
+    updatechart=false;
 
   
   procedureChart;
   resourceLoaded: boolean =false;
   cellChart;
+
+  filter(){
+    console.log('query button clicked with constructSeleted '+this.constructSelected+' cell selected='+this.cellSelected+' cellSubtypeSelected='+this.cellSubtypeSelected);
+  }
+  
+
   
   
 
@@ -173,13 +180,17 @@ series: [{
   }
 
   ngOnInit() {
+    this.getCellTypesDropdown();
+    this.getCellSubTypesDropdown();
+    this.getAssaysDropdown();
+    this.getHeatmapData( this.searchBox);
     
     
   }
 
   ngAfterViewInit() {
-    this.getHeatmapData( this.searchBox);
-    this.getCellSubTypesDropdown();
+    
+    
      //this.getHeatmapData(this.CELL_TYPE)
   }
 
@@ -215,28 +226,62 @@ series: [{
       this.rowHeaders=this.response['rowHeaders'];
       //here we need to add a whole column populated with the construct as java has no way of mixing strings and ints in an array
       this.constructs=this.response['constructs'];
-      console.log('construct='+this.constructs+'||');
-      console.log('rowheaders='+this.rowHeaders+'||');
+      //console.log('construct='+this.constructs+'||');
+      //console.log('rowheaders='+this.rowHeaders+'||');
       this.displayCellChart();
     
       
     });
   }
 
-  getCellSubTypesDropdown(){
+  getCellTypesDropdown(){
     console.log('calling cellType dropdown');
     this.resourceLoaded=false;
     //if(this.data.length<=1){
-    this.heatmapService.getCellSubTypeResponse().subscribe(resp => {
+    this.heatmapService.getCellTypeResponse().subscribe(resp => {
       // display its headers
-      this.response = { ... resp.body};
+      var lResponse = { ... resp.body};
       //console.log('response='+JSON.stringify(resp));
       //this.data = this.response['response']['docs']
       //console.log('response from json file here: '+JSON.stringify(this.response['_embedded'].Data[0]['data']));
       
-      this.cellSubTypeDropdowns=this.response['types'];
+      this.cells=lResponse['types'];
       //let headerData=this.response['_embedded'].Data[0]['columnHeaders'];      
   });
+}
+
+  getCellSubTypesDropdown(){
+    console.log('calling cellSubType dropdown');
+    this.resourceLoaded=false;
+    //if(this.data.length<=1){
+    this.heatmapService.getCellSubTypeResponse().subscribe(resp => {
+      // display its headers
+      var lResponse = { ... resp.body};
+      //console.log('response='+JSON.stringify(resp));
+      //this.data = this.response['response']['docs']
+      //console.log('response from json file here: '+JSON.stringify(this.response['_embedded'].Data[0]['data']));
+      
+      this.cellSubTypes=lResponse['types'];
+      console.log("subtypes being returned="+this.cellSubTypes);
+      //let headerData=this.response['_embedded'].Data[0]['columnHeaders'];      
+  });
+}
+
+getAssaysDropdown(){
+  console.log('calling assay dropdown');
+  this.resourceLoaded=false;
+  //if(this.data.length<=1){
+  this.heatmapService.getAssaysResponse().subscribe(resp => {
+    // display its headers
+    var lResponse = { ... resp.body};
+    //console.log('response='+JSON.stringify(resp));
+    //this.data = this.response['response']['docs']
+    //console.log('response from json file here: '+JSON.stringify(this.response['_embedded'].Data[0]['data']));
+    
+    this.assays=lResponse['assays'];
+    console.log("assays being returned="+this.assays);
+    //let headerData=this.response['_embedded'].Data[0]['columnHeaders'];      
+});
 }
 
 
@@ -328,16 +373,18 @@ titleChange = function(event) {
             }
         }],
         
+        
       }
       this.resourceLoaded=true;
       //this.Highcharts.setOptions(this.cellChartOptions);
       this.cellChartOptions=this.cellChart;
-      this.updateDemo2=true;
+      this.updatechart=true;
       this.resourceLoaded=true;
       
     };//end of display method
 
 
+    
 
    
       

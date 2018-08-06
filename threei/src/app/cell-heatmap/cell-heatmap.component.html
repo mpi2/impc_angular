@@ -1,13 +1,66 @@
+<form (ngSubmit)="filter()" #loginForm="ngForm">
+
+    <mat-card>
+        <mat-card-content>
+         
+          
+      <mat-form-field >
+                <mat-label>Search Gene or MP Term</mat-label>
+              <input matInput type="search" #searchBox placeholder="Search for gene symbol or name">
+      </mat-form-field>
+
+      <mat-form-field>
+          <mat-select   placeholder="Construct" [(value)]="constructSelected">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let construct of constructs" [value]="construct">{{construct}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+       <mat-form-field>
+          <mat-select   placeholder="Cell type" [(value)]="cellSelected">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let cell of cells" [value]="cell">{{cell}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      
+       <mat-form-field>
+          <mat-select   placeholder="Cell subtype" [(value)]="cellSubtypeSelected">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let cellSubType of cellSubTypes" [value]="cellSubType">{{cellSubType}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      
+         
+        <mat-form-field>
+          <mat-select   placeholder="Assay" [(value)]="assaySelected">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let assay of assays" [value]="assay">{{assay}}</mat-option>
+          </mat-select>
+        </mat-form-field> 
+
+
+        <button mat-fab>
+            Filter
+          </button>
+          <button mat-fab (click)="clearFilter()">
+              Clear Filter
+            </button>
+
+            
+      </mat-card-content>
+    </mat-card> 
+</form>
+
 <mat-spinner *ngIf="!resourceLoaded"></mat-spinner>
 <div>
     <highcharts-chart style="height: 1700px;  max-width: 1000px; min-width: 800px; margin: 0 auto"
       [Highcharts]="Highcharts"
       [options]="cellChartOptions"
-      [(update)]="updateDemo2"
+      [(update)]="updatechart"
    
       
     ></highcharts-chart>
-  </div>
+</div>
 
 <!-- <mat-tab label="Procedure View">
     <ng-template matTabContent>

@@ -33,7 +33,7 @@ Highcharts.setOptions({
 export class CellHeatmapComponent implements OnInit {
 
   Highcharts = Highcharts;
-    @ViewChild('searchBox') searchBox;
+    search='';
     constructs: string[];
     constructSelected: string;
     cells: string[];
@@ -58,7 +58,8 @@ export class CellHeatmapComponent implements OnInit {
   cellChart;
 
   filter(){
-    console.log('query button clicked with constructSeleted '+this.constructSelected+' cell selected='+this.cellSelected+' cellSubtypeSelected='+this.cellSubtypeSelected);
+    //console.log('query button clicked with constructSeleted '+this.constructSelected+' cell selected='+this.cellSelected+' cellSubtypeSelected='+this.cellSubtypeSelected);
+    this.getHeatmapData();
   }
   
 
@@ -183,7 +184,7 @@ series: [{
     this.getCellTypesDropdown();
     this.getCellSubTypesDropdown();
     this.getAssaysDropdown();
-    this.getHeatmapData( this.searchBox);
+    this.getHeatmapData();
     
     
   }
@@ -194,9 +195,8 @@ series: [{
      //this.getHeatmapData(this.CELL_TYPE)
   }
 
-  getHeatmapData( searchBox){
-    console.log('heamapType='+this.CELL_TYPE);
-    console.log('searchbox='+this.searchBox);
+  getHeatmapData(){
+    console.log('query button clicked with search='+this.search+' constructSeleted '+this.constructSelected+' cell selected='+this.cellSelected+' cellSubtypeSelected='+this.cellSubtypeSelected);
     this.resourceLoaded=false;
     //if(this.data.length<=1){
     this.heatmapService.getHeatmapResponse(this.CELL_TYPE).subscribe(resp => {

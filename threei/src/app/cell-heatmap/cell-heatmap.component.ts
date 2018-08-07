@@ -8,6 +8,7 @@ import * as HC_exporting from 'highcharts/modules/exporting';
 import { MatRadioModule, MatSelectModule } from '@angular/material';
 
 import { HeatmapService } from '../heatmap.service';
+import { Filter } from 'src/app/filter';
 
 HC_map(Highcharts);
 //require('../../js/worldmap')(Highcharts);
@@ -57,9 +58,12 @@ export class CellHeatmapComponent implements OnInit {
   resourceLoaded: boolean =false;
   cellChart;
 
-  filter(){
+  filterMethod(){
     //console.log('query button clicked with constructSeleted '+this.constructSelected+' cell selected='+this.cellSelected+' cellSubtypeSelected='+this.cellSubtypeSelected);
-    this.getHeatmapData();
+    
+      let filter = new Filter(this.search, this.constructSelected, this.cellSelected, this.cellSubtypeSelected, this.assaySelected);
+    
+    this.getHeatmapData(filter);
   }
   
 
@@ -184,7 +188,7 @@ series: [{
     this.getCellTypesDropdown();
     this.getCellSubTypesDropdown();
     this.getAssaysDropdown();
-    this.getHeatmapData();
+    this.getHeatmapData(undefined);
     
     
   }
@@ -195,7 +199,7 @@ series: [{
      //this.getHeatmapData(this.CELL_TYPE)
   }
 
-  getHeatmapData(){
+  getHeatmapData(filter: Filter){
     console.log('query button clicked with search='+this.search+' constructSeleted '+this.constructSelected+' cell selected='+this.cellSelected+' cellSubtypeSelected='+this.cellSubtypeSelected);
     this.resourceLoaded=false;
     //if(this.data.length<=1){
@@ -235,7 +239,7 @@ series: [{
   }
 
   getCellTypesDropdown(){
-    console.log('calling cellType dropdown');
+    //console.log('calling cellType dropdown');
     this.resourceLoaded=false;
     //if(this.data.length<=1){
     this.heatmapService.getCellTypeResponse().subscribe(resp => {
@@ -251,7 +255,7 @@ series: [{
 }
 
   getCellSubTypesDropdown(){
-    console.log('calling cellSubType dropdown');
+    //console.log('calling cellSubType dropdown');
     this.resourceLoaded=false;
     //if(this.data.length<=1){
     this.heatmapService.getCellSubTypeResponse().subscribe(resp => {
@@ -262,13 +266,13 @@ series: [{
       //console.log('response from json file here: '+JSON.stringify(this.response['_embedded'].Data[0]['data']));
       
       this.cellSubTypes=lResponse['types'];
-      console.log("subtypes being returned="+this.cellSubTypes);
+      //console.log("subtypes being returned="+this.cellSubTypes);
       //let headerData=this.response['_embedded'].Data[0]['columnHeaders'];      
   });
 }
 
 getAssaysDropdown(){
-  console.log('calling assay dropdown');
+  //console.log('calling assay dropdown');
   this.resourceLoaded=false;
   //if(this.data.length<=1){
   this.heatmapService.getAssaysResponse().subscribe(resp => {
@@ -279,7 +283,7 @@ getAssaysDropdown(){
     //console.log('response from json file here: '+JSON.stringify(this.response['_embedded'].Data[0]['data']));
     
     this.assays=lResponse['assays'];
-    console.log("assays being returned="+this.assays);
+    //console.log("assays being returned="+this.assays);
     //let headerData=this.response['_embedded'].Data[0]['columnHeaders'];      
 });
 }

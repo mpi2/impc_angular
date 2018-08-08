@@ -1,17 +1,33 @@
 import { SolrService } from './shared/solr.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FilterComponent } from './components/filter/filter.component';
-import { MatToolbarModule, MatSelectModule, MatAutocompleteModule,
-  MatInputModule, MatFormFieldModule, MatTableModule, MatSnackBarModule,
-  MatBadgeModule, MatChipsModule, MatTabsModule, MatSlideToggle, MatSlideToggleModule, MatProgressBar, MatProgressBarModule, MatSpinner, MatProgressSpinnerModule, MatTooltipModule } from '@angular/material';
-import { HomeComponent, ErrorMessageComponent } from './pages/home/home.component';
+import {
+  MatToolbarModule,
+  MatSelectModule,
+  MatAutocompleteModule,
+  MatInputModule,
+  MatFormFieldModule,
+  MatTableModule,
+  MatSnackBarModule,
+  MatBadgeModule,
+  MatChipsModule,
+  MatTabsModule,
+  MatSlideToggleModule,
+  MatProgressSpinnerModule,
+  MatTooltipModule,
+  MatButtonModule
+} from '@angular/material';
+import {
+  HomeComponent,
+  ErrorMessageComponent
+} from './pages/home/home.component';
 import { HeadBarComponent } from './components/head-bar/head-bar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { ChartModule } from 'angular-highcharts';
-import {DndModule} from 'ng2-dnd';
+import { DndModule } from 'ng2-dnd';
 
 import { AppComponent } from './app.component';
 import { LogoComponent } from './components/logo/logo.component';
@@ -21,6 +37,7 @@ import { SafePipe } from './shared/safe.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TableComponent } from './components/table/table.component';
+import { DiffComponent } from './components/diff/diff.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +51,8 @@ import { TableComponent } from './components/table/table.component';
     ComparisonComponent,
     SafePipe,
     TableComponent,
-    ErrorMessageComponent
+    ErrorMessageComponent,
+    DiffComponent
   ],
   imports: [
     BrowserModule,
@@ -56,13 +74,12 @@ import { TableComponent } from './components/table/table.component';
     MatSlideToggleModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
+    MatButtonModule,
     DndModule.forRoot(),
-    RouterModule.forRoot([
-      { path: '**', component: HomeComponent }
-  ]),
+    RouterModule.forRoot([{ path: '**', component: HomeComponent }])
   ],
   providers: [SolrService],
   bootstrap: [AppComponent],
   entryComponents: [ErrorMessageComponent]
 })
-export class AppModule { }
+export class AppModule {}

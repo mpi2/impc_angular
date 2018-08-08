@@ -1,9 +1,9 @@
 import { Result } from './../../shared/result.model';
 import { SolrService } from './../../shared/solr.service';
 import { Chart, Highcharts } from 'angular-highcharts';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RawDataService } from '../../shared/raw-data.service';
-import {Router, ActivatedRoute, Params} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 
 @Component({
@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
   chartData = {
     chart: {
@@ -39,7 +39,9 @@ export class HomeComponent implements OnInit {
       },
       max: 0,
       min: 0,
-      startOnTick: true
+      startOnTick: true,
+      endOnTick: true,
+      maxPadding: 1
     },
     tooltip: {
       formatter: function () {
@@ -75,10 +77,12 @@ export class HomeComponent implements OnInit {
           result.newData = data.newData;
           result.oldPValue = data.oldPValue.toExponential(2);
           result.newPValue = data.newPvalue.toExponential(2);
+          result.pValueDiff = data.newPvalue - data.oldPValue;
           result.rawLink = data.rawLink;
           result.portalLink = data.portalLink;
           result.resultsLink = data.resultsLink;
           result.method = data.method;
+          result.notProcessedReasons = data.notProcessedReasons;
           const chart = {...this.chartData};
           chart.series = [];
           data.series.forEach(serie => {
@@ -86,7 +90,7 @@ export class HomeComponent implements OnInit {
           });
 
           chart.title.text = procedureName + ': ' + parameterName;
-          this.solr.getParametrUnit(parameterID).subscribe(unit => {
+          this.solr.getParameterUnit(parameterID).subscribe(unit => {
             chart.yAxis.title.text = parameterName;
             if (unit !== ' ') {
               chart.yAxis.title.text += ` (${unit})`;
@@ -96,6 +100,7 @@ export class HomeComponent implements OnInit {
             result.chart = new Chart(chart);
             result.chart.ref$.toPromise().then( ref => {
               ref.xAxis[0].removePlotLine(undefined);
+              ref.yAxis[0].setExtremes(data.yMin, data.yMax);
               data.plotLines.forEach(plotLine => {
                 ref.xAxis[0].addPlotLine(plotLine);
               });
@@ -108,8 +113,14 @@ export class HomeComponent implements OnInit {
         });
       }
     ).catch(error => {
+      if (error instanceof SyntaxError) {
+        this.snackBar.open('THERE WAS AN ISSUE PARSING THE DATA FILE', null, {
+          duration: 2000,
+        });
+      } else {
+        this.openSnackBar();
+      }
       console.log(error);
-      this.openSnackBar();
       this.clear();
       if (i === this.metadataGroups.length - 1) {
         this.isLoadingResults = false;
@@ -119,10 +130,6 @@ export class HomeComponent implements OnInit {
 }
 
 constructor(private rawService: RawDataService, private route: ActivatedRoute, public snackBar: MatSnackBar, private solr: SolrService) {
-
-}
-
-ngOnInit() {
 
 }
 

@@ -1,8 +1,14 @@
-<div [chart]="chartData"></div>
-<div class="comparison" *ngIf="method.indexOf('Mixed Model framework') >= 0">
-  <impc-table style="width: 50%;" [dataSource]="oldData" title="Original Results Statistics Summary" [pValue]="oldPValue"></impc-table>
-  <impc-table style="width: 50%;" [dataSource]="newData" title="Windowed Results Statistics Summary" [pValue]="newPValue" ></impc-table>
+<div [chart]="result.chart"></div>
+<div class="comparison" *ngIf="result.method.indexOf('Mixed Model framework') >= 0">
+  <impc-table style="width: 50%;" [dataSource]="result.oldData" title="Original Results Statistics Summary" [pValue]="result.oldPValue" *ngIf="result.oldData.length > 0"></impc-table>
+  <impc-table style="width: 50%;" [dataSource]="result.newData" title="Windowed Results Statistics Summary" [pValue]="result.newPValue" *ngIf="result.newData.length > 0" [pValueDiff]="pValueDiff"></impc-table>
 </div>
-<h3 class="method">{{ method }}</h3>
-<div *ngIf="method.indexOf('Mixed Model framework') < 0" class="notice">(We don't apply window calculation to this method)</div>
-<h1 *ngIf="!method" class="warn">NOT PROCESSED</h1>
+<h3 class="method">{{ result.method }}</h3>
+<div *ngIf="result.method !== '' && result.method.indexOf('Mixed Model framework') < 0" class="notice">(We don't apply window calculation to this method)</div>
+<h2 *ngIf="result.method == ''" class="warn">NOT PROCESSED</h2>
+<div *ngIf="result.method == ''" class="reasons">
+  <h3>Possible reasons for not processing:</h3>
+  <ul>
+    <li *ngFor="let reason of result.notProcessedReasons">{{reason}}</li>
+  </ul>
+</div>

@@ -8,6 +8,7 @@ import * as HC_exporting from 'highcharts/modules/exporting';
 import { MatRadioModule, MatSelectModule } from '@angular/material';
 
 import { HeatmapService } from '../heatmap.service';
+import { ProcedureFilter } from './procedure-filter';
 
 HC_map(Highcharts);
 //require('../../js/worldmap')(Highcharts);
@@ -178,12 +179,12 @@ export class ProcedureHeatmapComponent implements OnInit {
      this.getHeatmapData( this.searchBox);
   }
 
-  getHeatmapData( searchBox){
+  getHeatmapData(filter: ProcedureFilter){
     
     console.log('searchbox='+this.searchBox);
     this.resourceLoaded=false;
     //if(this.data.length<=1){
-    this.heatmapService.getHeatmapResponse(this.PROCEDURE_TYPE).subscribe(resp => {
+    this.heatmapService.getProcedureHeatmapResponse(filter).subscribe(resp => {
       // display its headers
       this.response = { ... resp.body};
       //console.log('response='+JSON.stringify(resp));

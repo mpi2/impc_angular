@@ -8,7 +8,7 @@ import * as HC_exporting from 'highcharts/modules/exporting';
 import { MatRadioModule, MatSelectModule } from '@angular/material';
 
 import { HeatmapService } from '../heatmap.service';
-import { Filter } from 'src/app/filter';
+import { CellFilter } from './cell-filter';
 
 HC_map(Highcharts);
 //require('../../js/worldmap')(Highcharts);
@@ -61,7 +61,7 @@ export class CellHeatmapComponent implements OnInit {
   filterMethod(){
     //console.log('query button clicked with constructSeleted '+this.constructSelected+' cell selected='+this.cellSelected+' cellSubtypeSelected='+this.cellSubtypeSelected);
     
-      let filter = new Filter(this.search, this.constructSelected, this.cellSelected, this.cellSubtypeSelected, this.assaySelected);
+      let filter = new CellFilter(this.search, this.constructSelected, this.cellSelected, this.cellSubtypeSelected, this.assaySelected);
     
     this.getHeatmapData(filter);
   }
@@ -199,11 +199,10 @@ series: [{
      //this.getHeatmapData(this.CELL_TYPE)
   }
 
-  getHeatmapData(filter: Filter){
-    console.log('query button clicked with search='+this.search+' constructSeleted '+this.constructSelected+' cell selected='+this.cellSelected+' cellSubtypeSelected='+this.cellSubtypeSelected);
+  getHeatmapData(filter: CellFilter){
     this.resourceLoaded=false;
     //if(this.data.length<=1){
-    this.heatmapService.getHeatmapResponse(this.CELL_TYPE).subscribe(resp => {
+    this.heatmapService.getCellHeatmapResponse(filter).subscribe(resp => {
       // display its headers
       this.response = { ... resp.body};
       //console.log('response='+JSON.stringify(resp));

@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { HeatmapService } from './heatmap.service';
+import { HeatmapService } from '../app/heatmap.service';
 
 describe('HeatmapService', () => {
   beforeEach(() => {

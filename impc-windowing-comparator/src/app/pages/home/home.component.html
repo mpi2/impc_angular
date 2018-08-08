@@ -10,9 +10,9 @@
                 <impc-comparison *ngIf="result.chart" [result]="result"></impc-comparison>
                 <mat-toolbar *ngIf="!!result.chart" class="links" class="light" style="background-color: #e0e0e0; height: 40px; margin-top: 10px;">
                   <span class="filling"></span>
-                  <a mat-raised-button color="accent" target="_blank" [attr.href]="results[0].resultsLink" download>Download results</a>
-                  <a mat-raised-button color="accent" target="_blank" [attr.href]="results[0].rawLink" download>Download raw data</a>
-                  <a mat-raised-button color="accent" target="_blank" [attr.href]="results[0].portalLink">View on IMPC portal</a>
+                  <a mat-raised-button color="accent" target="_blank" [attr.href]="result.resultsLink" download>Download results</a>
+                  <a mat-raised-button color="accent" target="_blank" [attr.href]="result.rawLink" download>Download raw data</a>
+                  <a mat-raised-button color="accent" target="_blank" [attr.href]="result.portalLink">View on IMPC portal</a>
                   <span class="filling"></span>
                 </mat-toolbar>
             </mat-tab>

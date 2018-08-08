@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "ng serve --proxy-config proxy.conf.json  --port 4300",
+    "build": "ng build --prod --base-href /mi/impc/dev/phenotype-archive/media/images/windowing/ --deploy-url /mi/impc/dev/phenotype-archive/media/images/windowing/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

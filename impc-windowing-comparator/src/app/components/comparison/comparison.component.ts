@@ -1,7 +1,6 @@
-import { RawDataService } from './../../shared/raw-data.service';
+import { Result } from './../../shared/result.model';
 import { Component, OnInit, Input } from '@angular/core';
 import { Chart } from 'angular-highcharts';
-import { first, map } from '../../../../node_modules/rxjs/operators';
 
 @Component({
   selector: 'impc-comparison',
@@ -9,9 +8,7 @@ import { first, map } from '../../../../node_modules/rxjs/operators';
   styleUrls: ['./comparison.component.css']
 })
 export class ComparisonComponent implements OnInit {
-
   private _chartData: Chart;
-
 
   get chartData(): Chart {
     return this._chartData;
@@ -20,27 +17,18 @@ export class ComparisonComponent implements OnInit {
   @Input()
   set chartData(chart: Chart) {
     this._chartData = chart;
-    this._chartData.ref$.toPromise().then(ref => ref.series.forEach(serie => serie.show()));
+    this._chartData.ref$
+      .toPromise()
+      .then(ref => ref.series.forEach(serie => serie.show()));
   }
 
-  @Input()
-  oldData: any;
+  @Input() result: Result;
 
-  @Input()
-  newData: any;
+  pValueDiff: number;
 
-  @Input()
-  oldPValue;
+  constructor() {}
 
-  @Input()
-  newPValue;
-
-  @Input()
-  method;
-
-constructor() {}
-
-ngOnInit() { }
-
-
+  ngOnInit() {
+    this.pValueDiff = this.result.newPValue - this.result.oldPValue;
+  }
 }

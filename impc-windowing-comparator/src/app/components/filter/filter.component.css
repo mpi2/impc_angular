@@ -3,6 +3,16 @@ mat-form-field {
     width: 28%;
 }
 
+mat-form-field.short {
+    margin-right: 30px ;
+    width: 10%;
+}
+
+mat-form-field.long {
+    margin-right: 30px ;
+    width: 31%;
+}
+
 mat-form-field.second {
     width: 25%;
 }

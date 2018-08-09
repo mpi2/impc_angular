@@ -1,0 +1,5 @@
+<small *ngIf="value < 0 && !exponential" style="color: red">(&darr;{{ value * -1 | number:'1.0-4'}})</small>
+<small *ngIf="value > 0 && !exponential" style="color: green">(&uarr;{{ value | number:'1.0-4'}})</small>
+<small *ngIf="value === 0" style="color: orange">(=)</small>
+<small *ngIf="value < 0 && exponential" style="color: red">(&darr;{{ (value * -1).toExponential(exponential)}})</small>
+<small *ngIf="value > 0 && exponential" style="color: green">(&uarr;{{ value.toExponential(exponential) }})</small>

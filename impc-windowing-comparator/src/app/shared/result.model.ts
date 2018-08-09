@@ -6,10 +6,12 @@ export class Result {
     newData: any;
     oldPValue: any;
     newPValue: any;
+    pValueDiff: any;
     rawLink: string;
     portalLink: string;
     resultsLink: string;
     method: string;
     yMax: number;
     yMin: number;
+    notProcessedReasons: Array<string>;
 }

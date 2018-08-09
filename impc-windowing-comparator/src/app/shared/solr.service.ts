@@ -31,7 +31,7 @@ export class SolrService {
         let emptyField = false;
         q.forEach(field => {
             field.name = this.fieldNamesMap[field.name];
-            field.value = field.value ? field.value.replace(/([\!\*\+\&\|\(\)\[\]\{\}\^\~\?\:\"\s])/g, '\\$1') : '';
+            field.value = field.value ? field.value.replace(/([\!\*\+\|\(\)\[\]\{\}\^\~\?\:\"\s])/g, '\\$1') : '';
             if (!field.value && !field.wildcard) { emptyField = true; }
             if (field.wildcard) {
                 const preWildcard = !field.value ? '' : '*';
@@ -48,7 +48,9 @@ export class SolrService {
         });
         query = query.substring(0, query.length - 5);
         query = encodeURI(query);
-        const fqs = '&fq=datasource_name:IMPC&fq=observation_type:unidimensional&fq=biological_sample_group:experimental';
+        query = query.replace(/#/g, '%23');
+        query = query.replace(/&/g, '%26');
+        const fqs = '&fq=observation_type:unidimensional&fq=biological_sample_group:experimental';
         const options = '&rows=0&wt=json&facet=on&facet.mincount=1&facet.sort=index';
         const facet = pivot ? `&facet.pivot=${pivot}` : `&facet.field=${target}`;
         query += fqs + options + facet;
@@ -78,7 +80,7 @@ export class SolrService {
         return parsedResults.sort((a, b) => a.name.localeCompare(b.name));
     }
 
-    getParametrUnit(parameterID) {
+    getParameterUnit(parameterID) {
         const q = `parameter_stable_id:${parameterID}`;
         const options = '&rows=1&wt=json';
         return this.http.get(environment.solrUrl + 'pipeline/select?q=' + q + options).pipe(
@@ -86,5 +88,25 @@ export class SolrService {
                 return result['response']['docs'][0]['unit_x'];
             })
         );
+    }
+
+    getParameterName(parameterID) {
+      const q = `parameter_stable_id:${parameterID}`;
+      const options = '&rows=1&wt=json';
+      return this.http.get(environment.solrUrl + 'experiment/select?q=' + q + options).pipe(
+          map(result => {
+              return result['response']['docs'][0]['parameter_name'];
+          })
+      );
+    }
+
+    getProcedureName(procedureGroup) {
+      const q = `procedure_group:${procedureGroup}`;
+      const options = '&rows=1&wt=json';
+      return this.http.get(environment.solrUrl + 'experiment/select?q=' + q + options).pipe(
+          map(result => {
+              return result['response']['docs'][0]['procedure_name'];
+          })
+      );
     }
 }

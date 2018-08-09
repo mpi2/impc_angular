@@ -24,13 +24,25 @@ export class RawDataService {
     heterozygote: 'HET'
   };
 
+  possibleNotProcessedReasons = {
+    'both_mut_and_control': 'Both mutants and control',
+    'empty_dataset': 'Empty dataset',
+    'empty_response': 'Empty response',
+    'is_exception': 'Is exception',
+    'min_onbs_in_each_group': 'Minimium observation in each group',
+    'the_num_colonies': 'Number of colonies',
+    'variation_in_respone': 'Variaton in response'
+  };
+
   constructor(private http: HttpClient) { }
 
   getWindowData(phenotypingCenter, colonyID, zygosity, procedure, parameter, metadataGroup) {
     const fileName = 'output_Successful.tsv';
     const rawFileName = 'output_rawData.csv';
     let baseUrl = `${environment.dataBaseUrl}/${phenotypingCenter.replace(new RegExp(' ', 'g'), '_')}/`;
-    baseUrl += `${procedure}/${parameter}/${colonyID.replace(new RegExp('-| ', 'g'), '_')}/${zygosity}/${metadataGroup}/`;
+    baseUrl += `${procedure.replace(new RegExp('[^a-zA-Z0-9]', 'g'), '_')}/`;
+    baseUrl += `${parameter.replace(new RegExp('[^a-zA-Z0-9]', 'g'), '_')}/`;
+    baseUrl += `${colonyID.replace(new RegExp('[^a-zA-Z0-9]', 'g'), '_')}/${zygosity}/${metadataGroup}/`;
     const fileUrl = baseUrl + fileName;
     const rawLink = baseUrl + rawFileName;
     return this.http.post(fileUrl, {}, {responseType: 'text'})
@@ -98,8 +110,12 @@ export class RawDataService {
       series.marker = {};
       if (seriesName.indexOf('Male') >= 0) {
         series.marker.symbol = 'triangle';
+        series.marker.lineWidth = 1;
+        series.marker.lineColor = null;
       } else {
         series.marker.symbol = 'circle';
+        series.marker.lineWidth = 2;
+        series.marker.lineColor = null;
       }
       if (seriesName.indexOf('WT') >= 0) {
         series.color = 'rgba(239, 123, 11, 0.25)';
@@ -120,10 +136,10 @@ export class RawDataService {
     series.push(this.getSeries('Window'));
     const responseArray = response.split('\t');
     const processed = responseArray[0] !== 'NotProcessed';
-    const jsonStr = responseArray[14].replace(':NA', ':"NA"')
+    const jsonStr = responseArray[14];/*.replace(':NA', ':"NA"')
     .replace(new RegExp('Male: "NA""', 'g'), 'Male: NA"')
     .replace(new RegExp('Female: "NA",', 'g'), 'Female: NA,')
-    .replace('"(>1): FALSE: "NA""', '"(>1): FALSE: NA"');
+    .replace('"(>1): FALSE: "NA""', '"(>1): FALSE: NA"');*/
     const result = JSON.parse(jsonStr)['result'];
     console.log(result);
     const portalLink = result['detail']['gene_page_url'];
@@ -133,13 +149,18 @@ export class RawDataService {
     let window = [];
     const oldData = [];
     const newData = [];
+    const notProcessedReasons = [];
     let method = '';
     if (result['vectoroutput']['normal_result'] !== undefined) {
       method = result['vectoroutput']['normal_result']['method'];
     } else {
       method = '';
     }
-    if (processed && !!result['vectoroutput']['windowed_result']['additional_information']) {
+    if (!processed) {
+      Object.keys(this.possibleNotProcessedReasons).forEach(key =>
+        notProcessedReasons.push(`${this.possibleNotProcessedReasons[key]} = ${result['detail'][key]}`)
+      );
+    } else if (!!result['vectoroutput']['windowed_result']['additional_information']) {
       const oldDataObj = result['vectoroutput']['normal_result']['additional_information']['summary_statistics'];
       const newDataObj = result['vectoroutput']['windowed_result']['additional_information']['summary_statistics'];
       Object.keys(oldDataObj).forEach(key => oldData.push({
@@ -153,6 +174,11 @@ export class RawDataService {
         count: newDataObj[key]['count'],
         mean: newDataObj[key]['mean'],
         sd: newDataObj[key]['sd'],
+        diff: {
+          count: newDataObj[key]['count'] - oldDataObj[key]['count'],
+          mean: newDataObj[key]['mean'] - oldDataObj[key]['mean'],
+          sd: newDataObj[key]['sd'] - oldDataObj[key]['sd']
+        }
       }));
       oldPValue = result['vectoroutput']['normal_result']['genotype_contribution'];
       newPValue = result['vectoroutput']['windowed_result']['genotype_contribution'];
@@ -227,7 +253,8 @@ export class RawDataService {
       method: method,
       resultsLink: resultsLink,
       yMax: max,
-      yMin: min
+      yMin: min,
+      notProcessedReasons: notProcessedReasons
     };
   }
 }

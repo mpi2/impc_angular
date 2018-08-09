@@ -81,3 +81,16 @@ mat-drawer {
     align-items: center;
     justify-content: center;
   }
+
+.filling {
+    flex: 1 1 auto;
+}
+.mat-raised-button {
+  margin: 10px;
+}
+
+mat-toolbar {
+  background-color: rgb(224, 224, 224);
+  height: 70px !important;
+  margin-top: 10px;
+}

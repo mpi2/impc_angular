@@ -5,22 +5,16 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
-export class TableComponent implements OnInit {
+export class TableComponent {
+  @Input() dataSource;
 
-  @Input()
-  dataSource;
+  @Input() title;
 
-  @Input()
-  title;
+  @Input() pValue;
 
-  @Input()
-  pValue;
+  @Input() pValueDiff = null;
 
   displayedColumns = ['Category', 'Count', 'Mean', 'SD'];
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  constructor() {}
 }

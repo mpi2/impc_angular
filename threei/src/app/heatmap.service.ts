@@ -18,13 +18,35 @@ export class HeatmapService {
   getCellHeatmapResponse(filter: CellFilter):
       Observable<HttpResponse<Response>> {
       console.log('calling heatmap service method');
-      
-      if(filter){
-        console.log('query button clicked with search='+filter.searchText+' constructSeleted '+filter.construct+' cell selected='+filter.cellType+' cellSubtypeSelected='+filter.cellSubType);
-
-      }
+      let filterString=this.getFilterString(filter);
+      let urlstring=this.restBaseUrl +'cell_heatmap'+filterString;
+      console.log('urlSTring='+urlstring);
         return this.http.get<Response>(
-          this.restBaseUrl +'cell_heatmap', { observe: 'response' });
+          urlstring, { observe: 'response' });
+    }
+
+  getFilterString(filter: CellFilter) {
+    let filterQuery = '';
+    if (filter) {
+      console.log('query button clicked with search=' + filter.searchText + ' constructSeleted ' + filter.construct + ' cell selected=' + filter.cellType + ' cellSubtypeSelected=' + filter.cellSubType + 'sortField=' + filter.sort);
+      filterQuery += '?';
+      if (filter.sort) {
+        filterQuery += '&sort=' + filter.sort;
+      }
+      if(filter.searchText){
+        filterQuery+='&keywords='+filter.searchText;
+      }
+      if(filter.construct){
+        filterQuery+='&construct='+filter.construct;
+      }
+      if(filter.cellType){
+        filterQuery+='&cellType='+filter.cellType;
+      }
+      if(filter.cellSubType){
+        filterQuery+='&cellSubType='+filter.cellSubType;
+      }
+    }
+    return filterQuery;
     }
 
     getProcedureHeatmapResponse(filter: ProcedureFilter):
@@ -58,5 +80,16 @@ export class HeatmapService {
     return this.http.get<Response>(
       this.restBaseUrl +'/assays', { observe: 'response' });
   }
+
+  getConstructsResponse():
+    Observable<HttpResponse<Response>> {
+    console.log('calling constrcts method');
+    
+    return this.http.get<Response>(
+      this.restBaseUrl +'/constructs', { observe: 'response' });
+  }
+
+  
    
+
 }

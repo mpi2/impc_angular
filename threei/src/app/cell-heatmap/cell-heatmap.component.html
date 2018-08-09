@@ -11,7 +11,7 @@
       <mat-form-field>
           <mat-select   placeholder="Construct" [(value)]="constructSelected">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let construct of constructs" [value]="construct">{{construct}}</mat-option>
+            <mat-option *ngFor="let construct of constructTypes" [value]="construct">{{construct}}</mat-option>
           </mat-select>
         </mat-form-field>
 
@@ -41,13 +41,24 @@
         <button mat-fab>
             Filter
           </button>
-          <button mat-fab (click)="clearFilter()">
+          <button type="button" mat-fab (click)="clearFilter()">
               Clear Filter
             </button>
 
             
       </mat-card-content>
     </mat-card> 
+
+    <mat-card>
+      <mat-card-content>
+          <mat-form-field>
+              <mat-select   placeholder="sort" [(value)]="sortFieldSelected">
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let header of columnHeaders" [value]="header">{{header}}</mat-option>
+              </mat-select>
+            </mat-form-field> 
+      </mat-card-content>
+    </mat-card>
 </form>
 
 <mat-spinner *ngIf="!resourceLoaded"></mat-spinner>

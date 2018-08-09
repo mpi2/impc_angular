@@ -33,9 +33,12 @@ Highcharts.setOptions({
 })
 export class CellHeatmapComponent implements OnInit {
 
+  
+  sortFieldSelected: string;
   Highcharts = Highcharts;
     search='';
-    constructs: string[];
+    constructs: string[];//all constructs available including the brackets
+    constructTypes: string[];//for menu dropdown just conatains unique set with brackets part removed
     constructSelected: string;
     cells: string[];
     cellSelected: string;
@@ -61,11 +64,20 @@ export class CellHeatmapComponent implements OnInit {
   filterMethod(){
     //console.log('query button clicked with constructSeleted '+this.constructSelected+' cell selected='+this.cellSelected+' cellSubtypeSelected='+this.cellSubtypeSelected);
     
-      let filter = new CellFilter(this.search, this.constructSelected, this.cellSelected, this.cellSubtypeSelected, this.assaySelected);
+      let filter = new CellFilter(this.search, this.constructSelected, this.cellSelected, this.cellSubtypeSelected, this.assaySelected, this.sortFieldSelected);
     
     this.getHeatmapData(filter);
   }
   
+  clearFilter(){
+    //console.log('query button clicked with constructSeleted '+this.constructSelected+' cell selected='+this.cellSelected+' cellSubtypeSelected='+this.cellSubtypeSelected);
+    
+      let filter = undefined;
+      this.search=null, this.constructSelected=null, this.cellSelected=null, this.cellSubtypeSelected=null, this.assaySelected=null, this.sortFieldSelected=null;
+    
+    
+    this.getHeatmapData(filter);
+  }
 
   
   
@@ -185,10 +197,11 @@ series: [{
   }
 
   ngOnInit() {
+    this.getHeatmapData(undefined);
     this.getCellTypesDropdown();
     this.getCellSubTypesDropdown();
     this.getAssaysDropdown();
-    this.getHeatmapData(undefined);
+    this.getConstructsDropdown();
     
     
   }
@@ -235,6 +248,23 @@ series: [{
     
       
     });
+  }
+
+  getConstructsDropdown(){
+    //console.log('calling assay dropdown');
+    this.resourceLoaded=false;
+    //if(this.data.length<=1){
+    this.heatmapService.getConstructsResponse().subscribe(resp => {
+      // display its headers
+      var lResponse = { ... resp.body};
+      //console.log('response='+JSON.stringify(resp));
+      //this.data = this.response['response']['docs']
+      //console.log('response from json file here: '+JSON.stringify(this.response['_embedded'].Data[0]['data']));
+      
+      this.constructTypes=lResponse['types'];
+      //console.log("assays being returned="+this.assays);
+      //let headerData=this.response['_embedded'].Data[0]['columnHeaders'];      
+  });
   }
 
   getCellTypesDropdown(){

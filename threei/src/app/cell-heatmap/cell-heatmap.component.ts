@@ -36,7 +36,7 @@ export class CellHeatmapComponent implements OnInit {
   
   sortFieldSelected: string;
   Highcharts = Highcharts;
-    search='';
+    keyword: '';
     constructs: string[];//all constructs available including the brackets
     constructTypes: string[];//for menu dropdown just conatains unique set with brackets part removed
     constructSelected: string;
@@ -64,7 +64,7 @@ export class CellHeatmapComponent implements OnInit {
   filterMethod(){
     //console.log('query button clicked with constructSeleted '+this.constructSelected+' cell selected='+this.cellSelected+' cellSubtypeSelected='+this.cellSubtypeSelected);
     
-      let filter = new CellFilter(this.search, this.constructSelected, this.cellSelected, this.cellSubtypeSelected, this.assaySelected, this.sortFieldSelected);
+      let filter = new CellFilter(this.keyword, this.constructSelected, this.cellSelected, this.cellSubtypeSelected, this.assaySelected, this.sortFieldSelected);
     
     this.getHeatmapData(filter);
   }
@@ -73,7 +73,7 @@ export class CellHeatmapComponent implements OnInit {
     //console.log('query button clicked with constructSeleted '+this.constructSelected+' cell selected='+this.cellSelected+' cellSubtypeSelected='+this.cellSubtypeSelected);
     
       let filter = undefined;
-      this.search=null, this.constructSelected=null, this.cellSelected=null, this.cellSubtypeSelected=null, this.assaySelected=null, this.sortFieldSelected=null;
+      this.keyword=null, this.constructSelected=null, this.cellSelected=null, this.cellSubtypeSelected=null, this.assaySelected=null, this.sortFieldSelected=null;
     
     
     this.getHeatmapData(filter);

@@ -311,7 +311,7 @@ getAssaysDropdown(){
     //this.data = this.response['response']['docs']
     //console.log('response from json file here: '+JSON.stringify(this.response['_embedded'].Data[0]['data']));
     
-    this.assays=lResponse['assays'];
+    this.assays=lResponse['types'];
     //console.log("assays being returned="+this.assays);
     //let headerData=this.response['_embedded'].Data[0]['columnHeaders'];      
 });

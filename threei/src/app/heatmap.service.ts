@@ -45,6 +45,9 @@ export class HeatmapService {
       if(filter.cellSubType){
         filterQuery+='&cellSubType='+filter.cellSubType;
       }
+      if(filter.assay){
+        filterQuery+='&assay='+filter.assay;
+      }
     }
     return filterQuery;
     }

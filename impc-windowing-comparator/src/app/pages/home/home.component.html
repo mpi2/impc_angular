@@ -4,20 +4,30 @@
     <div class="example-loading-shade" *ngIf="isLoadingResults">
         <mat-spinner *ngIf="isLoadingResults" color="accent"></mat-spinner>
     </div>
-    <mat-tab-group color="accent" backgroundColor="primary" *ngIf="metadataGroups.length > 1 && results.length > 1">
-        <mat-tab *ngFor="let result of results, let i = index" label="Metadata group {{i + 1}}">
-            <impc-comparison *ngIf="result.chart" [chartData]="result.chart" [oldData]="result.oldData" [newData]="result.newData" [oldPValue]="result.oldPValue" [newPValue]="result.newPValue" [method]="result.method"></impc-comparison>
-            <div *ngIf="!!result.chart" class="links">
-                <a target="_blank" [attr.href]="result.rawLink">Download raw data</a> | <a target="_blank" [attr.href]="result.portalLink">View on IMPC portal</a> | <a target="_blank" [attr.href]="result.resultsLink">Download results</a>
-            </div>
-        </mat-tab>
-    </mat-tab-group>
+    <div class="impc-tabs">
+        <mat-tab-group color="primary" backgroundColor="accent" *ngIf="metadataGroups.length > 1 && results.length > 1">
+            <mat-tab *ngFor="let result of results, let i = index" label="Metadata group {{i + 1}}">
+                <impc-comparison *ngIf="result.chart" [result]="result"></impc-comparison>
+                <mat-toolbar *ngIf="!!result.chart" class="links" class="light" style="background-color: #e0e0e0; height: 40px; margin-top: 10px;">
+                  <span class="filling"></span>
+                  <a mat-raised-button color="accent" target="_blank" [attr.href]="result.resultsLink" download>Download results</a>
+                  <a mat-raised-button color="accent" target="_blank" [attr.href]="result.rawLink" download>Download raw data</a>
+                  <a mat-raised-button color="accent" target="_blank" [attr.href]="result.portalLink">View on IMPC portal</a>
+                  <span class="filling"></span>
+                </mat-toolbar>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+
     <div *ngIf="metadataGroups.length === 1 && results.length === 1">
-        <impc-comparison *ngIf="results[0].chart" [chartData]="results[0].chart" [oldData]="results[0].oldData" [newData]="results[0].newData" [oldPValue]="results[0].oldPValue" [newPValue]="results[0].newPValue" [method]="results[0].method"></impc-comparison>
-        <div *ngIf="!!results[0].chart" class="links">
-            <a target="_blank" [attr.href]="results[0].rawLink">Download raw data</a> | <a target="_blank" [attr.href]="results[0].portalLink">View on IMPC portal</a> | <a target="_blank" [attr.href]="results[0].resultsLink">Download results</a>
-        </div>
+        <impc-comparison *ngIf="results[0].chart" [result]="results[0]"></impc-comparison>
+        <mat-toolbar color="primary" class="light">
+          <span class="filling"></span>
+          <a mat-raised-button color="accent" target="_blank" [attr.href]="results[0].resultsLink" download>Download results</a>
+          <a mat-raised-button color="accent" target="_blank" [attr.href]="results[0].rawLink" download>Download raw data</a>
+          <a mat-raised-button color="accent" target="_blank" [attr.href]="results[0].portalLink">View on IMPC portal</a>
+          <span class="filling"></span>
+        </mat-toolbar>
     </div>
     <h1 *ngIf="metadataGroups.length === 0 && results.length === 1" class="alert">PLEASE FILL THE FIELDS TO VISUALIZE THE WINDOWING RESULT</h1>
-    <impc-footer></impc-footer>
 </div>

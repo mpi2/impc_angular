@@ -8,10 +8,7 @@ import { HighchartsChartComponent } from './highcharts-chart.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule} from '@angular/forms';
-import { MatCheckboxModule, MatProgressSpinnerModule,
-   MatCardModule, MatSliderModule, MatGridListModule, 
-   MatInputModule, MatSelectModule, MatCheckbox, MatButtonModule,MatTabsModule
-  } from '@angular/material';
+import { MatCheckboxModule, MatProgressSpinnerModule, MatCardModule, MatSliderModule, MatGridListModule, MatInputModule, MatSelectModule, MatCheckbox, MatButtonModule, MatTabsModule, MatToolbarModule} from '@angular/material';
 
 
 
@@ -47,10 +44,10 @@ import { ProcedureHeatmapComponent } from './procedure-heatmap/procedure-heatmap
     PhenotypeofthemonthPageComponent,
     ImageacknowledgementsPageComponent,
     CellHeatmapComponent,
-    ProcedureHeatmapComponent, CellHeatmapComponent, ProcedureHeatmapComponent,
+    ProcedureHeatmapComponent, ProcedureHeatmapComponent,
   ],
   imports: [
-    BrowserModule, MenusModule, AppRoutingModule, SlideshowModule, MatExpansionModule, FormsModule, HttpClientModule, MatRadioModule, MatProgressSpinnerModule, MatSelectModule, MatInputModule, MatCardModule, MatTabsModule
+    BrowserModule, MenusModule, AppRoutingModule, SlideshowModule, MatExpansionModule, FormsModule, HttpClientModule, MatRadioModule, MatProgressSpinnerModule, MatSelectModule, MatInputModule, MatCardModule, MatTabsModule, MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

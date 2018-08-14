@@ -7,13 +7,9 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './logo.component.html',
   styleUrls: ['./logo.component.css']
 })
-export class LogoComponent implements OnInit {
+export class LogoComponent {
 
   public baseUrl = environment.baseUrl;
 
   constructor() { }
-
-  ngOnInit() {
-  }
-
 }

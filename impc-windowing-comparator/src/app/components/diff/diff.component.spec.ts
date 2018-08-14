@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HeatmapComponent } from './heatmap.component';
+import { DiffComponent } from './diff.component';
 
-describe('HeatmapComponent', () => {
-  let component: HeatmapComponent;
-  let fixture: ComponentFixture<HeatmapComponent>;
+describe('DiffComponent', () => {
+  let component: DiffComponent;
+  let fixture: ComponentFixture<DiffComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HeatmapComponent ]
+      declarations: [ DiffComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HeatmapComponent);
+    fixture = TestBed.createComponent(DiffComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

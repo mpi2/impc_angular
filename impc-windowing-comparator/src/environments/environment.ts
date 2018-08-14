@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:4200',
-  dataBaseUrl: 'http://localhost:4200/Results',
-  solrUrl: 'http://localhost:4200/solr/'
+  baseUrl: 'http://localhost:4300',
+  dataBaseUrl: 'http://localhost:4300/Results',
+  solrUrl: 'http://localhost:4300/solr/'
 };
 
 /*

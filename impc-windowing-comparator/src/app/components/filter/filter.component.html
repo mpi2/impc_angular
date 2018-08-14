@@ -1,9 +1,10 @@
 <div style="text-align: center; margin-top: 20px;">
+<span *ngIf="editing" class="notice">Drag and drop the fields to reorder</span>
 <form [formGroup]="formGroup" dnd-sortable-container [sortableData]="filters">
   <ng-container *ngFor="let filter of filters; let i = index">
     <mat-form-field dnd-sortable [sortableIndex]="i" [dragEnabled]="editing" *ngIf="filter.type !== 'none'">
       <div *ngIf="filter.type === 'select'" [matBadge]="editing ? '&#x21b9;' : i + 1" matBadgePosition="before" matBadgeColor="primary">
-        <mat-select [placeholder]="filter.title" #select [formControlName]="filter.name"  (selectionChange)="selected(i)">
+        <mat-select [placeholder]="filter.title" #select [formControlName]="filter.name"  (selectionChange)="selected(filter, true)">
           <mat-option *ngFor="let option of dynamicOptions[filter.name] | async" [value]="option" >
             {{ option }}
           </mat-option>
@@ -12,26 +13,29 @@
       <div *ngIf="filter.type === 'autocomplete'" [matBadge]="editing ? '&#x21b9;' : i + 1" matBadgePosition="before" matBadgeColor="primary">
         <div *ngIf="filter.name !== 'procedure' && filter.name !== 'parameter' ">
           <input matInput [placeholder]="filter.title" [matAutocomplete]="auto" [formControlName]="filter.name" (click)="$event.target.select()">
-          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected(i)" [autoActiveFirstOption]="true">
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected(filter, true)" [autoActiveFirstOption]="true">
             <mat-option  *ngFor="let option of dynamicOptions[filter.name] | async" [value]="option">
               {{ option }}
             </mat-option>
           </mat-autocomplete>
         </div>
-        <div *ngIf="filter.name === 'procedure' || filter.name === 'parameter' ">
+        <div *ngIf="filter.name === 'procedure' || filter.name === 'parameter'">
           <input matInput [placeholder]="filter.title" [matAutocomplete]="auto" [formControlName]="filter.name" (click)="$event.target.select()">
-          <mat-autocomplete  #auto="matAutocomplete" (optionSelected)="selected(i)" [autoActiveFirstOption]="true">
+          <mat-autocomplete  #auto="matAutocomplete" (optionSelected)="selected(filter, true)" [autoActiveFirstOption]="true" id="{{filter.name}}">
             <mat-option *ngFor="let option of dynamicOptions[filter.name] | async" [value]="option.name + ' | ' + option.id">
               <small>{{option.name}}</small> |
               <small>{{option.id}}</small>
             </mat-option>
           </mat-autocomplete>
         </div>
-        
+
+      </div>
+      <div matSuffix *ngIf="loading[filter.name] && formGroup.controls[filter.name].enabled">
+          <mat-progress-spinner color="accent" mode="indeterminate" diameter="20" strokeWidth="2" matSuffix></mat-progress-spinner>
       </div>
     </mat-form-field>
   </ng-container>
-  
+
 </form>
 <div class="toggle-wrapper">
     <mat-slide-toggle
@@ -41,11 +45,11 @@
     [disabled]="false"
     (change)="toggle()"
     >
-    <span *ngIf="editing">
-        Save filtering order
+    <span *ngIf="editing" style="color: #ff9800">
+        Deactivate filter reordering
     </span>
     <span *ngIf="!editing">
-        Edit filtering order
+        Activate filter reordering
     </span>
     </mat-slide-toggle>
 </div>

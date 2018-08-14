@@ -12,7 +12,7 @@
         "changeOrigin": true
     },
     "/Results/*": {
-        "target": "https://wwwdev.ebi.ac.uk/~jmason/DR8_windowed/jobs/",
+        "target": "https://wwwdev.ebi.ac.uk/~hamedhm/windowing/DR8/jobs/",
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true

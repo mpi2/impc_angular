@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NgModule } from '@angular/core';
 import {SlideshowModule} from 'ng-simple-slideshow';
 import { MatExpansionModule, MatRadioModule } from '@angular/material';
@@ -8,12 +9,11 @@ import { HighchartsChartComponent } from './highcharts-chart.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule} from '@angular/forms';
-import { MatCheckboxModule, MatProgressSpinnerModule, MatCardModule, MatSliderModule, MatGridListModule, MatInputModule, MatSelectModule, MatCheckbox, MatButtonModule, MatTabsModule, MatToolbarModule} from '@angular/material';
+import { MatCheckboxModule, MatProgressSpinnerModule, MatCardModule, MatSliderModule, MatGridListModule, MatInputModule, MatSelectModule, MatCheckbox, MatButtonModule, MatTabsModule, MatToolbarModule, MatMenuModule} from '@angular/material';
 
 
 
 import { AppComponent  } from './app.component';
-import { MenusModule } from './menus/menus.module';
 import { Router } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -29,7 +29,8 @@ import { PhenotypeofthemonthPageComponent } from './phenotypeofthemonth-page/phe
 import { ImageacknowledgementsPageComponent } from './imageacknowledgements-page/imageacknowledgements-page.component';
 import { CellHeatmapComponent } from './cell-heatmap/cell-heatmap.component';
 import { ProcedureHeatmapComponent } from './procedure-heatmap/procedure-heatmap.component';
-import { BottomMenuComponent } from './menus/bottom-menu/bottom-menu.component';
+import { BottomMenuComponent } from './bottom-menu/bottom-menu.component';
+import { TopMenuComponent } from './top-menu/top-menu.component';
 
 
 
@@ -45,10 +46,10 @@ import { BottomMenuComponent } from './menus/bottom-menu/bottom-menu.component';
     PhenotypeofthemonthPageComponent,
     ImageacknowledgementsPageComponent,
     CellHeatmapComponent,
-    ProcedureHeatmapComponent, ProcedureHeatmapComponent, BottomMenuComponent,
+    ProcedureHeatmapComponent, ProcedureHeatmapComponent, BottomMenuComponent, TopMenuComponent
   ],
   imports: [
-    BrowserModule, MenusModule, AppRoutingModule, SlideshowModule, MatExpansionModule, FormsModule, HttpClientModule, MatRadioModule, MatProgressSpinnerModule, MatSelectModule, MatInputModule, MatCardModule, MatTabsModule, MatToolbarModule
+    BrowserModule, AppRoutingModule, SlideshowModule, MatExpansionModule, FormsModule, HttpClientModule, MatRadioModule, MatProgressSpinnerModule, MatSelectModule, MatInputModule, MatCardModule, MatTabsModule, MatToolbarModule, MatMenuModule, BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

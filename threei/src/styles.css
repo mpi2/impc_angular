@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 /* threeI css being added here */
 *{font-family: "source sans pro" ,"Euphemia UCAS","Kannada Sangam MN";}
-html, body, div, applet, object, iframe, h1,h2, h3, h4, h5, h6, p, a, img, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, header, footer {
+html, body, div, applet, object, iframe, h1,h2, h3, h4, h5, h6, p, a, img, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, header {
     border: 0;
     outline: 0;
     font-weight: inherit;

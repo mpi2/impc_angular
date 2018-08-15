@@ -1,3 +1,4 @@
+import { MatMenuModule } from '@angular/material';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

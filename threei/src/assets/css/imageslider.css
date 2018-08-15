@@ -1,10 +1,9 @@
-* {box-sizing:border-box}
-body {font-family: "Euphemia UCAS","Kannada Sangam MN";}
+
 .mySlides {display:none}
 
 /* Slideshow container */
 .slideshow-container {
-  width: 50%;
+  width: 100%;
   height: auto;
   position: relative;
   margin: auto;
@@ -12,9 +11,9 @@ body {font-family: "Euphemia UCAS","Kannada Sangam MN";}
 
 .slideshow-container[_ngcontent-c2]{
   top:2%;
-  width: 50%;
+  width: 100%;
   height: auto;
-  right:70px;
+  right:0px;
   position:center;
   margin: auto;
 }
@@ -27,7 +26,6 @@ body {font-family: "Euphemia UCAS","Kannada Sangam MN";}
   bottom: 8px;
   width: 100%;
   text-align: center;
-  font-family: "Euphemia UCAS","Kannada Sangam MN";
 }
 
 /* Fading animation */

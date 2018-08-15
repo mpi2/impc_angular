@@ -1,4 +1,74 @@
 /* You can add global styles to this file, and also import other style files */
+/* threeI css being added here */
+*{font-family: "source sans pro" ,"Euphemia UCAS","Kannada Sangam MN";}
+html, body, div, applet, object, iframe, h1,h2, h3, h4, h5, h6, p, a, img, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+    border: 0;
+    outline: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+    margin: 0;
+}
+
+/* text-decoration: none; color: white;  padding:30px; */
+
+#clear{
+    clear: right;
+    height: 0;
+    width: 0;
+    margin: 0;
+    padding: 0;
+}
+
+#center-content{
+    width: 60%;
+    float: left;
+}
+#main, .menu-content{
+    position: relative;
+    width: 70%;
+    min-width: 1100px;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 25px;
+}
+
+#center-content {
+    position: relative;
+    width: 68%;
+    min-width: 1100px;
+    max-width: 1300px;
+    margin: 100px auto;
+    /* padding: 0 25px; */
+    float: left;
+}
+
+
+#sidebar {
+    width: 20%;
+    float: right;
+    right:0px;
+    position: relative;
+}
+
+#logo {
+    height: 70px;
+    /* padding-top: 2px; */
+}
+
+#top-menu{
+    /* padding: 1.1em 0; */
+    background-color: #eee;
+    margin: none;
+    /* border-bottom: #ddd 1px solid; */
+}
+#bottom-menu{
+    background-color: #666;
+    align-content: center;
+    
+}
+
 /* ::ng-deep .mat-button-focus-overlay {
     background-color:orange;
 } */
@@ -11,6 +81,12 @@
     background-color:orange;
 }
 
+
+footer.footerToBottom {
+    position: absolute;
+    width:100%;
+    bottom:0px;
+}
 /* #mn > div > a:nth-child(2) > button > span{
     color: orange
 } */

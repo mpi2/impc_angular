@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 /* threeI css being added here */
 *{font-family: "source sans pro" ,"Euphemia UCAS","Kannada Sangam MN";}
-html, body, div, applet, object, iframe, h1,h2, h3, h4, h5, h6, p, a, img, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+html, body, div, applet, object, iframe, h1,h2, h3, h4, h5, h6, p, a, img, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, header, footer {
     border: 0;
     outline: 0;
     font-weight: inherit;
@@ -34,6 +34,10 @@ html, body, div, applet, object, iframe, h1,h2, h3, h4, h5, h6, p, a, img, ol, u
     padding: 0 25px;
 }
 
+a .menu-content{
+    color: #eee;
+}
+
 #center-content {
     position: relative;
     width: 68%;
@@ -58,14 +62,12 @@ html, body, div, applet, object, iframe, h1,h2, h3, h4, h5, h6, p, a, img, ol, u
 }
 
 #top-menu{
-    /* padding: 1.1em 0; */
     background-color: #eee;
-    margin: none;
-    /* border-bottom: #ddd 1px solid; */
 }
 #bottom-menu{
     background-color: #666;
     align-content: center;
+    height: 150px;
     
 }
 
@@ -86,6 +88,7 @@ footer.footerToBottom {
     position: absolute;
     width:100%;
     bottom:0px;
+    
 }
 /* #mn > div > a:nth-child(2) > button > span{
     color: orange

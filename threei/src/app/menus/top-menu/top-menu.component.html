@@ -9,18 +9,18 @@
 
 
 <!-- <nav><a routerLink="/home" >HOME</a></nav> -->
-<a  routerLink="home"  ><button  mat-button routerLinkActive="mat-accent" >HOME</button></a>
-<a  routerLink="data"  ><button mat-button>DATA</button></a>
-<a routerLink="analysis" ><button mat-button>ANALYSIS</button></a>
-<a routerLink="methods" ><button mat-button>METHODS</button></a>
-<a routerLink="contact" ><button mat-button>CONTACT</button></a>
+<a  routerLink="home" routerLinkActive="active" ><button  mat-button routerLinkActive="mat-accent" >HOME</button></a>
+<a  routerLink="data" routerLinkActive="active" ><button mat-button>DATA</button></a>
+<a  routerLink="analysis" routerLinkActive="active"><button mat-button>ANALYSIS</button></a>
+<a  routerLink="methods" routerLinkActive="active"><button mat-button>METHODS</button></a>
+<a  routerLink="contact" routerLinkActive="active" ><button mat-button>CONTACT</button></a>
 
-<a routerLink="learn_more" ><button mat-button [matMenuTriggerFor]="menu2">LEARN MORE</button></a>
+<a  routerLink="learn_more" routerLinkActive="active" ><button mat-button [matMenuTriggerFor]="menu2">LEARN MORE</button></a>
 <mat-menu #menu2="matMenu">
-    <a routerLink="faq"><button mat-menu-item>FAQ</button></a>
-    <a routerLink="glossary" ><button mat-menu-item>Glossary</button></a>
-    <a routerLink="publications" ><button mat-menu-item>Publications</button></a>
-    <a routerLink="privacy" ><button mat-menu-item>Privacy Policy</button></a>
+    <a routerLink="faq" routerLinkActive="active"><button mat-menu-item>FAQ</button></a>
+    <a routerLink="glossary" routerLinkActive="active" ><button mat-menu-item>Glossary</button></a>
+    <a routerLink="publications" routerLinkActive="active"><button mat-menu-item>Publications</button></a>
+    <a routerLink="privacy" routerLinkActive="active"><button mat-menu-item>Privacy Policy</button></a>
 </mat-menu>
 
 </div>
@@ -28,3 +28,4 @@
 <div class="clear"></div>
 </div>
 </header>
+

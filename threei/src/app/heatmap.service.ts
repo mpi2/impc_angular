@@ -28,13 +28,13 @@ export class HeatmapService {
   getFilterString(filter: CellFilter) {
     let filterQuery = '';
     if (filter) {
-      console.log('query button clicked with search=' + filter.searchText + ' constructSeleted ' + filter.construct + ' cell selected=' + filter.cellType + ' cellSubtypeSelected=' + filter.cellSubType + 'sortField=' + filter.sort);
+      console.log('query button clicked with search=' + filter.keyword + ' constructSeleted ' + filter.construct + ' cell selected=' + filter.cellType + ' cellSubtypeSelected=' + filter.cellSubType + 'sortField=' + filter.sort);
       filterQuery += '?';
       if (filter.sort) {
         filterQuery += '&sort=' + filter.sort;
       }
-      if(filter.searchText){
-        filterQuery+='&keywords='+filter.searchText;
+      if(filter.keyword){
+        filterQuery+='&keyword='+filter.keyword;
       }
       if(filter.construct){
         filterQuery+='&construct='+filter.construct;
@@ -44,6 +44,9 @@ export class HeatmapService {
       }
       if(filter.cellSubType){
         filterQuery+='&cellSubType='+filter.cellSubType;
+      }
+      if(filter.assay){
+        filterQuery+='&assay='+filter.assay;
       }
     }
     return filterQuery;

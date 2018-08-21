@@ -91,7 +91,7 @@ cellChartOptions={
     marginBottom: 80,
     plotBorderWidth: 1,
      height: 17000,
-     width:1000
+     width:750
 },
 
 
@@ -355,34 +355,35 @@ titleChange = function(event) {
           },
     
         yAxis: [{
-          categories: this.constructs,
+          categories: this.rowHeaders,
           title: null
         },{
-        categories: this.rowHeaders,
+        categories: this.constructs,
         title: null
         } ],
     
         tooltip: {
-            formatter: function () {
-                return '<b>' + this.series.xAxis.categories[this.point.x] + '</b><br/>' +
-                this.series.colorAxis.dataClasses[this.point.dataClass].name + '</b><br>'+
-                '<b>' + this.series.yAxis.categories[this.point.y] + '</b>';
-            }
+          crosshairs: [true, true],
+          formatter: function() {
+            return "I'd like to have first yAxis category here<br>" + "<span style=\"font-weight: bold; color:" + this.series.color + "\">" + this.series.chart.yAxis[0].categories[this.y] + "</span><br/>" + "And second yAxis category here. <br/>" + "<span style=\"font-weight: bold; color:" + this.series.color + "\">" + this.series.chart.yAxis[1].categories[this.y] + "</span><br/>" + "x value: " + this.point.x + "<br/>"
+          },
+          "useHTML": true
         },
+        
         plotOptions: {
           series: {
               events: {
                   click: function (e) {
-                      var gene= e.point.series.yAxis.categories[e.point.y];
-                      //var construct=e.point.series.yAxis.categories[e.point.y];
+                    var gene= e.point.series.yAxis.categories[e.point.y];
+                      //var construct= e.point.series.yAxis[0].categories;//[e.point.y];
                       var procedure=e.point.series.xAxis.categories[e.point.x];
                       
                       var text = 'gene: ' +gene +
-                               ' Procedure: ' + procedure + ' significance=' + e.point.value ;
+                               ' Procedure: ' + procedure + ' significance=' + e.point.value;
                      
                       //may have to use routerLink like for menus to link to our new not created yet parameter page
                         var url = 'http://starwars.com';
-                        var routerLink='procedureDetails?'+'procedure="'+procedure+'"&gene="'+gene+'"';
+                        var routerLink='details?'+'procedure="'+procedure+'"&gene="'+gene+'"';
                         window.open(routerLink,'_blank');
                         //   this.chart.clickLabel.attr({
                         //       text: text
@@ -390,8 +391,8 @@ titleChange = function(event) {
                           console.log('text on click='+text);
                       
                   }
-              }
-          }
+              },
+          },
       },
     
         series: [{

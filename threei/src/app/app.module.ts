@@ -35,9 +35,10 @@ import { ProcedureHeatmapComponent } from './procedure-heatmap/procedure-heatmap
 
 @NgModule({
   declarations: [
-    AppComponent,SafePipe,
+    AppComponent,
+    SafePipe,
     HomePageComponent,
-    FaqPageComponent, DataPageComponent, AnalysisPageComponent, MethodsPageComponent, ContactPageComponent, GlossaryPageComponent, 
+    FaqPageComponent, DataPageComponent, AnalysisPageComponent, MethodsPageComponent, ContactPageComponent, GlossaryPageComponent,
     PublicationsPageComponent, PrivacyPageComponent, LearnMorePageComponent,
     HighchartsChartComponent,
     ConsortiumPageComponent,

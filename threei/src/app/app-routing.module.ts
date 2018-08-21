@@ -15,6 +15,7 @@ import { PrivacyPageComponent } from './privacy-page/privacy-page.component';
 import { LearnMorePageComponent } from './learn-more-page/learn-more-page.component';
 import { ConsortiumPageComponent } from './consortium-page/consortium-page.component';
 import { PhenotypeofthemonthPageComponent } from './phenotypeofthemonth-page/phenotypeofthemonth-page.component';
+import {ImageacknowledgementsPageComponent} from "./imageacknowledgements-page/imageacknowledgements-page.component";
 
 const appRoutes: Routes = [
   {
@@ -62,7 +63,7 @@ const appRoutes: Routes = [
     // outlet: 'popup'
   },
   {
-    path: 'consortium',
+    path: 'consortium-meeting',
     component: ConsortiumPageComponent,
     //outlet: 'popup'
   },
@@ -71,13 +72,19 @@ const appRoutes: Routes = [
     component: PhenotypeofthemonthPageComponent,
     //outlet: 'popup'
   },
-  
+
+  {
+    path: 'image-acknowledgements',
+    component: ImageacknowledgementsPageComponent,
+    //outlet: 'popup'
+  },
+
   {
     path: 'learn_more',
     component: LearnMorePageComponent,
     // outlet: 'popup'
   },
-  
+
    { path: '',   redirectTo: 'home', pathMatch: 'full' }
 //   { path: '**', component: PageNotFoundComponent }
 ];

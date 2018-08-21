@@ -1,20 +1,20 @@
-import { NgModule }             from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 
 import { AppComponent } from './app.component';
-import { HomePageComponent }  from './home-page/home-page.component';
+import { HomePageComponent } from './home-page/home-page.component';
 import { DataPageComponent} from './data-page/data-page.component';
 import { AnalysisPageComponent } from './analysis-page/analysis-page.component';
 import { MethodsPageComponent } from './methods-page/methods-page.component';
 import { ContactPageComponent } from './contact-page/contact-page.component';
-import { FaqPageComponent }    from './faq-page/faq-page.component';
-import { GlossaryPageComponent }    from './glossary-page/glossary-page.component';
-import { PublicationsPageComponent }    from './publications-page/publications-page.component';
-import { PrivacyPageComponent }    from './privacy-page/privacy-page.component';
+import { FaqPageComponent } from './faq-page/faq-page.component';
+import { GlossaryPageComponent } from './glossary-page/glossary-page.component';
+import { PublicationsPageComponent } from './publications-page/publications-page.component';
+import { PrivacyPageComponent } from './privacy-page/privacy-page.component';
 import { LearnMorePageComponent } from './learn-more-page/learn-more-page.component';
 import { ConsortiumPageComponent } from './consortium-page/consortium-page.component';
-import { PhenotypeofthemonthPageComponent }  from './phenotypeofthemonth-page/phenotypeofthemonth-page.component';
+import { PhenotypeofthemonthPageComponent } from './phenotypeofthemonth-page/phenotypeofthemonth-page.component';
 
 const appRoutes: Routes = [
   {

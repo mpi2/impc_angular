@@ -47,10 +47,12 @@ export class AppComponent {
 
     return month[d.getMonth()];
   }
-getPhenotype(): string {
-  var d = new Date();
-  var n = d.getMonth() + 1;
-  switch (n) {
+
+
+  getPhenotype(): string {
+    var d = new Date();
+    let n = d.getMonth() + 1;
+    switch (n) {
       case 1 :  return 'Adgrd1'; break;
       case 2 : return 'Bivm'; break;
       case 3 : return 'Chd9'; break;
@@ -66,7 +68,7 @@ getPhenotype(): string {
       default : break;
 
     }
+ }
 
-}
 
 }

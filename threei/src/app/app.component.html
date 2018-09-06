@@ -33,25 +33,7 @@
 
     <aside id="sidebar"  >
       <div class="region region-sidebar-second">
-        <div id="block-views-phenotype-of-the-month-block-1" class="block block-views">
-          <div class="head"> Phenotype of  the  Month</div>
-          <div class="content">
-            <div class="view view-phenotype-of-the-month view-id-phenotype_of_the_month view-display-id-block_1 view-dom-id-aea57fa4b3e8167014066f06dcf76299">
-              <div class="view-content">
-                <div class="views-row views-row-1 views-row-odd views-row-first views-row-last">
-                  <div class="views-field views-field-php">
-                    <span class="field-content">
-                    <p>
-                      <a name="phenotype-of-the-month-view" class="simple-dialog simpleDialogProcessed"
-                          style="font-size: 1.5em;" rel="width:680;position:[center,160];" data-hasqtip="68"
-                          oldtitle="Phenotype of the Month" title="" (click)="onClick()">{{getPhenotype()}}</a>
-                    </p></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-                    </div>
-        </div>
+        <threei-phenotype-of-the-month></threei-phenotype-of-the-month>
         <div id="block-block-23" class="block block-block">
           <div class="content">
             <div id="block-heatmap-stats">
@@ -107,10 +89,11 @@
                 <img src="/assets/images/slider/impc_logo-150x50.png" width="150" height="50"/></a></p>
 
 
-            <div class="clear"></div>
+           
           </div>
         </div>
       </div>
+      <div class="clear"></div>
     </aside>
               <slideshow [imageUrls]="imageUrlArray" [height]="height"
               [minHeight]="'280px'"
@@ -156,7 +139,6 @@
        </div>
 
     </mat-toolbar>
--->
 
 </div>
 

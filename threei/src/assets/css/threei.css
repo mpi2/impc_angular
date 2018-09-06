@@ -131,7 +131,7 @@ li {
     padding-bottom: 6em;
     padding-top: 3em;
   right:40px;
-  z-index: -1;
+  /* z-index: -1; */
 }
 .region-sidebar-second {
     width: 20%;

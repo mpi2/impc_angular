@@ -30,6 +30,7 @@ import { ImageacknowledgementsPageComponent } from './imageacknowledgements-page
 import { CellHeatmapComponent } from './cell-heatmap/cell-heatmap.component';
 import { ProcedureHeatmapComponent } from './procedure-heatmap/procedure-heatmap.component';
 import { DetailsPageComponent } from './details-page/details-page.component';
+import { PhenotypeOfTheMonthComponent } from './phenotype-of-the-month/phenotype-of-the-month.component';
 
 
 
@@ -46,7 +47,7 @@ import { DetailsPageComponent } from './details-page/details-page.component';
     PhenotypeofthemonthPageComponent,
     ImageacknowledgementsPageComponent,
     CellHeatmapComponent,
-    ProcedureHeatmapComponent, ProcedureHeatmapComponent, DetailsPageComponent,
+    ProcedureHeatmapComponent, ProcedureHeatmapComponent, DetailsPageComponent, PhenotypeOfTheMonthComponent,
   ],
   imports: [
     BrowserModule, MenusModule, AppRoutingModule, SlideshowModule, MatExpansionModule, FormsModule, HttpClientModule, MatRadioModule, MatProgressSpinnerModule, MatSelectModule, MatInputModule, MatCardModule, MatTabsModule, MatToolbarModule

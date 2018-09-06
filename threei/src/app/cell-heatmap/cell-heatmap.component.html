@@ -1,7 +1,9 @@
+
+
 <form (ngSubmit)="filterMethod()" #loginForm="ngForm">
 
     <mat-card>
-        <mat-card-content>
+        <mat-card-content width="400px">
          
           
       <mat-form-field >
@@ -22,7 +24,7 @@
           </mat-select>
         </mat-form-field>
       
-       <mat-form-field>
+       <!-- <mat-form-field>
           <mat-select   placeholder="Cell subtype" [(value)]="cellSubtypeSelected">
             <mat-option>None</mat-option>
             <mat-option *ngFor="let cellSubType of cellSubTypes" [value]="cellSubType">{{cellSubType}}</mat-option>
@@ -35,7 +37,7 @@
               <mat-option>None</mat-option>
               <mat-option *ngFor="let assay of assays" [value]="assay">{{assay}}</mat-option>
           </mat-select>
-        </mat-form-field> 
+        </mat-form-field>  -->
 
 
         <button mat-fab>
@@ -63,7 +65,7 @@
 
 <mat-spinner *ngIf="!resourceLoaded"></mat-spinner>
 <div>
-    <highcharts-chart style="height: 1700px;  max-width: 1000px; min-width: 800px; margin: 0 auto"
+    <highcharts-chart style="height: 1500px;  max-width: 700px; min-width: 600px; margin: 0 auto"
       [Highcharts]="Highcharts"
       [options]="cellChartOptions"
       [(update)]="updatechart"
@@ -72,16 +74,3 @@
     ></highcharts-chart>
 </div>
 
-<!-- <mat-tab label="Procedure View">
-    <ng-template matTabContent>
-        <div style="height: 400px;  max-width: 1000px; margin: 0 auto">
-            <highcharts-chart
-              [Highcharts]="Highcharts"
-              [options]="heatmapChart"
-              [(update)]="updateDemo2"
-           
-              
-            ></highcharts-chart>
-          </div>
-    </ng-template>
-  </mat-tab> -->

@@ -16,6 +16,8 @@ import { LearnMorePageComponent } from './learn-more-page/learn-more-page.compon
 import { ConsortiumPageComponent } from './consortium-page/consortium-page.component';
 import { PhenotypeofthemonthPageComponent } from './phenotypeofthemonth-page/phenotypeofthemonth-page.component';
 import {ImageacknowledgementsPageComponent} from "./imageacknowledgements-page/imageacknowledgements-page.component";
+import { DetailsPageComponent } from './details-page/details-page.component';
+
 
 const appRoutes: Routes = [
   {
@@ -82,6 +84,12 @@ const appRoutes: Routes = [
   {
     path: 'learn_more',
     component: LearnMorePageComponent,
+    // outlet: 'popup'
+  },
+
+  {
+    path: 'details',
+    component: DetailsPageComponent,
     // outlet: 'popup'
   },
 

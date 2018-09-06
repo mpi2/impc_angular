@@ -25,6 +25,18 @@ export class HeatmapService {
           urlstring, { observe: 'response' });
     }
 
+    getDetailsPageResponse(gene: string, procedure: string, construct: string):
+      Observable<HttpResponse<Response>> {
+      console.log('calling heatmap service method getDetailsPageResponse');
+      let filterString='gene='+gene;
+      if(procedure)filterString+='&procedure='+procedure;
+      if(construct)filterString+='&construct='+construct;
+      let urlstring=this.restBaseUrl +'procedure_page?'+filterString;
+      console.log('urlSTring='+urlstring);
+        return this.http.get<Response>(
+          urlstring, { observe: 'response' });
+    }
+
   getFilterString(filter: CellFilter) {
     let filterQuery = '';
     if (filter) {

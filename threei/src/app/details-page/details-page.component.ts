@@ -69,8 +69,23 @@ export class DetailsPageComponent implements OnInit {
 
   displayTable(): any {
 
-    console.log('rows='+this.rows);
-    console.log('columnHeaders='+this.columnHeaders);
+    //console.log('rows='+this.rows);
+    //console.log('columnHeaders='+this.columnHeaders);
+  }
+
+  getStyle(sig: number) {
+    if(sig==0) {
+      return "white";
+    }
+    if(sig==1) {
+      return "grey";
+    } 
+    if(sig==2) {
+      return "blue";
+    }
+    if(sig==3) {
+      return "red";
+    }
   }
 
 }

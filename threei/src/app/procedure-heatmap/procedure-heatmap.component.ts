@@ -258,13 +258,13 @@ this.procedureChart= {
         reserveSpace: true,
       },
 //example of multiple columns working http://jsfiddle.net/0qmt0mkq/
-    yAxis: [{
-    categories: this.constructs,
-    title: null
-    },{
+yAxis: [{
     categories: this.rowHeaders,
     title: null
-    } ],
+  },{
+  categories: this.constructs,
+  title: null
+  } ],
 
     colorAxis: {
 
@@ -323,7 +323,7 @@ this.procedureChart= {
                  
                   //may have to use routerLink like for menus to link to our new not created yet parameter page
                     var url = 'http://starwars.com';
-                    var routerLink='details?'+'procedure="'+procedure+'"&gene="'+gene+'"';
+                    var routerLink='details?'+'procedure='+procedure+'&gene='+gene;
                     window.open(routerLink,'_blank');
                     //   this.chart.clickLabel.attr({
                     //       text: text

@@ -124,9 +124,10 @@
 
 
 <mat-toolbar>
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+      <div fxFlex="10%"></div>
 
-
-            <div >
+            <div fxFlex="80%" >
             <a style="text-decoration: none; color: white; padding:30px; " href="/">HOME  </a>
             <a style="text-decoration: none; color: white;  padding:30px;" href="/data">DATA  </a>
             <a style="text-decoration: none; color: white; padding:30px; " href="/analysis">ANALYSIS  </a>
@@ -135,10 +136,11 @@
             <a style="text-decoration: none; color: white; padding:30px; " href="/learn_more">LEARNMORE  </a>
               
        
-        <p class="textright" style="text-align: right;word-spacing: normal; font-size:12px">Software <br/></p>
-
-       </div>
-
+            <p class="textright" style="text-align: right;word-spacing: normal; font-size:12px">Software <br/></p>
+          
+            </div>
+      <div fxFlex="10%"></div>
+    </div>
     </mat-toolbar>
 
 </div>

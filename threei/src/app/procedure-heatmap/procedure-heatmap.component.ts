@@ -64,7 +64,7 @@ export class ProcedureHeatmapComponent implements OnInit {
       marginBottom: 80,
       plotBorderWidth: 1,
       height: 17000,
-      width:750
+      width: 1000
   },
   
   

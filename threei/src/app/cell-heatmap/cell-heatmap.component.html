@@ -62,15 +62,18 @@
       </mat-card-content>
     </mat-card>
 </form>
-
+<mat-card>
+    <mat-card-content>
 <mat-spinner *ngIf="!resourceLoaded"></mat-spinner>
-<div>
-    <highcharts-chart style="height: 1500px;  max-width: 700px; min-width: 600px; margin: 0 auto"
+
+    <highcharts-chart
       [Highcharts]="Highcharts"
       [options]="cellChartOptions"
       [(update)]="updatechart"
    
       
     ></highcharts-chart>
-</div>
+    </mat-card-content>
+    </mat-card>
+
 

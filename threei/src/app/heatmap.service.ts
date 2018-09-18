@@ -5,6 +5,8 @@ import { catchError, retry } from 'rxjs/operators';
 import { Observable, Subject, ReplaySubject, from, of, range } from 'rxjs';
 import { ProcedureFilter } from './procedure-heatmap/procedure-filter';
 import { CellFilter } from './cell-heatmap/cell-filter';
+import { environment } from '../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,7 @@ import { CellFilter } from './cell-heatmap/cell-filter';
 export class HeatmapService {
 
   restDataBaseUrl = 'http://localhost:8080/data';
-  restBaseUrl= 'http://localhost:8080/';
+  restBaseUrl= environment.restBaseUrl;
   constructor(private http: HttpClient) { }
 
   getCellHeatmapResponse(filter: CellFilter):

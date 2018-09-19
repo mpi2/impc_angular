@@ -1518,13 +1518,7 @@ div.node > img{
     font-size:larger;
     font-family: "source sans pro" ,"Euphemia UCAS","Kannada Sangam MN";
 }
-a[href$='.pdf']{
-    padding:5px 20px 5px 0;
-    background:transparent url(/static/images/impc.jpg) no-repeat center right;
-}
-ul.ul-pdf a[href$='.pdf']{
-    background:transparent url(/static/images/pdf.png) no-repeat center left;
-}
+
 ul.ul-pdf{
     list-style-type:none;
 }

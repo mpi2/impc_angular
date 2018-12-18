@@ -5,12 +5,12 @@ mat-form-field {
 
 mat-form-field.short {
     margin-right: 30px ;
-    width: 10%;
+    width: 9%;
 }
 
 mat-form-field.long {
     margin-right: 30px ;
-    width: 31%;
+    width: 36%;
 }
 
 mat-form-field.second {
@@ -18,13 +18,15 @@ mat-form-field.second {
 }
 
 .toggle {
-    position: relative;
-    float: right;
+  position: relative;
+  float: left;
+  margin-left: -30px;
+  margin-top: 20px;
 }
 .toggle-wrapper {
     display: inline-block;
-    width: 100%;
-} 
+    width: 87%;
+}
 
 .notice {
     color: rgba(0, 0, 0, 0.42);
@@ -37,4 +39,15 @@ mat-form-field.second {
 
 .progress-wrapper {
     display: inline-block;
+}
+
+.clear {
+  float: right;
+}
+
+.version {
+  margin-right: 30px;
+  width: 28%;
+  float: left;
+  margin-left: 20px;
 }

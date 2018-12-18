@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   baseUrl: 'http://localhost:4300',
-  dataBaseUrl: 'http://localhost:4300/Results',
+  dataBaseUrl: 'http://localhost:4300/windowing/',
   solrUrl: 'http://localhost:4300/solr/'
 };
 

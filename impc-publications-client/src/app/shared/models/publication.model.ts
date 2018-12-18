@@ -17,10 +17,11 @@ export class Publication {
    journalInfo: any;
    authors: any;
    fragments: any;
+   consortiumPaper: boolean;
 
    constructor(title: string, fullTextUrlList: FullTextUrl[], journal: string, authorString: string,
     keywords: any, datasource: string, alleles: Allele[],
-    falsePositive: boolean, reviewed: boolean, firstPublicationDate: String) {
+    falsePositive: boolean, reviewed: boolean, consortiumPaper: boolean, firstPublicationDate: String) {
         this.title = title;
         this.fullTextUrlList = fullTextUrlList;
         this.journal = journal;
@@ -30,6 +31,7 @@ export class Publication {
         this.alleles = alleles;
         this.falsePositive = falsePositive;
         this.reviewed = reviewed;
+        this.consortiumPaper = consortiumPaper;
         this.firstPublicationDate = firstPublicationDate;
    }
 }

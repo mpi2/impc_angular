@@ -1,57 +1,67 @@
 <div style="text-align: center; margin-top: 20px;">
-<span *ngIf="editing" class="notice">Drag and drop the fields to reorder</span>
-<form [formGroup]="formGroup" dnd-sortable-container [sortableData]="filters">
-  <ng-container *ngFor="let filter of filters; let i = index">
-    <mat-form-field dnd-sortable [sortableIndex]="i" [dragEnabled]="editing" *ngIf="filter.type !== 'none'">
-      <div *ngIf="filter.type === 'select'" [matBadge]="editing ? '&#x21b9;' : i + 1" matBadgePosition="before" matBadgeColor="primary">
-        <mat-select [placeholder]="filter.title" #select [formControlName]="filter.name"  (selectionChange)="selected(filter, true)">
-          <mat-option *ngFor="let option of dynamicOptions[filter.name] | async" [value]="option" >
-            {{ option }}
-          </mat-option>
-        </mat-select>
-      </div>
-      <div *ngIf="filter.type === 'autocomplete'" [matBadge]="editing ? '&#x21b9;' : i + 1" matBadgePosition="before" matBadgeColor="primary">
-        <div *ngIf="filter.name !== 'procedure' && filter.name !== 'parameter' ">
-          <input matInput [placeholder]="filter.title" [matAutocomplete]="auto" [formControlName]="filter.name" (click)="$event.target.select()">
-          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected(filter, true)" [autoActiveFirstOption]="true">
-            <mat-option  *ngFor="let option of dynamicOptions[filter.name] | async" [value]="option">
+  <span *ngIf="editing" class="notice">Drag and drop the fields to reorder</span>
+  <form [formGroup]="formGroup" dnd-sortable-container [sortableData]="filters">
+    <ng-container *ngFor="let filter of filters; let i = index">
+      <mat-form-field dnd-sortable [sortableIndex]="i" [dragEnabled]="editing" *ngIf="filter.type !== 'none'">
+        <div *ngIf="filter.type === 'select'" [matBadge]="editing ? '&#x21b9;' : i + 1" matBadgePosition="before"
+          matBadgeColor="primary">
+          <mat-select [placeholder]="filter.title" #select [formControlName]="filter.name" (selectionChange)="selected(filter, true)">
+            <mat-option *ngFor="let option of dynamicOptions[filter.name] | async" [value]="option">
               {{ option }}
             </mat-option>
-          </mat-autocomplete>
+          </mat-select>
         </div>
-        <div *ngIf="filter.name === 'procedure' || filter.name === 'parameter'">
-          <input matInput [placeholder]="filter.title" [matAutocomplete]="auto" [formControlName]="filter.name" (click)="$event.target.select()">
-          <mat-autocomplete  #auto="matAutocomplete" (optionSelected)="selected(filter, true)" [autoActiveFirstOption]="true" id="{{filter.name}}">
-            <mat-option *ngFor="let option of dynamicOptions[filter.name] | async" [value]="option.name + ' | ' + option.id">
-              <small>{{option.name}}</small> |
-              <small>{{option.id}}</small>
-            </mat-option>
-          </mat-autocomplete>
-        </div>
+        <div *ngIf="filter.type === 'autocomplete'" [matBadge]="editing ? '&#x21b9;' : i + 1" matBadgePosition="before"
+          matBadgeColor="primary">
+          <div *ngIf="filter.name !== 'procedure' && filter.name !== 'parameter' ">
+            <input matInput [placeholder]="filter.title" [matAutocomplete]="auto" [formControlName]="filter.name"
+              (click)="$event.target.select()">
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected(filter, true)" [autoActiveFirstOption]="true">
+              <mat-option *ngFor="let option of dynamicOptions[filter.name] | async" [value]="option">
+                {{ option }}
+              </mat-option>
+            </mat-autocomplete>
+          </div>
+          <div *ngIf="filter.name === 'procedure' || filter.name === 'parameter'">
+            <input matInput [placeholder]="filter.title" [matAutocomplete]="auto" [formControlName]="filter.name"
+              (click)="$event.target.select()">
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected(filter, true)" [autoActiveFirstOption]="true"
+              id="{{filter.name}}">
+              <mat-option *ngFor="let option of dynamicOptions[filter.name] | async" [value]="option.name + ' | ' + option.id">
+                <small>{{option.name}}</small> |
+                <small>{{option.id}}</small>
+              </mat-option>
+            </mat-autocomplete>
+          </div>
 
-      </div>
-      <div matSuffix *ngIf="loading[filter.name] && formGroup.controls[filter.name].enabled">
+        </div>
+        <div matSuffix *ngIf="loading[filter.name] && formGroup.controls[filter.name].enabled">
           <mat-progress-spinner color="accent" mode="indeterminate" diameter="20" strokeWidth="2" matSuffix></mat-progress-spinner>
-      </div>
-    </mat-form-field>
-  </ng-container>
+        </div>
+      </mat-form-field>
+    </ng-container>
 
-</form>
-<div class="toggle-wrapper">
-    <mat-slide-toggle
-    class="toggle"
-    color="accent"
-    [(ngModel)]="editing"
-    [disabled]="false"
-    (change)="toggle()"
-    >
-    <span *ngIf="editing" style="color: #ff9800">
+  </form>
+  <div class="toggle-wrapper">
+    <mat-slide-toggle class="toggle" color="accent" [(ngModel)]="editing" [disabled]="false" (change)="toggle()">
+      <span *ngIf="editing" style="color: #ff9800">
         Deactivate filter reordering
-    </span>
-    <span *ngIf="!editing">
+      </span>
+      <span *ngIf="!editing">
         Activate filter reordering
-    </span>
+      </span>
     </mat-slide-toggle>
-</div>
+    <mat-form-field class="version">
+        <mat-select  placeholder="Select version" [(value)]="version" (selectionChange)="changeVersion($event)">
+            <mat-option value="DR8|Results_8">DR8_Version 1</mat-option>
+            <mat-option value="DR8|ResultsV2sen001_2TstPR">DR8_Version 2</mat-option>
+            <mat-option value="DR8|ResultsV3Sen111_9TstPR">DR8_Version 3</mat-option>
+            <mat-option value="DR9.1|Results_9.1">DR9.1_Version 1</mat-option>
+            <!-- <mat-option value="DR9|Results_9V2Sen111">DR9_Version 2</mat-option> -->
+          </mat-select>
+    </mat-form-field>
+
+    <button mat-flat-button color="accent" class="clear" *ngIf="formGroup.controls[filters[0].name].valid" (click)="formGroup.controls[filters[0].name].setValue('')">CLEAR</button>
+  </div>
 
 </div>

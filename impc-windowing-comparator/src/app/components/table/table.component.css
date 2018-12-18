@@ -1,11 +1,16 @@
 .title {
-    text-align: center;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-    margin-top: 0px;
+  text-align: center;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  margin-top: 0px;
 }
 
 .footer-row td {
-    color: #75787a;
-    font-weight: 700;
-    text-align: right;
-  }
+  color: #75787a;
+  font-weight: 700;
+  text-align: right;
+}
+.caption {
+  margin-top: 5px;
+  font-size: small;
+  text-align: center;
+}

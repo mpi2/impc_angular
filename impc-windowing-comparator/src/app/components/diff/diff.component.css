@@ -1,0 +1,14 @@
+.down {
+  color: rgb(174, 0, 0);
+  font-weight: 600;
+}
+
+.up {
+  color: rgb(17, 162, 4);
+  font-weight: 600;
+}
+
+.same {
+  color: orange;
+  font-weight: 600;
+}

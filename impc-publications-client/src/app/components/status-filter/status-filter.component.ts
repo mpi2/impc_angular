@@ -1,5 +1,11 @@
-import { PublicationsService } from '../../shared/services/publications.service';
-import { Component, OnInit, HostBinding, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  HostBinding,
+  Input,
+  Output,
+  EventEmitter
+} from '@angular/core';
 
 @Component({
   selector: 'impc-status-filter',
@@ -7,7 +13,6 @@ import { Component, OnInit, HostBinding, Input, Output, EventEmitter } from '@an
   styleUrls: ['./status-filter.component.css']
 })
 export class StatusFilterComponent implements OnInit {
-
   @HostBinding('class')
   classes = 'filter';
 
@@ -18,15 +23,16 @@ export class StatusFilterComponent implements OnInit {
   pending;
 
   @Input()
+  falsePositive;
+
+  @Input()
   reviewed;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   change(event) {
     this.changeSelection.next(event);
   }
-
 }

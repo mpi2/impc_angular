@@ -11,8 +11,8 @@
         "logLevel": "debug",
         "changeOrigin": true
     },
-    "/Results/*": {
-        "target": "https://wwwdev.ebi.ac.uk/~hamedhm/windowing/DR8/jobs/",
+    "/windowing/*": {
+        "target": "https://wwwdev.ebi.ac.uk/~hamedhm/",
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true

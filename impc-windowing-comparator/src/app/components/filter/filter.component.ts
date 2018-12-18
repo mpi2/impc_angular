@@ -32,12 +32,13 @@ class DynamycOptions {
 export class FilterComponent implements OnInit, AfterViewInit {
   dynamicOptions = new DynamycOptions();
   filters = [
-    { name: 'center', type: 'select', title: 'Center' },
     { name: 'alleleSymbol', type: 'autocomplete', title: 'Allele Symbol' },
+    { name: 'parameter', type: 'autocomplete', title: 'Parameter' },
+    { name: 'center', type: 'select', title: 'Center' },
     { name: 'colonyID', type: 'autocomplete', title: 'Colony ID' },
     { name: 'zygosity', type: 'select', title: 'Zygosity' },
     { name: 'procedure', type: 'autocomplete', title: 'Procedure' },
-    { name: 'parameter', type: 'autocomplete', title: 'Parameter' },
+
     { name: 'metadata', type: 'none', title: 'Metadata' }
   ];
   formGroup: FormGroup;
@@ -50,12 +51,16 @@ export class FilterComponent implements OnInit, AfterViewInit {
     center: false,
     zygosity: false
   };
+  version = 'DR8|Results_8';
 
   autocompletes = {};
 
-  @Output() updateChart: EventEmitter<any> = new EventEmitter();
-  @Output() invalid: EventEmitter<any> = new EventEmitter();
-  @ViewChildren(MatAutocomplete) matAutocompletes: QueryList<MatAutocomplete>;
+  @Output()
+  updateChart: EventEmitter<any> = new EventEmitter();
+  @Output()
+  invalid: EventEmitter<any> = new EventEmitter();
+  @ViewChildren(MatAutocomplete)
+  matAutocompletes: QueryList<MatAutocomplete>;
 
   constructor(
     private fb: FormBuilder,
@@ -82,6 +87,9 @@ export class FilterComponent implements OnInit, AfterViewInit {
     this.formGroup.controls[this.filters[0].name].enable();
     this.getOptions(this.filters[0], '');
     this._route.queryParams.pipe(first()).subscribe(params => {
+      if (params['version'] !== undefined) {
+        this.version = params['version'];
+      }
       for (let i = 0; i < this.filters.length; i++) {
         const filter = this.filters[i];
         const filterName = filter.name;
@@ -100,15 +108,27 @@ export class FilterComponent implements OnInit, AfterViewInit {
           this.formGroup.controls[this.getNextFilter(filter).name].enable();
         } else {
           if (this.formGroup.value['procedure'].split(' | ')[0] === '') {
-            const procedureID = this.formGroup.value['procedure'].split(' | ')[1];
+            const procedureID = this.formGroup.value['procedure'].split(
+              ' | '
+            )[1];
             this.solr.getProcedureName(procedureID).subscribe(procedureName => {
-              this.formGroup.controls['procedure'].setValue(`${procedureName} | ${procedureID}`, {emitEvent: false});
+              this.formGroup.controls['procedure'].setValue(
+                `${procedureName} | ${procedureID}`,
+                { emitEvent: false }
+              );
               if (this.formGroup.value['parameter'].split(' | ')[0] === '') {
-                const parameterID = this.formGroup.value['parameter'].split(' | ')[1];
-                this.solr.getParameterName(parameterID).subscribe(parameterName => {
-                  this.formGroup.controls['parameter'].setValue(`${parameterName} | ${parameterID}`, {emitEvent: false});
-                  this.update();
-                });
+                const parameterID = this.formGroup.value['parameter'].split(
+                  ' | '
+                )[1];
+                this.solr
+                  .getParameterName(parameterID)
+                  .subscribe(parameterName => {
+                    this.formGroup.controls['parameter'].setValue(
+                      `${parameterName} | ${parameterID}`,
+                      { emitEvent: false }
+                    );
+                    this.update();
+                  });
               } else {
                 this.update();
               }
@@ -206,6 +226,7 @@ export class FilterComponent implements OnInit, AfterViewInit {
 
   update() {
     const value = this.formGroup.value;
+    value['version'] = this.version;
     this.updateParams(value);
     this.updateChart.emit(value);
   }
@@ -264,6 +285,12 @@ export class FilterComponent implements OnInit, AfterViewInit {
       this.formGroup.controls[this.filters[0].name].enable();
       this.formGroup.controls[this.filters[0].name].setValue('');
       localStorage.setItem('filters', JSON.stringify(this.filters));
+    }
+  }
+
+  changeVersion(event) {
+    if (!this.formGroup.invalid) {
+      this.update();
     }
   }
 }

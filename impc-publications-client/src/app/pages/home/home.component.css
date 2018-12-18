@@ -6,7 +6,7 @@
 }
 
 .main-content {
-    display: table;    
+    display: table;
 }
 
 .filter {
@@ -15,6 +15,7 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 10px;
 }
 
 .publication-list {

@@ -25,21 +25,23 @@ export class RawDataService {
   };
 
   possibleNotProcessedReasons = {
-    'both_mut_and_control': 'Both mutants and control',
-    'empty_dataset': 'Empty dataset',
-    'empty_response': 'Empty response',
+    'both_mut_and_control_after_preprocess': 'Both mutants and control after preprocressing',
+    'empty_dataset_after_preprocess': 'Empty dataset after preprocressing',
+    'empty_response_after_preprocess': 'Empty response after preprocressing',
     'is_exception': 'Is exception',
-    'min_onbs_in_each_group': 'Minimium observation in each group',
-    'the_num_colonies': 'Number of colonies',
-    'variation_in_respone': 'Variaton in response'
+    'min_onbs_in_each_group_processed_data_after_preprocess': 'Minimium observation in each group',
+    'the_num_colonies_after_preprocess': 'Number of colonies',
+    'variation_in_respone_after_preprocess': 'Variaton in response'
   };
 
   constructor(private http: HttpClient) { }
 
-  getWindowData(phenotypingCenter, colonyID, zygosity, procedure, parameter, metadataGroup) {
+  getWindowData(phenotypingCenter, colonyID, zygosity, procedure, parameter, metadataGroup, version): any {
     const fileName = 'output_Successful.tsv';
-    const rawFileName = 'output_rawData.csv';
-    let baseUrl = `${environment.dataBaseUrl}/${phenotypingCenter.replace(new RegExp(' ', 'g'), '_')}/`;
+    const rawFileName = 'output_rawData.csv.zip';
+    const dataRelease = version.split('|')[0];
+    const dataVersion = version.split('|')[1];
+    let baseUrl = `${environment.dataBaseUrl}${dataRelease}/jobs/${dataVersion}/${phenotypingCenter.replace(new RegExp(' ', 'g'), '_')}/`;
     baseUrl += `${procedure.replace(new RegExp('[^a-zA-Z0-9]', 'g'), '_')}/`;
     baseUrl += `${parameter.replace(new RegExp('[^a-zA-Z0-9]', 'g'), '_')}/`;
     baseUrl += `${colonyID.replace(new RegExp('[^a-zA-Z0-9]', 'g'), '_')}/${zygosity}/${metadataGroup}/`;
@@ -48,9 +50,12 @@ export class RawDataService {
     return this.http.post(fileUrl, {}, {responseType: 'text'})
     .toPromise()
     .then(response => this.parseResponse(response, zygosity, fileUrl, rawLink))
-    .catch(error => this.http.post(fileUrl.replace('Successful', 'NotProcessed'), {},
+    .catch(error => {
+      console.log(error);
+      return this.http.post(fileUrl.replace('Successful', 'NotProcessed'), {},
                                   {responseType: 'text'}).toPromise()
-    .then(response => this.parseResponse(response, zygosity, fileUrl.replace('Successful', 'NotProcessed'), rawLink)));
+    .then(response => this.parseResponse(response, zygosity, fileUrl.replace('Successful', 'NotProcessed'), rawLink));
+  });
   }
 
   CSVToArray( strData, strDelimiter? ) {
@@ -98,7 +103,7 @@ export class RawDataService {
       series.dashStyle = 'ShortDashDot';
       series.lineWidth = 2.5;
       series.marker = { enabled: false };
-      series.color = 'rgb(82,86,89, 0.8)';
+      series.color = 'rgba(82,86,89, 0.8)';
       series.states = {
         hover: {
           lineWidth: 0
@@ -136,13 +141,10 @@ export class RawDataService {
     series.push(this.getSeries('Window'));
     const responseArray = response.split('\t');
     const processed = responseArray[0] !== 'NotProcessed';
-    const jsonStr = responseArray[14];/*.replace(':NA', ':"NA"')
-    .replace(new RegExp('Male: "NA""', 'g'), 'Male: NA"')
-    .replace(new RegExp('Female: "NA",', 'g'), 'Female: NA,')
-    .replace('"(>1): FALSE: "NA""', '"(>1): FALSE: NA"');*/
-    const result = JSON.parse(jsonStr)['result'];
+    const jsonStr = responseArray[17];
+    const result = JSON.parse(jsonStr.replace(new RegExp('{}', 'g'), 'null'))['result'];
     console.log(result);
-    const portalLink = result['detail']['gene_page_url'];
+    const portalLink = result['details']['gene_page_url'];
     const resultsLink = fileUrl;
     let oldPValue = 0;
     let newPValue = 0;
@@ -150,19 +152,28 @@ export class RawDataService {
     const oldData = [];
     const newData = [];
     const notProcessedReasons = [];
+    const details = result['details'];
+    const normalResult = result['vectoroutput'] ? result['vectoroutput']['normal_result'] :  null;
+    const windowedResult = result['vectoroutput'] ? result['vectoroutput']['windowed_result'] : null;
+    const k = details['window_parameters'] ? details['window_parameters']['k'] : null;
+    const l = details['window_parameters'] ? details['window_parameters']['l'] : null;
+    const minSamplesReq = details['window_parameters'] ? details['window_parameters']['min_obs'] : null;
+    const samplesInWindow = details['window_parameters'] ? details['window_parameters']['obs_in_window'] : null;
     let method = '';
-    if (result['vectoroutput']['normal_result'] !== undefined) {
-      method = result['vectoroutput']['normal_result']['method'];
+    if (normalResult !== null) {
+      method = normalResult['method'];
     } else {
       method = '';
     }
     if (!processed) {
-      Object.keys(this.possibleNotProcessedReasons).forEach(key =>
-        notProcessedReasons.push(`${this.possibleNotProcessedReasons[key]} = ${result['detail'][key]}`)
+      Object.keys(this.possibleNotProcessedReasons).forEach(key => {
+        const value =  typeof details[key] === 'object' ? this.objToString(details[key]) : details[key];
+        notProcessedReasons.push(`${this.possibleNotProcessedReasons[key]} = ${value}`);
+      }
       );
-    } else if (!!result['vectoroutput']['windowed_result']['additional_information']) {
-      const oldDataObj = result['vectoroutput']['normal_result']['additional_information']['summary_statistics'];
-      const newDataObj = result['vectoroutput']['windowed_result']['additional_information']['summary_statistics'];
+    } else if (!!windowedResult) {
+      const oldDataObj = normalResult['additional_information']['summary_statistics'];
+      const newDataObj = windowedResult['additional_information']['summary_statistics'];
       Object.keys(oldDataObj).forEach(key => oldData.push({
         category: key,
         count: oldDataObj[key]['count'],
@@ -180,16 +191,16 @@ export class RawDataService {
           sd: newDataObj[key]['sd'] - oldDataObj[key]['sd']
         }
       }));
-      oldPValue = result['vectoroutput']['normal_result']['genotype_contribution'];
-      newPValue = result['vectoroutput']['windowed_result']['genotype_contribution'];
-      window = result['detail']['window_parameters']['weights'];
+      oldPValue = normalResult['genotype_contribution'];
+      newPValue = windowedResult['genotype_contribution'];
+      window = details['window_parameters']['weights'];
     }
-    const phenlist_data_spec_ids = result['detail']['phenlist_data_spec_Ids'];
-    const original_external_sample_ids = result['detail']['original_external_sample_id'];
-    let values = result['detail']['original_response'];
-    let dates = result['detail']['original_date_of_experiment'];
-    let sampleGroups = result['detail']['original_biological_sample_group'];
-    let sexes = result['detail']['original_sex'];
+    const phenlist_data_spec_ids = details['phenlist_data_spec_Ids'];
+    const original_external_sample_ids = details['original_external_sample_id'];
+    let values = details['original_response'];
+    let dates = details['original_date_of_experiment'];
+    let sampleGroups = details['original_biological_sample_group'];
+    let sexes = details['original_sex'];
     if (phenlist_data_spec_ids && original_external_sample_ids.length > phenlist_data_spec_ids.length) {
       const filterIndexes = [];
       original_external_sample_ids.forEach((id, index) => {
@@ -235,7 +246,7 @@ export class RawDataService {
     });
     if (processed) {
       dates.forEach((date, index) => {
-        const weigth = window[index];
+        const weigth = window !== null ? window[index] : 1;
         const windowY = (max - min) * weigth + min;
         const windowPoint = [date, windowY];
         series[4].data.push(windowPoint);
@@ -254,7 +265,22 @@ export class RawDataService {
       resultsLink: resultsLink,
       yMax: max,
       yMin: min,
-      notProcessedReasons: notProcessedReasons
+      notProcessedReasons: notProcessedReasons,
+      minSamplesReq: minSamplesReq,
+      samplesInWindow: samplesInWindow,
+      l: l,
+      k: k
     };
   }
+
+  objToString(obj) {
+    let str = '';
+    for (const p in obj) {
+      if (obj.hasOwnProperty(p)) {
+        str += p + ': ' + obj[p] + ', ';
+      }
+    }
+    return str;
+  }
+
 }

@@ -1,4 +1,5 @@
-<impc-publication *ngFor="let publication of publications|async" [publication]="publication"></impc-publication>
+<impc-publication *ngFor="let publication of publications|async" [publication]="publication" [showActions]="isLoggedIn"></impc-publication>
+<h1 class="mat-h1" *ngIf="length === 0" style="text-align: center; margin: 10px; ">NO PUBLICATIONS FOUND FOR THE SELECTED FILTERS</h1>
 <mat-paginator *ngIf="length > 0" [length]="length"
               [pageSize]="pageSize"
               [pageSizeOptions]="pageSizeOptions"
@@ -6,4 +7,3 @@
               [showFirstLastButtons]="true"
               (page)="pageEvent($event)">
 </mat-paginator>
-<h1 *ngIf="length === 0">NO PUBLICATIONS PENDING OF CURATION FOUND</h1>

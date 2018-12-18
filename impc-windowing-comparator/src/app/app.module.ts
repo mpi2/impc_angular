@@ -26,7 +26,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { ChartModule } from 'angular-highcharts';
+import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
 import { DndModule } from 'ng2-dnd';
 
 import { AppComponent } from './app.component';
@@ -38,6 +38,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TableComponent } from './components/table/table.component';
 import { DiffComponent } from './components/diff/diff.component';
+import { BioschemasMetadataComponent } from './components/bioschemas-metadata/bioschemas-metadata.component';
+import * as more from 'highcharts/highcharts-more.src';
+import * as histogram from 'highcharts/modules/histogram-bellcurve';
+import * as exporting from 'highcharts/modules/exporting.src';
 
 @NgModule({
   declarations: [
@@ -52,7 +56,8 @@ import { DiffComponent } from './components/diff/diff.component';
     SafePipe,
     TableComponent,
     ErrorMessageComponent,
-    DiffComponent
+    DiffComponent,
+    BioschemasMetadataComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +83,10 @@ import { DiffComponent } from './components/diff/diff.component';
     DndModule.forRoot(),
     RouterModule.forRoot([{ path: '**', component: HomeComponent }])
   ],
-  providers: [SolrService],
+  providers: [
+    SolrService,
+    { provide: HIGHCHARTS_MODULES, useFactory: () => [ more, exporting, histogram ] }
+  ],
   bootstrap: [AppComponent],
   entryComponents: [ErrorMessageComponent]
 })

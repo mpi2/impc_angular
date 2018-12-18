@@ -9,6 +9,7 @@ import { Chart } from 'angular-highcharts';
 })
 export class ComparisonComponent implements OnInit {
   private _chartData: Chart;
+  windowTableCaption = null;
 
   get chartData(): Chart {
     return this._chartData;
@@ -22,7 +23,8 @@ export class ComparisonComponent implements OnInit {
       .then(ref => ref.series.forEach(serie => serie.show()));
   }
 
-  @Input() result: Result;
+  @Input()
+  result: Result;
 
   pValueDiff: number;
 
@@ -30,5 +32,10 @@ export class ComparisonComponent implements OnInit {
 
   ngOnInit() {
     this.pValueDiff = this.result.newPValue - this.result.oldPValue;
+    this.windowTableCaption = `Minimum Samples Required: ${
+      this.result.minSamplesReq
+    } | Samples in window: ${this.result.samplesInWindow} | L: ${
+      this.result.l
+    } | K: ${this.result.k ? this.result.k.toFixed(2) : null}`;
   }
 }

@@ -14,4 +14,8 @@ export class Result {
     yMax: number;
     yMin: number;
     notProcessedReasons: Array<string>;
+    k: number;
+    l: number;
+    minSamplesReq: number;
+    samplesInWindow: number;
 }

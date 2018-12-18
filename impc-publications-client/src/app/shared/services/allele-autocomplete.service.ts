@@ -16,12 +16,28 @@ export class AlleleAutocompleteService {
   getAlleles(text): Observable<any> {
     const requestUrl = environment.impcAlleleApiUrl + '/' + text ;
     if (text !== '') {
-      return this.http.get(requestUrl).pipe(map(response => response['content']));
+      return this.http.get(requestUrl).pipe(
+        map(response => {
+          response['content'].forEach(allele => allele['project'] = allele['alleleSymbol'].split('(')[1].split(')')[0]);
+          console.log(response['content']);
+          return response['content'];
+        })
+      );
     } else if (this.allAlleles !== null) {
-      return this.allAlleles.pipe(map(response => response['content']));
+      return this.allAlleles.pipe(
+        map(response => {
+          response['content'].forEach(allele => allele['project'] = allele['alleleSymbol'].split('(')[1].split(')')[0]);
+          return response['content'];
+        })
+      );
     } else {
       this.allAlleles = this.http.get(requestUrl);
-      return this.allAlleles.pipe(map(response => response['content']));
+      return this.allAlleles.pipe(
+        map(response => {
+          response['content'].forEach(allele => allele['project'] = allele['alleleSymbol'].split('(')[1].split(')')[0]);
+          return response['content'];
+        })
+      );
     }
   }
 

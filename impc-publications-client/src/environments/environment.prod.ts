@@ -1,9 +1,9 @@
 export const environment = {
   production: true,
-  impcPublicationsApiUrl: 'http://ves-ebi-d0.ebi.ac.uk:28080/graphql',
-  impcFragmentsApiUrl: 'http://ves-ebi-d0.ebi.ac.uk:28080/fragments',
-  impcAlleleApiUrl: 'http://ves-ebi-d0.ebi.ac.uk:28080/alleles',
-  impcAuthUrl: 'http://ves-ebi-d0.ebi.ac.uk:28080/token/generate-token',
+  impcPublicationsApiUrl: 'http://wp-p3s-41.ebi.ac.uk:28080/graphql',
+  impcFragmentsApiUrl: 'http://wp-p3s-41.ebi.ac.uk:28080/fragments',
+  impcAlleleApiUrl: 'http://wp-p3s-41.ebi.ac.uk:28080/alleles',
+  impcAuthUrl: 'http://wp-p3s-41.ebi.ac.uk:28080/token/generate-token',
   tokenKey: 'AuthToken',
-  baseUrl: 'http://ves-ebi-d0.ebi.ac.uk/publications'
+  baseUrl: 'http://wp-p3s-41.ebi.ac.uk/publications'
 };

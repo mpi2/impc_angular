@@ -17,6 +17,7 @@ export class FacetsComponent implements OnInit {
   facets = [];
 
   selection: any;
+  panelOpenState = false;
 
   constructor() { }
 
@@ -24,6 +25,7 @@ export class FacetsComponent implements OnInit {
   }
 
   change(event) {
+    console.log(this.selection);
     this.changeSelection.next(this.selection);
   }
 

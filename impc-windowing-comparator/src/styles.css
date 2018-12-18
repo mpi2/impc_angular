@@ -24,3 +24,56 @@
     font-weight: 900 !important;
     color: black;
 }
+
+
+.data-protection-banner {
+  font-family: Helvetica, Arial, FreeSans, "Liberation Sans", sans-serif;
+  font-weight: normal;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  font-size: 16px;
+  font-weight: 400;
+  text-decoration-color: white;
+  text-decoration-line: none;
+  text-decoration-style: solid;
+}
+
+.row {
+  max-width: 80rem;
+  margin-right: auto;
+  margin-left: auto;
+  box-sizing: border-box;
+  display: block;
+  line-height: 25px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.columns {
+  display: table-cell;
+  padding-right: 0.9375rem;
+  padding-left: 0.9375rem;
+}
+
+.large-9 {
+  width: 75%;
+  float: left;
+}
+
+.large-3 {
+  width: 20%;
+  text-align: right;
+  float: right;
+}
+
+.columns > a, .columns > a:visited{
+    border-bottom-width: 1px;
+    border-bottom-style: dotted;
+    border-bottom-color: inherit;
+}
+.columns > a {
+  color: white;
+}
+.columns > a:visited {
+  color: #555;
+}

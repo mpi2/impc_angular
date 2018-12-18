@@ -14,6 +14,8 @@ export class TableComponent {
 
   @Input() pValueDiff = null;
 
+  @Input() caption = null;
+
   displayedColumns = ['Category', 'Count', 'Mean', 'SD'];
 
   constructor() {}

@@ -1,9 +1,12 @@
 import { AlleleAutocompleteService } from './../../shared/services/allele-autocomplete.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
-import {MatChipInputEvent, MatAutocompleteSelectedEvent} from '@angular/material';
-import {FormControl} from '@angular/forms';
-import { Observable} from 'rxjs/Observable';
+import {
+  MatChipInputEvent,
+  MatAutocompleteSelectedEvent
+} from '@angular/material';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
 import { startWith } from 'rxjs/operators/startWith';
 import { map } from 'rxjs/operators/map';
 import { mergeMap } from 'rxjs/operators/mergeMap';
@@ -14,7 +17,6 @@ import { mergeMap } from 'rxjs/operators/mergeMap';
   styleUrls: ['./publication-allele-adder.component.css']
 })
 export class PublicationAlleleAdderComponent implements OnInit {
-
   visible = true;
   selectable = true;
   removable = true;
@@ -36,14 +38,15 @@ export class PublicationAlleleAdderComponent implements OnInit {
 
   separatorKeysCodes = [ENTER, COMMA];
 
-
-  constructor(private allelesService: AlleleAutocompleteService) { }
+  constructor(private allelesService: AlleleAutocompleteService) {}
 
   ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges
-    .pipe(
+    this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
-      mergeMap(val => this.filter(val))
+      mergeMap(val => {
+        val = typeof val === 'string' ? val : '';
+        return this.filter(val);
+      })
     );
   }
 
@@ -61,10 +64,10 @@ export class PublicationAlleleAdderComponent implements OnInit {
 
   addFromAutcomplete(event: MatAutocompleteSelectedEvent, textInput): void {
     const value = event.option.value;
-    if ((value || '').trim()) {
+    if (value) {
       this.myControl.setValue('');
       textInput.value = '';
-      this._alleles.push({'alleleSymbol': value.trim()});
+      this._alleles.push(value);
     }
   }
 
@@ -84,5 +87,4 @@ export class PublicationAlleleAdderComponent implements OnInit {
   pasteEvent($event) {
     console.log($event.clipboardData.getData('Text'));
   }
-
 }

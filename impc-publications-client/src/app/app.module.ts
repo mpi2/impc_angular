@@ -7,11 +7,22 @@ import { FragmentsService } from './shared/services/fragments.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
-  MatToolbarModule, MatIconModule, MatButtonToggleModule, MatChipsModule,
-  MatCardModule, MatButtonModule, MatStepperModule, MatPaginatorModule,
-  MatSidenavModule, MatListModule, MatCheckboxModule, MatSnackBarModule, MatTooltipModule
+  MatToolbarModule,
+  MatIconModule,
+  MatButtonToggleModule,
+  MatChipsModule,
+  MatCardModule,
+  MatButtonModule,
+  MatStepperModule,
+  MatPaginatorModule,
+  MatSidenavModule,
+  MatListModule,
+  MatCheckboxModule,
+  MatSnackBarModule,
+  MatTooltipModule,
+  MatExpansionModule
 } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -77,15 +88,23 @@ import { TokenInterceptor } from './shared/services/interceptor.service';
     MatCheckboxModule,
     MatSnackBarModule,
     MatTooltipModule,
+    MatExpansionModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [ AuthService, AuthGuard, PublicationsService, FragmentsService, AlleleAutocompleteService, {
-    provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptor,
-    multi: true
-  }],
-  bootstrap: [ AppComponent ]
+  providers: [
+    AuthService,
+    AuthGuard,
+    PublicationsService,
+    FragmentsService,
+    AlleleAutocompleteService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

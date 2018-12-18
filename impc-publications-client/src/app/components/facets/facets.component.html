@@ -1,8 +1,8 @@
-<mat-sidenav-container class="example-container">
+<!--mat-sidenav-container class="example-container">
   <mat-sidenav #sidenav mode="side" opened="false" class="example-sidenav"
   [fixedInViewport]="true" [fixedTopGap]="150"
   [fixedBottomGap]="150">
-  <mat-card>
+  <mat-card class="filters">
     <mat-card-header>
       <div mat-card-avatar><mat-icon>filter_list</mat-icon></div>
       <mat-card-title>Filter</mat-card-title>
@@ -10,16 +10,43 @@
     <mat-card-content>
       <mat-selection-list (selectionChange)="change($event)" [(ngModel)]="selection">
         <span *ngFor="let facet of facets">
-          <h3 matSubheader>{{facet.section}}</h3>
-          <mat-list-option *ngFor="let option of facet.options" [value]="{ 'section': facet.section, 'option': option }">{{ option }}</mat-list-option>
+          <span *ngIf="facet.options">
+              <h3 matSubheader>{{facet.section | titlecase}}s</h3>
+              <mat-list-option *ngFor="let option of facet.options" [value]="{ 'section': facet.section, 'option': option }" class="indented">{{ option }}</mat-list-option>
+          </span>
+          <span *ngIf="!facet.options">
+              <mat-checkbox>Check me!</mat-checkbox>
+          </span>
         </span>
       </mat-selection-list>
     </mat-card-content>
   </mat-card>
-  
+
 </mat-sidenav>
 
 <mat-sidenav-content class="feedback-container">
-  <p class="feedback"><button (click)="sidenav.toggle()" mat-raised-button color="accent">Filter</button></p>
+  <p class="feedback"><button (click)="sidenav.toggle()" mat-raised-button color="accent" class="filter-button">Filter</button></p>
 </mat-sidenav-content>
-</mat-sidenav-container>
+</mat-sidenav-container-->
+
+<mat-accordion>
+  <mat-expansion-panel class="filter" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{panelOpenState ? 'Hide' : 'Show'}} filters
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-selection-list (selectionChange)="change($event)" [(ngModel)]="selection" style="text-align: -webkit-center;">
+      <div *ngFor="let facet of facets" class="facet">
+        <span *ngIf="facet.options">
+          <div class="group-title">{{facet.title | titlecase}}</div>
+          <mat-list-option *ngFor="let option of facet.options" [value]="{ 'field': facet.field, 'option': option }" class="indented">{{
+            option }}</mat-list-option>
+        </span>
+        <span *ngIf="facet.options === undefined">
+          <mat-list-option [value]="{ 'field': facet.field, 'option': true }">{{facet.title | titlecase}}</mat-list-option>
+        </span>
+      </div>
+    </mat-selection-list>
+  </mat-expansion-panel>
+</mat-accordion>
